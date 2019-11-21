@@ -37,7 +37,7 @@ async def help_message_f(client, message):
     message_id = 99
     # display the /help message
     await message.reply_text(
-        f"<b>Disclaimer:<b>\nThe bot can be used to download any direct link + torrent +\n YouTube videos and upload it directly to Telegram👌\n \n 👉For YouTube video send the link, tag it and type /ytdl\n \n 👉For torrent files or links send the magnet and type /leech",
+        f"<b>Disclaimer:</b>\nThe bot can be used to download any direct link + torrent +\n YouTube videos and upload it directly to Telegram👌\n \n 👉For YouTube video send the link, tag it and type /ytdl\n \n 👉For torrent files or links send the magnet and type /leech",
         quote=True
     )
 

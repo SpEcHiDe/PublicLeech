@@ -21,6 +21,7 @@ from tobrot import (
     ARIA_TWO_STARTED_PORT,
     MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START,
     AUTH_CHANNEL,
+    DOWNLOAD_LOCATION,
     EDIT_SLEEP_TIME_OUT
 )
 
@@ -31,7 +32,7 @@ async def aria_start():
     aria2_daemon_start_cmd.append("aria2c")
     # aria2_daemon_start_cmd.append("--allow-overwrite=true")
     aria2_daemon_start_cmd.append("--daemon=true")
-    # aria2_daemon_start_cmd.append(f"--dir={Config.TMP_DOWNLOAD_DIRECTORY}")
+    # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
     # TODO: this does not work, need to investigate this.
     # but for now, https://t.me/TrollVoiceBot?start=858
     aria2_daemon_start_cmd.append("--enable-rpc")
@@ -193,7 +194,16 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         if not complete:
             if not file.error_message:
                 msg = ""
-                # msg = f"\nDownloading File: `{file.name}`"
+                # sometimes, this weird https://t.me/c/1220993104/392975
+                # error creeps up
+                # TODO: temporary workaround
+                downloading_dir_name = "N/A"
+                try:
+                    downloading_dir_name = str(download.name)
+                except:
+                    pass
+                #
+                msg = f"\nDownloading File: `{downloading_dir_name}`"
                 msg += f"\nSpeed: {file.download_speed_string()} 🔽 / {file.upload_speed_string()} 🔼"
                 msg += f"\nProgress: {file.progress_string()}"
                 msg += f"\nTotal Size: {file.total_length_string()}"

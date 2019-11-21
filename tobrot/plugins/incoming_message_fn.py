@@ -43,11 +43,12 @@ async def incoming_message_f(client, message):
         # start the aria2c daemon
         aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
+        current_user_id = message.from_user.id
         # create an unique directory
         new_download_location = os.path.join(
             DOWNLOAD_LOCATION,
-            str(time.time()),
-            cf_name if cf_name is not None else ""
+            str(current_user_id),
+            str(time.time())
         )
         # create download directory, if not exist
         if not os.path.isdir(new_download_location):

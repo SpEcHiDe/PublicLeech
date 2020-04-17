@@ -35,7 +35,7 @@ async def new_join_f(client, message):
 async def help_message_f(client, message):
     # await message.reply_text("no one gonna help you 🤣🤣🤣🤣", quote=True)
     channel_id = str(AUTH_CHANNEL)[4:]
-    message_id = 99
+    message_id = 284410
     # display the /help message
     await message.reply_text(
         f"please read the <a href='https://t.me/c/{channel_id}/{message_id}'>Pinned Message</a>",

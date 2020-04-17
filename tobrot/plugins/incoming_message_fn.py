@@ -28,7 +28,8 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 
 async def incoming_message_f(client, message):
-    i_m_sefg = await message.reply_text("processing", message.text.startswith('magnet'))
+        """/leech command"""
+    i_m_sefg = await message.reply_text("processing", if message.text.startswith('magnet'))
     is_zip = False
     if len(message.command) > 1:
         if message.command[1] == "archive":

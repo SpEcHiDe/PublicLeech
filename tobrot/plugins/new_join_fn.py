@@ -38,7 +38,7 @@ async def help_message_f(client, message):
     message_id = 284410
     # display the /help message
     await message.reply_text(
-        f"please read the <a href='https://t.me/c/{channel_id}/{message_id}'>Pinned Message</a>",
+        f"please read the <a href='https://t.me/poundleech/125'>Pinned Message</a>",
         quote=True
     )
 

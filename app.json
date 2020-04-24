@@ -56,6 +56,14 @@
     "MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START": {
       "description": "should be an integer. Number of seconds to wait before cancelling a torrent.",
       "required": false
+    },
+    "FINISHED_PROGRESS_STR": {
+      "description": "should be a single character.",
+      "required": false
+    },
+    "UN_FINISHED_PROGRESS_STR": {
+      "description": "should be a single character.",
+      "required": false
     }
   },
   "addons": [
@@ -63,7 +71,7 @@
   "buildpacks": [{
     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
   }, {
-    "url": "https://github.com/amivin/aria2-heroku"
+    "url": "https://github.com/SayanthD/aria2-heroku"
   }, {
     "url": "heroku/python"
   }],

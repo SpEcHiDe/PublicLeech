@@ -73,15 +73,28 @@ def add_magnet(aria_instance, magnetic_link, c_file_name):
     #     options = {
     #         "dir": c_file_name
     #     }
-    try:
-        download = aria_instance.add_magnet(
-            magnetic_link,
-            options=options
-        )
-    except Exception as e:
-        return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
+    akcm = magnetic_link.split('\n')
+    if len(akcm)>1:
+        for akcurl in akcm:
+            try:
+                download = aria_instance.add_magnet(
+                    akcurl,
+                    options=options
+                )
+            except Exception as e:
+                return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
+            else:
+                return True, "" + download.gid + ""
     else:
-        return True, "" + download.gid + ""
+        try:
+            download = aria_instance.add_magnet(
+                magnetic_link,
+                options=options
+            )
+        except Exception as e:
+            return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
+        else:
+            return True, "" + download.gid + ""
 
 
 def add_url(aria_instance, text_url, c_file_name):
@@ -111,13 +124,7 @@ async def call_apropriate_function(
     is_zip
 ):
     if incoming_link.startswith("magnet:"):
-        #sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
-        akcm = incoming_link.split('\n')
-        if len(akcm)>1:
-            for akcurl in akcm:
-                sagtus, err_message = add_magnet(aria_instance, akcurl, c_file_name)
-        else:
-            sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
+        sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
     else:
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
     if not sagtus:

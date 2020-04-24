@@ -75,26 +75,16 @@ def add_magnet(aria_instance, magnetic_link, c_file_name):
     #     }
     akcm = magnetic_link.split('\n')
     if len(akcm)>1:
-        for akcurl in akcm:
-            try:
-                download = aria_instance.add_magnet(
-                    akcurl,
-                    options=options
-                )
-            except Exception as e:
-                return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
-            else:
-                return True, "" + download.gid + ""
+        return False, "**2222222** \n  \nPlease do not send SLOW links. Read /help"
+    try:
+        download = aria_instance.add_magnet(
+            magnetic_link,
+            options=options
+        )
+    except Exception as e:
+        return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
     else:
-        try:
-            download = aria_instance.add_magnet(
-                magnetic_link,
-                options=options
-            )
-        except Exception as e:
-            return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
-        else:
-            return True, "" + download.gid + ""
+        return True, "" + download.gid + ""
 
 
 def add_url(aria_instance, text_url, c_file_name):

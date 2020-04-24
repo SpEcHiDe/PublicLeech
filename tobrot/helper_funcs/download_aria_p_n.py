@@ -75,7 +75,7 @@ def add_magnet(aria_instance, magnetic_link, c_file_name):
     #     }
     akcm = magnetic_link.split('\n')
     if len(akcm)>1:
-        return False, "**2222222** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
+        return False, "**2222222** \n  \nPlease do not send SLOW links. Read /help"
     try:
         download = aria_instance.add_magnet(
             magnetic_link,

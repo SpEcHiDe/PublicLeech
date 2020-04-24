@@ -206,7 +206,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 except:
                     pass
                 #
-                msg = f"\n<tt>💾 : </tt>**{downloading_dir_name}**"
+                msg = f"\n**{downloading_dir_name}**"
                 msg += f"\n<tt> 📥 : <i>{file.download_speed_string()}</i> / 📤 : <i>{file.upload_speed_string()}</i></tt>"
                 if is_file is None :
                    msg += f"\n<tt> 🔗 : <i>{file.connections}</i></tt>"

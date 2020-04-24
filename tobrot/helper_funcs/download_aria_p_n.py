@@ -74,7 +74,7 @@ def add_magnet(aria_instance, magnetic_link, c_file_name):
     #         "dir": c_file_name
     #     }
     try:
-        download = aria_instance.add_magnet(
+        download = aria_instance.add_magnets(
             magnetic_link,
             options=options
         )
@@ -111,7 +111,7 @@ async def call_apropriate_function(
     is_zip
 ):
     if incoming_link.startswith("magnet:"):
-        sagtus, err_message = add_magnets(aria_instance, incoming_link, c_file_name)
+        sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
     else:
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
     if not sagtus:

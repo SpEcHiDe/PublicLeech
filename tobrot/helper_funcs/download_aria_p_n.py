@@ -150,6 +150,7 @@ async def call_apropriate_function(
         await asyncio.sleep(1)
         if err_message is not None:
             if len(err_message)>1:
+                akci = 0
                 while akci < len(err_message):
                     await check_progress_for_dl(
                         aria_instance,
@@ -169,6 +170,7 @@ async def call_apropriate_function(
             return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     if len(err_message)>1:
+        akci = 0
         while akci < len(err_message):
             file[akci] = aria_instance.get_download(err_message[akci])
             to_upload_file[akci] = file[akci].name
@@ -189,6 +191,7 @@ async def call_apropriate_function(
     LOGGER.info(response)
     user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
     if len(to_upload_file)>1:
+        akci = 0
         while akci < len(to_upload_file):
             final_response = await upload_to_tg(
                 sent_message_to_update_tg_p,

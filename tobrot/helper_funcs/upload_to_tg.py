@@ -85,7 +85,7 @@ async def upload_to_tg(
             await i_m_s_g.edit_text(
                 f"Detected File Size: {d_f_s} 😡\n"
                 f"<code>{ba_se_file_name}</code> splitted into {number_of_files} files.\n"
-                "trying to upload to Telegram, now ..."
+                "Trying to upload to Telegram, now ..."
             )
             for le_file in totlaa_sleif:
                 # recursion: will this FAIL somewhere?
@@ -149,7 +149,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 reply_to_message_id=message.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "trying to upload {}".format(os.path.basename(local_file_name)),
+                    "Trying to upload {}".format(os.path.basename(local_file_name)),
                     message_for_progress_display,
                     start_time
                 )
@@ -190,7 +190,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 reply_to_message_id=message.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "trying to upload",
+                    "Trying to upload {}".format(os.path.basename(local_file_name)),
                     message_for_progress_display,
                     start_time
                 )
@@ -221,7 +221,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 reply_to_message_id=message.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "trying to upload",
+                    "Trying to upload {}".format(os.path.basename(local_file_name)),
                     message_for_progress_display,
                     start_time
                 )

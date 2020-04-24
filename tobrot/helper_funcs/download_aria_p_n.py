@@ -166,7 +166,7 @@ async def call_apropriate_function(
         message_id = final_response[key_f_res_se]
         channel_id = str(AUTH_CHANNEL)[4:]
         private_link = f"https://t.me/c/{channel_id}/{message_id}"
-        message_to_send += "👉 <a href='"
+        message_to_send += "🔘 <a href='"
         message_to_send += private_link
         message_to_send += "'>"
         message_to_send += local_file_name

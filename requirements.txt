@@ -5,3 +5,4 @@ Pillow
 https://github.com/pyrogram/pyrogram/archive/asyncio.zip
 tgcrypto
 youtube_dl
+--upgrade youtube_dl

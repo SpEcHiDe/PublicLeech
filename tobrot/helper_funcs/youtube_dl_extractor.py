@@ -29,8 +29,8 @@ async def extract_youtube_dl_formats(url, user_working_dir):
         url
     ]
     if "hotstar" in url:
-        command_to_exec.append("--geo-bypass-country")
-        command_to_exec.append("IN")
+   #     command_to_exec.append("--geo-bypass-country")
+    #    command_to_exec.append("IN")
     LOGGER.info(command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,

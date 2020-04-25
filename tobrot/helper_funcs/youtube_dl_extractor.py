@@ -32,6 +32,7 @@ async def extract_youtube_dl_formats(url, user_working_dir):
        
         command_to_exec.append("--geo-bypass-country")
         command_to_exec.append("IN")
+        command_to_exec.append("--proxy socks5://43.224.8.124:6667/")
     LOGGER.info(command_to_exec)
     process = await asyncio.create_subprocess_exec(
         *command_to_exec,

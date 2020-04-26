@@ -75,7 +75,7 @@ async def incoming_message_f(client, message):
                     is_zip
                 )
             else:
-                sagtus2, err_message2 = await call_apropriate_function(
+                sagtus2, err_message2 = await call_apropriate_function2(
                     aria_i_p[akci],
                     akcm[akci],
                     new_download_location,

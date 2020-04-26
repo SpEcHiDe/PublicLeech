@@ -192,6 +192,88 @@ async def call_apropriate_function(
     return True, None
 
 
+def call_apropriate_function2(
+    aria_instance,
+    incoming_link,
+    c_file_name,
+    sent_message_to_update_tg_p,
+    is_zip
+):
+    if incoming_link.startswith("magnet:"):
+        sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
+    else:
+        sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
+    if not sagtus:
+        return sagtus, err_message
+    LOGGER.info(err_message)
+    # https://stackoverflow.com/a/58213653/4723940
+    await check_progress_for_dl(
+        aria_instance,
+        err_message,
+        sent_message_to_update_tg_p,
+        None
+    )
+    if incoming_link.startswith("magnet:") or incoming_link.lower().endswith(".torrent"):
+        #
+        err_message = await check_metadata(aria_instance, err_message)
+        #
+        await asyncio.sleep(1)
+        if err_message is not None:
+            await check_progress_for_dl(
+                aria_instance,
+                err_message,
+                sent_message_to_update_tg_p,
+                None
+            )
+        else:
+            return False, "can't get metadata \n\n#stopped"
+    await asyncio.sleep(1)
+    file = aria_instance.get_download(err_message)
+    to_upload_file = file.name
+    #
+    if is_zip:
+        # first check if current free space allows this
+        # ref: https://github.com/out386/aria-telegram-mirror-bot/blob/master/src/download_tools/aria-tools.ts#L194
+        # archive the contents
+        check_if_file = await create_archive(to_upload_file)
+        if check_if_file is not None:
+            to_upload_file = check_if_file
+    #
+    response = {}
+    LOGGER.info(response)
+    user_id = sent_message_to_update_tg_p.reply_to_message.from_user.id
+    final_response = await upload_to_tg(
+        sent_message_to_update_tg_p,
+        to_upload_file,
+        user_id,
+        response
+    )
+    LOGGER.info(final_response)
+    message_to_send = ""
+    for key_f_res_se in final_response:
+        local_file_name = key_f_res_se
+        message_id = final_response[key_f_res_se]
+        channel_id = str(AUTH_CHANNEL)[4:]
+        private_link = f"https://t.me/c/{channel_id}/{message_id}"
+        message_to_send += "🔘 <a href='"
+        message_to_send += private_link
+        message_to_send += "'>"
+        message_to_send += local_file_name
+        message_to_send += "</a>"
+        message_to_send += "\n"
+    if message_to_send != "":
+        mention_req_user = f"<a href='tg://user?id={user_id}'>Your Requested Files</a>\n\n"
+        message_to_send = mention_req_user + message_to_send
+        message_to_send = message_to_send + "\n\n" + "#uploads"
+    else:
+        message_to_send = "<i>FAILED</i> to upload files. 😞😞"
+    await sent_message_to_update_tg_p.reply_to_message.reply_text(
+        text=message_to_send,
+        quote=True,
+        disable_web_page_preview=True
+    )
+    return True, None
+
 # https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
 async def check_progress_for_dl(aria2, gid, event, previous_message):
     try:

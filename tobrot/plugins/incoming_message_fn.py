@@ -40,7 +40,7 @@ async def incoming_message_f(client, message):
     LOGGER.info(cf_name)
     if dl_url is not None:
         akcm = dl_url.split('\n')
-        for akc_i in range(len(akcm)):
+        for akc_url in akcm:
             await i_m_sefg.edit_text("extracting links")
             # start the aria2c daemon
             aria_i_p = await aria_start()
@@ -59,7 +59,7 @@ async def incoming_message_f(client, message):
             # try to download the "link"
             sagtus, err_message = await call_apropriate_function(
                 aria_i_p,
-                akcm[akc_i],
+                akc_url,
                 new_download_location,
                 i_m_sefg,
                 is_zip

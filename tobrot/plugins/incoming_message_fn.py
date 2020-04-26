@@ -44,7 +44,7 @@ async def incoming_message_f(client, message):
         sagtus = []
         err_message = []
         current_user_id = []
-        for akc_i in range(len(akcm)):
+        for akci in range(len(akcm)):
             i_m_sefg.append(await message.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")
             # start the aria2c daemon
@@ -64,7 +64,7 @@ async def incoming_message_f(client, message):
             # try to download the "link"
             sagtus2, err_message2 = await call_apropriate_function(
                 aria_i_p[akci],
-                akcm[akc_i],
+                akcm[akci],
                 new_download_location,
                 i_m_sefg[akci],
                 is_zip

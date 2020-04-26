@@ -39,6 +39,7 @@ async def incoming_message_f(client, message):
     LOGGER.info(cf_name)
     if dl_url is not None:
         akcm = dl_url.split('\n')
+<<<<<<< HEAD
         i_m_sefg = []
         for akci in range(len(akcm)):
             i_m_sefg.append(await message.reply_text("processing", quote=True))
@@ -51,6 +52,10 @@ async def incoming_message_f(client, message):
             #message = messagebkp
             #i_m_sefg.append(await messagebkp.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")
+=======
+        for akc_url in akcm:
+            await i_m_sefg.edit_text("extracting links")
+>>>>>>> parent of baba1ee... Update incoming_message_fn.py
             # start the aria2c daemon
             aria_i_p.append(await aria_start())
             LOGGER.info(aria_i_p[akci])
@@ -66,6 +71,7 @@ async def incoming_message_f(client, message):
                 os.makedirs(new_download_location)
             await i_m_sefg[akci].edit_text("trying to download")
             # try to download the "link"
+<<<<<<< HEAD
             if akci == len(akcm)-1:
                 sagtus2, err_message2 = await call_apropriate_function(
                     aria_i_p[akci],
@@ -84,6 +90,15 @@ async def incoming_message_f(client, message):
                 )
             sagtus.append(sagtus2)
             err_message.append(err_message2)
+=======
+            sagtus, err_message = await call_apropriate_function(
+                aria_i_p,
+                akc_url,
+                new_download_location,
+                i_m_sefg,
+                is_zip
+            )
+>>>>>>> parent of baba1ee... Update incoming_message_fn.py
             if not sagtus:
                 # if FAILED, display the error message
                 await i_m_sefg[akci].edit_text(err_message[akci])

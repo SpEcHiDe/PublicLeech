@@ -66,22 +66,13 @@ async def incoming_message_f(client, message):
                 os.makedirs(new_download_location)
             await i_m_sefg[akci].edit_text("trying to download")
             # try to download the "link"
-            if akci == len(akcm)-1:
-                sagtus2, err_message2 = await call_apropriate_function(
-                    aria_i_p[akci],
-                    akcm[akci],
-                    new_download_location,
-                    i_m_sefg[akci],
-                    is_zip
-                )
-            else:
-                sagtus2, err_message2 = call_apropriate_function(
-                    aria_i_p[akci],
-                    akcm[akci],
-                    new_download_location,
-                    i_m_sefg[akci],
-                    is_zip
-                )
+            sagtus2, err_message2 = await call_apropriate_function(
+                aria_i_p[akci],
+                akcm[akci],
+                new_download_location,
+                i_m_sefg[akci],
+                is_zip
+            )
             sagtus.append(sagtus2)
             err_message.append(err_message2)
             if not sagtus:

@@ -42,7 +42,6 @@ async def incoming_message_f(client, message):
         akcm = dl_url.split('\n')
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
         i_m_sefg = []
         for akci in range(len(akcm)):
             i_m_sefg.append(await message.reply_text("processing", quote=True))
@@ -65,9 +64,6 @@ async def incoming_message_f(client, message):
             current_user_id.append(messagebkp.from_user.id)
 =======
         for akc_i in range(len(akcm)):
-=======
-        for akc_url in akcm:
->>>>>>> parent of baba1ee... Update incoming_message_fn.py
             await i_m_sefg.edit_text("extracting links")
             # start the aria2c daemon
             aria_i_p = await aria_start()
@@ -112,12 +108,8 @@ async def incoming_message_f(client, message):
 =======
             sagtus, err_message = await call_apropriate_function(
                 aria_i_p,
-<<<<<<< HEAD
                 akcm[akc_i],
 >>>>>>> parent of 20425a5... Update incoming_message_fn.py
-=======
-                akc_url,
->>>>>>> parent of baba1ee... Update incoming_message_fn.py
                 new_download_location,
                 i_m_sefg,
                 is_zip

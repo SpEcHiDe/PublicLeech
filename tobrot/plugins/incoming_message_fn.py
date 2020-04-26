@@ -44,9 +44,7 @@ async def incoming_message_f(client, message):
         sagtus = []
         err_message = []
         current_user_id = []
-        messagebkp = message
         for akci in range(len(akcm)):
-            message = messagebkp
             i_m_sefg.append(await message.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")
             # start the aria2c daemon

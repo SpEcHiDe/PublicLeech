@@ -37,7 +37,7 @@ async def aria_start():
     # but for now, https://t.me/TrollVoiceBot?start=858
     aria2_daemon_start_cmd.append("--enable-rpc")
     aria2_daemon_start_cmd.append("--follow-torrent=mem")
-    aria2_daemon_start_cmd.append("--bt-enable-lpd=True")
+    aria2_daemon_start_cmd.append("--bt-enable-lpd=true")
     aria2_daemon_start_cmd.append("--max-connection-per-server=16")
     aria2_daemon_start_cmd.append("--min-split-size=10M")
     aria2_daemon_start_cmd.append("--rpc-listen-all=false")

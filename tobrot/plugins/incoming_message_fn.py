@@ -39,6 +39,11 @@ async def incoming_message_f(client, message):
     LOGGER.info(cf_name)
     if dl_url is not None:
         akcm = dl_url.split('\n')
+        i_m_sefg = []
+        aria_i_p = []
+        sagtus = []
+        err_message = []
+        current_user_id = []
         for akc_i in range(len(akcm)):
             i_m_sefg.append(await message.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")

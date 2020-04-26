@@ -52,6 +52,12 @@ if __name__ == "__main__" :
         workers=343
     )
     #
+    incoming_split_message_handler = MessageHandler(
+        incoming_split_message_f,
+        filters=Filters.command(["splitmag"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_split_message_handler)
+    #
     incoming_message_handler = MessageHandler(
         incoming_message_f,
         filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)

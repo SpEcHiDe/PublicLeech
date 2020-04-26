@@ -29,7 +29,6 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 async def incoming_message_f(client, message):
     """/leech command"""
-    i_m_sefg = await message.reply_text("processing", quote=True)
     is_zip = False
     if len(message.command) > 1:
         if message.command[1] == "archive":
@@ -40,7 +39,6 @@ async def incoming_message_f(client, message):
     LOGGER.info(cf_name)
     if dl_url is not None:
         akcm = dl_url.split('\n')
-<<<<<<< HEAD
 <<<<<<< HEAD
         i_m_sefg = []
         for akci in range(len(akcm)):
@@ -62,26 +60,17 @@ async def incoming_message_f(client, message):
             aria_i_p.append(await aria_start())
             LOGGER.info(aria_i_p[akci])
             current_user_id.append(messagebkp.from_user.id)
-=======
-        for akc_i in range(len(akcm)):
-            await i_m_sefg.edit_text("extracting links")
-            # start the aria2c daemon
-            aria_i_p = await aria_start()
-            LOGGER.info(aria_i_p)
-            current_user_id = message.from_user.id
->>>>>>> parent of 20425a5... Update incoming_message_fn.py
             # create an unique directory
             new_download_location = os.path.join(
                 DOWNLOAD_LOCATION,
-                str(current_user_id),
+                str(current_user_id[akci]),
                 str(time.time())
             )
             # create download directory, if not exist
             if not os.path.isdir(new_download_location):
                 os.makedirs(new_download_location)
-            await i_m_sefg.edit_text("trying to download")
+            await i_m_sefg[akci].edit_text("trying to download")
             # try to download the "link"
-<<<<<<< HEAD
 <<<<<<< HEAD
             if akci == len(akcm)-1:
                 sagtus2, err_message2 = await call_apropriate_function(
@@ -105,11 +94,6 @@ async def incoming_message_f(client, message):
             sagtus, err_message = await call_apropriate_function(
                 aria_i_p,
                 akc_url,
-=======
-            sagtus, err_message = await call_apropriate_function(
-                aria_i_p,
-                akcm[akc_i],
->>>>>>> parent of 20425a5... Update incoming_message_fn.py
                 new_download_location,
                 i_m_sefg,
                 is_zip
@@ -117,7 +101,7 @@ async def incoming_message_f(client, message):
 >>>>>>> parent of baba1ee... Update incoming_message_fn.py
             if not sagtus:
                 # if FAILED, display the error message
-                await i_m_sefg.edit_text(err_message)
+                await i_m_sefg[akci].edit_text(err_message[akci])
     else:
         await i_m_sefg.edit_text("**ERR**! What have you entered. Please read /help")
 

@@ -71,6 +71,23 @@ async def incoming_message_f(client, message):
         await i_m_sefg.edit_text("**ERR**! What have you entered. Please read /help")
 
 
+def extract_link_split(message):
+    url = message.text
+    return url
+
+
+
+async def incoming_split_message_f(client, message):
+    """/splitmag command"""
+    dl_url = extract_link_split(message.reply_to_message)
+    LOGGER.info(dl_url)
+    akcm = dl_url.split('\n')
+    msgbkp = message
+    i_m_sefg = []
+    for akci in range(len(akcm)):
+        i_m_sefg.append(await msgbkp.reply_text(akcm[akci], quote=True))
+        await i_m_sefg[akci].reply_text("/leech @TorSeed2eubot", quote=True)
+        
 async def incoming_youtube_dl_f(client, message):
     """ /ytdl command """
     i_m_sefg = await message.reply_text("processing", quote=True)

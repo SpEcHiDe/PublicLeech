@@ -40,6 +40,8 @@ async def incoming_message_f(client, message):
     if dl_url is not None:
         akcm = dl_url.split('\n')
         i_m_sefg = []
+        for akci in range(len(akcm)):
+            i_m_sefg.append(await message.reply_text("processing", quote=True))
         aria_i_p = []
         sagtus = []
         err_message = []
@@ -47,7 +49,7 @@ async def incoming_message_f(client, message):
         messagebkp = message
         for akci in range(len(akcm)):
             #message = messagebkp
-            i_m_sefg.append(await messagebkp.reply_text("processing", quote=True))
+            #i_m_sefg.append(await messagebkp.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")
             # start the aria2c daemon
             aria_i_p.append(await aria_start())

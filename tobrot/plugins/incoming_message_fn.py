@@ -40,12 +40,12 @@ async def incoming_message_f(client, message):
     if dl_url is not None:
         akcm = dl_url.split('\n')
         for akc_i in range(len(akcm)):
-            i_m_sefg[akci] = await message.reply_text("processing", quote=True)
+            i_m_sefg.append(await message.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")
             # start the aria2c daemon
-            aria_i_p[akci] = await aria_start()
+            aria_i_p.append(await aria_start())
             LOGGER.info(aria_i_p[akci])
-            current_user_id[akci] = message.from_user.id
+            current_user_id.append(message.from_user.id)
             # create an unique directory
             new_download_location = os.path.join(
                 DOWNLOAD_LOCATION,
@@ -57,13 +57,15 @@ async def incoming_message_f(client, message):
                 os.makedirs(new_download_location)
             await i_m_sefg[akci].edit_text("trying to download")
             # try to download the "link"
-            sagtus[akci], err_message[akci] = await call_apropriate_function(
+            sagtus2, err_message2 = await call_apropriate_function(
                 aria_i_p[akci],
                 akcm[akc_i],
                 new_download_location,
                 i_m_sefg[akci],
                 is_zip
             )
+            sagtus.append(sagtus2)
+            err_message.append(err_message2)
             if not sagtus:
                 # if FAILED, display the error message
                 await i_m_sefg[akci].edit_text(err_message[akci])

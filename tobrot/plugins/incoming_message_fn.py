@@ -29,7 +29,6 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 async def incoming_message_f(client, message):
     """/leech command"""
-    i_m_sefg = await message.reply_text("processing", quote=True)
     is_zip = False
     if len(message.command) > 1:
         if message.command[1] == "archive":
@@ -41,32 +40,33 @@ async def incoming_message_f(client, message):
     if dl_url is not None:
         akcm = dl_url.split('\n')
         for akc_i in range(len(akcm)):
-            await i_m_sefg.edit_text("extracting links")
+            i_m_sefg[akci] = await message.reply_text("processing", quote=True)
+            await i_m_sefg[akci].edit_text("extracting links")
             # start the aria2c daemon
-            aria_i_p = await aria_start()
-            LOGGER.info(aria_i_p)
-            current_user_id = message.from_user.id
+            aria_i_p[akci] = await aria_start()
+            LOGGER.info(aria_i_p[akci])
+            current_user_id[akci] = message.from_user.id
             # create an unique directory
             new_download_location = os.path.join(
                 DOWNLOAD_LOCATION,
-                str(current_user_id),
+                str(current_user_id[akci]),
                 str(time.time())
             )
             # create download directory, if not exist
             if not os.path.isdir(new_download_location):
                 os.makedirs(new_download_location)
-            await i_m_sefg.edit_text("trying to download")
+            await i_m_sefg[akci].edit_text("trying to download")
             # try to download the "link"
-            sagtus, err_message = await call_apropriate_function(
-                aria_i_p,
+            sagtus[akci], err_message[akci] = await call_apropriate_function(
+                aria_i_p[akci],
                 akcm[akc_i],
                 new_download_location,
-                i_m_sefg,
+                i_m_sefg[akci],
                 is_zip
             )
             if not sagtus:
                 # if FAILED, display the error message
-                await i_m_sefg.edit_text(err_message)
+                await i_m_sefg[akci].edit_text(err_message[akci])
     else:
         await i_m_sefg.edit_text("**ERR**! What have you entered. Please read /help")
 

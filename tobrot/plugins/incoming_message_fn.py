@@ -46,13 +46,13 @@ async def incoming_message_f(client, message):
         current_user_id = []
         messagebkp = message
         for akci in range(len(akcm)):
-            message = messagebkp
-            i_m_sefg.append(await message.reply_text("processing", quote=True))
+            #message = messagebkp
+            i_m_sefg.append(await messagebkp.reply_text("processing", quote=True))
             await i_m_sefg[akci].edit_text("extracting links")
             # start the aria2c daemon
             aria_i_p.append(await aria_start())
             LOGGER.info(aria_i_p[akci])
-            current_user_id.append(message.from_user.id)
+            current_user_id.append(messagebkp.from_user.id)
             # create an unique directory
             new_download_location = os.path.join(
                 DOWNLOAD_LOCATION,

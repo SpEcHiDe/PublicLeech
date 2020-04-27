@@ -156,9 +156,14 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                     os.path.dirname(os.path.abspath(local_file_name))
                 )
                 
-            qwerty = os.path.abspath(local_file_name
-            qwerty = "===========  " + qwerty
+            qwerty = os.path.abspath(local_file_name)
+            qwerty = "111===========  " + qwerty
             LOGGER.info(qwerty)
+            
+            qwerty = thumbnail_location
+            qwerty = "222===========  " + qwerty
+            LOGGER.info(qwerty)
+            
             # if a file, don't upload "thumb"
             thumb = None
             if thumb_image_path is not None and os.path.isfile(thumb_image_path):

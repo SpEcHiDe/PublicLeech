@@ -37,7 +37,7 @@ async def incoming_purge_message_f(client, message):
         downloads = aria_i_p.get_downloads()
         for download in downloads:
             LOGGER.info(download.remove(force=True))
-    await i_m_sefg.delete()
+    await i_m_sefg2.delete()
 
 async def incoming_message_f(client, message):
     """/leech command"""

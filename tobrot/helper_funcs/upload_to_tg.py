@@ -48,32 +48,12 @@ async def upload_to_tg(
     # caption_str += "'>"
     # caption_str += "Here is the file to the link you sent"
     # caption_str += "</a>"LOGGER.info(directory_contents)
-    LOGGER.info(local_file_name)
-    LOGGER.info(local_file_name)
-    LOGGER.info(local_file_name)
-    LOGGER.info(local_file_name)
-    LOGGER.info(local_file_name)
-    LOGGER.info(" base base base base") 
-    LOGGER.info(base_file_name) 
-    LOGGER.info(base_file_name) 
-    LOGGER.info(base_file_name) 
-    LOGGER.info(base_file_name) 
-    LOGGER.info(base_file_name) 
-    LOGGER.info(base_file_name) 
+    LOGGER.info(local_file_name) 
     if os.path.isdir(local_file_name):
         directory_contents = os.listdir(local_file_name)
         directory_contents.sort()
         # number_of_files = len(directory_contents)
-        LOGGER.info(" loop loop loop loop loop loop loop") 
         LOGGER.info(directory_contents)
-        LOGGER.info(directory_contents)
-        LOGGER.info(directory_contents)
-        LOGGER.info(directory_contents)
-        LOGGER.info(directory_contents)
-        LOGGER.info(directory_contents)
-
-
-
         new_m_esg = message
         if not message.photo:
             new_m_esg = await message.reply_text(
@@ -146,8 +126,8 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
         message_for_progress_display = message
         if not message.photo:
             message_for_progress_display = await message.reply_text(
-                #"starting upload of {}".format(os.path.basename(local_file_name))
-                "starting upload of {}".format((local_file_name))
+                "starting upload of {}".format(os.path.basename(local_file_name))
+                #"starting upload of {}".format((local_file_name))
             )
         if local_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
             thumb_image_path = None
@@ -156,23 +136,8 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                     thumbnail_location,
                     os.path.dirname(os.path.abspath(local_file_name))
                 )
-                
-            qwerty = os.path.abspath(local_file_name)
-            qwerty = "111===========  " + qwerty
-            LOGGER.info(qwerty)
             
-            shutil.copyfile("/app/{}".format(os.path.basename(local_file_name)), "/app/tobrot/{}".format(os.path.basename(local_file_name)))
-            
-            LOGGER.info("hihihihihihihi")
-            akclll = listdir("/app/")
-            
-            for uio in akclll:
-                LOGGER.info(uio)
-            LOGGER.info("hihihihihihihi")
-            
-            qwerty = thumbnail_location
-            qwerty = "222===========  " + qwerty
-            LOGGER.info(qwerty)
+            #shutil.copyfile("/app/{}".format(os.path.basename(local_file_name)), "/app/tobrot/{}".format(os.path.basename(local_file_name)))
             
             # if a file, don't upload "thumb"
             thumb = None
@@ -181,15 +146,6 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
             #
             # send document
             
-            dir_pathakc = "============dir_pathakc============" + os.path.dirname(os.path.realpath(__file__))
-            LOGGER.info(dir_pathakc)
-            
-            
-            dir_pathakc = "============(os.path.basename(local_file_name)============" + os.path.dirname(os.path.basename(local_file_name))
-            LOGGER.info(dir_pathakc)
-            
-            asdfghjk = "===============AKCFILE = " + local_file_name
-            LOGGER.info(asdfghjk)
             sent_message = await message.reply_document(
                 document=local_file_name,
                 # quote=True,

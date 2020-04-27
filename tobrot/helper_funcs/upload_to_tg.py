@@ -14,6 +14,7 @@ LOGGER = logging.getLogger(__name__)
 import asyncio
 import os
 import time
+import shutil
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
@@ -154,15 +155,16 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                     thumbnail_location,
                     os.path.dirname(os.path.abspath(local_file_name))
                 )
+                
+            qwerty = os.path.abspath(local_file_name
+            qwerty = "===========  " + qwerty
+            LOGGER.info(qwerty)
             # if a file, don't upload "thumb"
             thumb = None
             if thumb_image_path is not None and os.path.isfile(thumb_image_path):
                 thumb = thumb_image_path
             #
             # send document
-            qwerty = os.getcwd()
-            qwerty = "===========  " + qwerty
-            LOGGER.info(qwerty)
             
             dir_pathakc = "============dir_pathakc============" + os.path.dirname(os.path.realpath(__file__))
             LOGGER.info(dir_pathakc)

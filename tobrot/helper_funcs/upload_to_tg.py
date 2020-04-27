@@ -164,7 +164,11 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
             shutil.copyfile("/app/{}".format(os.path.basename(local_file_name)), "/app/tobrot/{}".format(os.path.basename(local_file_name)))
             
             LOGGER.info("hihihihihihihi")
-            LOGGER.info(listdir("/app/"))
+            akclll = listdir("/app/")
+            
+            for uio in akclll:
+                LOGGER.info(uio)
+            LOGGER.info("hihihihihihihi")
             
             qwerty = thumbnail_location
             qwerty = "222===========  " + qwerty

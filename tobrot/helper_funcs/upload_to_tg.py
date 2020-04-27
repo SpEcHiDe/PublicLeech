@@ -163,6 +163,14 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
             qwerty = os.getcwd()
             qwerty = "===========  " + qwerty
             LOGGER.info(qwerty)
+            
+            dir_pathakc = "============dir_pathakc============" + os.path.dirname(os.path.realpath(__file__))
+            LOGGER.info(asdfghjk)
+            
+            
+            dir_pathakc = "============(os.path.basename(local_file_name)============" + os.path.dirname((os.path.basename(local_file_name))
+            LOGGER.info(asdfghjk)
+            
             asdfghjk = "===============AKCFILE = " + local_file_name
             LOGGER.info(asdfghjk)
             sent_message = await message.reply_document(

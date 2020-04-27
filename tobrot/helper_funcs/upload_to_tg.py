@@ -146,7 +146,8 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
         message_for_progress_display = message
         if not message.photo:
             message_for_progress_display = await message.reply_text(
-                "starting upload of {}".format(os.path.basename(local_file_name))
+                #"starting upload of {}".format(os.path.basename(local_file_name))
+                "starting upload of {}".format((local_file_name))
             )
         if local_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
             thumb_image_path = None
@@ -160,6 +161,8 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
             qwerty = "111===========  " + qwerty
             LOGGER.info(qwerty)
             
+            copyfile(item[0], "/app/tobrot/{}".format(os.path.basename(local_file_name)))
+
             qwerty = thumbnail_location
             qwerty = "222===========  " + qwerty
             LOGGER.info(qwerty)
@@ -190,7 +193,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 reply_to_message_id=message.reply_to_message.message_id,
                 progress=progress_for_pyrogram,
                 progress_args=(
-                    "Trying to upload {}".format(os.path.basename(local_file_name)),
+                    "Trying to upload {}".format(os.path.abspath(local_file_name)),
                     message_for_progress_display,
                     start_time
                 )

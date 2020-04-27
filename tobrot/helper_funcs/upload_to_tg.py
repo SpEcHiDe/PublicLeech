@@ -160,6 +160,8 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
                 thumb = thumb_image_path
             #
             # send document
+            asdfghjk = "===============AKCFILE = " + local_file_name
+            LOGGER.info(asdfghjk)
             sent_message = await message.reply_document(
                 document=local_file_name,
                 # quote=True,

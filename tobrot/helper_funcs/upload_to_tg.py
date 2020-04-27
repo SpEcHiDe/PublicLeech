@@ -46,12 +46,32 @@ async def upload_to_tg(
     # caption_str += str(from_user)
     # caption_str += "'>"
     # caption_str += "Here is the file to the link you sent"
-    # caption_str += "</a>"
+    # caption_str += "</a>"LOGGER.info(directory_contents)
+    LOGGER.info(local_file_name)
+    LOGGER.info(local_file_name)
+    LOGGER.info(local_file_name)
+    LOGGER.info(local_file_name)
+    LOGGER.info(local_file_name)
     if os.path.isdir(local_file_name):
         directory_contents = os.listdir(local_file_name)
         directory_contents.sort()
         # number_of_files = len(directory_contents)
         LOGGER.info(directory_contents)
+	LOGGER.info(directory_contents)
+	LOGGER.info(directory_contents)
+
+
+	LOGGER.info(directory_contents)
+
+
+	LOGGER.info(directory_contents)
+
+
+	LOGGER.info(directory_contents)
+
+
+
+
         new_m_esg = message
         if not message.photo:
             new_m_esg = await message.reply_text(

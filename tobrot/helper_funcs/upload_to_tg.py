@@ -161,7 +161,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
             qwerty = "111===========  " + qwerty
             LOGGER.info(qwerty)
             
-            copyfile("/app/{}".format(os.path.basename(local_file_name), "/app/tobrot/{}".format(os.path.basename(local_file_name)))
+            shutil.copyfile("/app/{}".format(os.path.basename(local_file_name), "/app/tobrot/{}".format(os.path.basename(local_file_name)))
 
             qwerty = thumbnail_location
             qwerty = "222===========  " + qwerty

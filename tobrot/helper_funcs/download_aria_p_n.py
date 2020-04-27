@@ -64,7 +64,7 @@ async def aria_start():
         aria2p.Client(
             host="http://localhost",
             port=ARIA_TWO_STARTED_PORT,
-            secret=""
+            secret="seedr123"
         )
     )
     return aria2

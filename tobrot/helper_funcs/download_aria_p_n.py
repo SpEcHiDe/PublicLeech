@@ -200,33 +200,34 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         is_file = file.seeder
         if not complete:
             if not file.error_message:
-                msg = ""
-                # sometimes, this weird https://t.me/c/1220993104/392975
-                # error creeps up
-                # TODO: temporary workaround
-                downloading_dir_name = "N/A"
-                try:
-                    # another derp -_-
-                    # https://t.me/c/1220993104/423318
-                    downloading_dir_name = str(file.name)
-                except:
-                    pass
-                #
-                msg = f"\n**{downloading_dir_name}**"
-                msg += f"\n 📥 : <i>{file.download_speed_string()}</i> / 📤 : <i>{file.upload_speed_string()}</i>"
-                if is_file is None :
-                   msg += f"\n 🔗 : <i>{file.connections}</i>"
-                else :
-                   msg += f"\n 🍐 : <i>{file.connections}</i> / 🌱 : <i>{file.num_seeders}</i>"
-                msg += f"\n 📀 : <i>{file.progress_string()}</i> / ⏱️ : <i>{file.eta_string()}</i>"
-                msg += f"\n ⚖️ : <i>{file.total_length_string()}</i>"
-                # msg += f"\nStatus: {file.status}"
-                msg += f"\n "
-                msg += f"\n<code>/cancel {gid}</code>"
-                # LOGGER.info(msg)
-                if msg != previous_message:
-                    #await event.edit(msg)
-                    #previous_message = msg
+                if 0: #added to greycode
+                    msg = ""
+                    # sometimes, this weird https://t.me/c/1220993104/392975
+                    # error creeps up
+                    # TODO: temporary workaround
+                    downloading_dir_name = "N/A"
+                    try:
+                        # another derp -_-
+                        # https://t.me/c/1220993104/423318
+                        downloading_dir_name = str(file.name)
+                    except:
+                        pass
+                    #
+                    msg = f"\n**{downloading_dir_name}**"
+                    msg += f"\n 📥 : <i>{file.download_speed_string()}</i> / 📤 : <i>{file.upload_speed_string()}</i>"
+                    if is_file is None :
+                       msg += f"\n 🔗 : <i>{file.connections}</i>"
+                    else :
+                       msg += f"\n 🍐 : <i>{file.connections}</i> / 🌱 : <i>{file.num_seeders}</i>"
+                    msg += f"\n 📀 : <i>{file.progress_string()}</i> / ⏱️ : <i>{file.eta_string()}</i>"
+                    msg += f"\n ⚖️ : <i>{file.total_length_string()}</i>"
+                    # msg += f"\nStatus: {file.status}"
+                    msg += f"\n "
+                    msg += f"\n<code>/cancel {gid}</code>"
+                    # LOGGER.info(msg)
+                    #if msg != previous_message:
+                        #await event.edit(msg)
+                        #previous_message = msg
             else:
                 msg = file.error_message
                 await event.edit(f"`{msg}`")

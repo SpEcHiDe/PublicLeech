@@ -165,11 +165,11 @@ async def upload_single_file(message, local_file_name, caption_str, from_user):
             LOGGER.info(qwerty)
             
             dir_pathakc = "============dir_pathakc============" + os.path.dirname(os.path.realpath(__file__))
-            LOGGER.info(asdfghjk)
+            LOGGER.info(dir_pathakc)
             
             
             dir_pathakc = "============(os.path.basename(local_file_name)============" + os.path.dirname((os.path.basename(local_file_name))
-            LOGGER.info(asdfghjk)
+            LOGGER.info(dir_pathakc)
             
             asdfghjk = "===============AKCFILE = " + local_file_name
             LOGGER.info(asdfghjk)

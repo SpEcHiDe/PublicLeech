@@ -56,19 +56,13 @@ async def upload_to_tg(
         directory_contents = os.listdir(local_file_name)
         directory_contents.sort()
         # number_of_files = len(directory_contents)
+
         LOGGER.info(directory_contents)
-	LOGGER.info(directory_contents)
-	LOGGER.info(directory_contents)
-
-
-	LOGGER.info(directory_contents)
-
-
-	LOGGER.info(directory_contents)
-
-
-	LOGGER.info(directory_contents)
-
+        LOGGER.info(directory_contents)
+        LOGGER.info(directory_contents)
+        LOGGER.info(directory_contents)
+        LOGGER.info(directory_contents)
+        LOGGER.info(directory_contents)
 
 
 

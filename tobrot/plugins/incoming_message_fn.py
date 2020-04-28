@@ -98,6 +98,9 @@ async def incoming_statuz_message_f(client, message):
                 await msg_statuz.edit(msg)
                 
             if prev_msg == msg:
+                await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
+                msg += "\nOver & Out"
+                await msg_statuz.edit(msg)
                 break;
             prev_msg = msg
             akccounter = akccounter + 1

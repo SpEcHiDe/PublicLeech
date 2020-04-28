@@ -83,8 +83,8 @@ async def incoming_statuz_message_f(client, message):
             if akccounter == 1:
                 msg_statuz = await message.reply_text(msg, quote=True)
             else:
-                await msg_statuz.edit_text(msg)
                 await asyncio.sleep(5)
+                await msg_statuz.edit_text(msg)
                 
             if prev_msg == msg:
                 break;

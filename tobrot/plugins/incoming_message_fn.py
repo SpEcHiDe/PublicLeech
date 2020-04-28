@@ -42,8 +42,10 @@ async def incoming_statuz_message_f(client, message):
         msg_statuz = await message.reply_text("Current Status 😎", quote=True)
         prev_msg = ""
         akccounter = 1
+        
+        aria_i_p = await aria_start()
+        
         while 1:        
-            aria_i_p = await aria_start()
             # Show All Downloads
             downloads = aria_i_p.get_downloads()
             
@@ -98,8 +100,12 @@ async def incoming_statuz_message_f(client, message):
             if prev_msg == msg:
                 break;
             prev_msg = msg
-            akccounter = akccounter + 1 
-
+            akccounter = akccounter + 1
+        LOGGER.info(msg) 
+        msg += "STATUS COMPLETED"    
+        await msg_statuz.edit(msg)
+        LOGGER.info(msg)
+        
 async def incoming_purge_message_f(client, message):
     """/purge command"""
     i_m_sefg2 = await message.reply_text("Purging...", quote=True)

@@ -83,7 +83,8 @@ async def incoming_statuz_message_f(client, message):
                 msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
                 
             if akccounter == 1:
-                msg_statuz2 = await msg_statuz.reply_text(msg, quote=True)
+                #msg_statuz2 = await msg_statuz.reply_text(msg, quote=True)
+                await msg_statuz.edit(msg)
                 LOGGER.info(msg_statuz2)
             else:
                 await asyncio.sleep(5)
@@ -93,7 +94,7 @@ async def incoming_statuz_message_f(client, message):
                 LOGGER.info(msg_statuz2)
                 LOGGER.info(msg)
                 LOGGER.info("=======================")
-                await msg_statuz2.edit(msg)
+                await msg_statuz.edit(msg)
                 
             if prev_msg == msg:
                 break;

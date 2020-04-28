@@ -42,8 +42,9 @@ async def incoming_statuz_message_f(client, message):
         msg_statuz = await message.reply_text("Current Status 😎", quote=True)
         prev_msg = ""
         akccounter = 1
+        aria_i_p = await aria_start()
+        
         while 1:        
-            aria_i_p = await aria_start()
             # Show All Downloads
             downloads = aria_i_p.get_downloads()
             

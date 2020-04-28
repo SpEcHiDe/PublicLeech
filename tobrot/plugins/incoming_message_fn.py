@@ -15,7 +15,8 @@ LOGGER = logging.getLogger(__name__)
 import os
 
 from tobrot import (
-    DOWNLOAD_LOCATION
+    DOWNLOAD_LOCATION,
+    EDIT_SLEEP_TIME_OUT
 )
 
 
@@ -86,7 +87,7 @@ async def incoming_statuz_message_f(client, message):
                 #msg_statuz2 = await msg_statuz.reply_text(msg, quote=True)
                 await msg_statuz.edit(msg)
             else:
-                await asyncio.sleep(5)
+                await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
             #await msg_statuz.delete()
                 LOGGER.info("=======================")
                 LOGGER.info(msg_statuz)

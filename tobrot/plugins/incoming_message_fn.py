@@ -28,6 +28,68 @@ from tobrot.helper_funcs.download_from_link import request_download
 from tobrot.helper_funcs.display_progress import progress_for_pyrogram
 from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
+async def incoming_statuz_message_f(client, message):
+    """/statuz command"""
+    if await AdminCheck(client, message.chat.id, message.from_user.id):
+
+        #
+        DOWNLOAD_ICON = "📥"
+        UPLOAD_ICON = "📤"
+        #
+        msg = ""
+        
+        prev_msg = ""
+        akccounter = 1
+        while 1:        
+            aria_i_p = await aria_start()
+            # Show All Downloads
+            downloads = aria_i_p.get_downloads()
+            
+            for download in downloads:
+                downloading_dir_name = "NA"
+                try:
+                    downloading_dir_name = str(download.name)
+                except:
+                    pass
+                total_length_size = str(download.total_length_string())
+                progress_percent_string = str(download.progress_string())
+                down_speed_string = str(download.download_speed_string())
+                up_speed_string = str(download.upload_speed_string())
+                download_current_status = str(download.status)
+                e_t_a = str(download.eta_string())
+                current_gid = str(download.gid)
+                #
+                msg += f"<u><code>{downloading_dir_name}</code></u>"
+                msg += "\n| "
+                msg += f"{total_length_size}"
+                msg += " | "
+                msg += f"{progress_percent_string}"
+                msg += " | "
+                msg += f"{DOWNLOAD_ICON} {down_speed_string}"
+                msg += " | "
+                msg += f"{UPLOAD_ICON} {up_speed_string}"
+                msg += " | "
+                msg += f"{e_t_a}"
+                msg += " | "
+                msg += f"{download_current_status}"
+                msg += " | "
+                msg += f"\n<code>/cancel {current_gid}</code>"
+                msg += " | "
+                msg += "\n\n"
+            LOGGER.info(msg)
+            if msg == "":
+                msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
+                
+            if akccounter == 1:
+                msg_statuz = await message.reply_text(msg, quote=True)
+            else:
+                await msg_statuz.edit_text(msg)
+                
+            if prev_msg == msg:
+                break;
+            prev_msg = msg
+            akccounter = akccounter + 1 
+
 async def incoming_purge_message_f(client, message):
     """/purge command"""
     i_m_sefg2 = await message.reply_text("Purging...", quote=True)

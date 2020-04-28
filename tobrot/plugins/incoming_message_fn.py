@@ -36,7 +36,6 @@ async def incoming_statuz_message_f(client, message):
         DOWNLOAD_ICON = "📥"
         UPLOAD_ICON = "📤"
         #
-        msg = ""
         
         prev_msg = ""
         akccounter = 1
@@ -45,6 +44,7 @@ async def incoming_statuz_message_f(client, message):
             # Show All Downloads
             downloads = aria_i_p.get_downloads()
             
+            msg = ""
             for download in downloads:
                 downloading_dir_name = "NA"
                 try:
@@ -84,6 +84,7 @@ async def incoming_statuz_message_f(client, message):
                 msg_statuz = await message.reply_text(msg, quote=True)
             else:
                 await msg_statuz.edit_text(msg)
+                await asyncio.sleep(5)
                 
             if prev_msg == msg:
                 break;

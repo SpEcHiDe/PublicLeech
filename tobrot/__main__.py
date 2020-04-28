@@ -70,6 +70,12 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_purge_message_handler)
     #
+    incoming_statuz_message_handler = MessageHandler(
+        incoming_statuz_message_f,
+        filters=Filters.command(["statuz"]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_statuz_message_handler)
+    #
     incoming_youtube_dl_handler = MessageHandler(
         incoming_youtube_dl_f,
         filters=Filters.command(["ytdl"]) & Filters.chat(chats=AUTH_CHANNEL)

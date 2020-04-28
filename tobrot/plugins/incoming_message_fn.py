@@ -21,6 +21,7 @@ from tobrot import (
 
 import aria2p
 import time
+import asyncio
 from tobrot.helper_funcs.extract_link_from_message import extract_link
 from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start

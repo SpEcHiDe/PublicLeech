@@ -81,11 +81,11 @@ async def incoming_statuz_message_f(client, message):
             if msg == "":
                 msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
                 
-            if akccounter == 1:
-                msg_statuz = await message.reply_text(msg, quote=True)
-            else:
-                await asyncio.sleep(5)
-                await msg_statuz.delete()
+            #if akccounter == 1:
+            msg_statuz = await message.reply_text(msg, quote=True)
+            #else:
+            await asyncio.sleep(5)
+            await msg_statuz.delete()
                 
             if prev_msg == msg:
                 break;

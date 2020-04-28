@@ -104,7 +104,7 @@ async def incoming_statuz_message_f(client, message):
                 #LOGGER.info(msg_statuz)
                 #LOGGER.info(msg)
                 #LOGGER.info("=======================")
-                await msg_statuz.delete()
+                #await msg_statuz.delete()
                 #await message.reply_text(msg, quote=True)
                 break;
             prev_msg = msg

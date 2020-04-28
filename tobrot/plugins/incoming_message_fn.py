@@ -101,10 +101,7 @@ async def incoming_statuz_message_f(client, message):
                 break;
             prev_msg = msg
             akccounter = akccounter + 1
-    LOGGER.info(msg) 
-    msg += "\n\n**Over and Out** 🔊"
-    await msg_statuz.edit(msg)
-    LOGGER.info(msg)
+
         
 async def incoming_purge_message_f(client, message):
     """/purge command"""

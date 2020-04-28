@@ -85,13 +85,11 @@ async def incoming_statuz_message_f(client, message):
             if akccounter == 1:
                 #msg_statuz2 = await msg_statuz.reply_text(msg, quote=True)
                 await msg_statuz.edit(msg)
-                LOGGER.info(msg_statuz2)
             else:
                 await asyncio.sleep(5)
             #await msg_statuz.delete()
                 LOGGER.info("=======================")
                 LOGGER.info(msg_statuz)
-                LOGGER.info(msg_statuz2)
                 LOGGER.info(msg)
                 LOGGER.info("=======================")
                 await msg_statuz.edit(msg)

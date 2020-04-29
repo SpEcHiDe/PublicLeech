@@ -19,22 +19,19 @@ async def create_archive(input_directory):
     return_name = None
     if os.path.exists(input_directory):
         base_dir_name = os.path.basename(input_directory)
-        compressed_file_name = f"{base_dir_name}.rar"
+        compressed_file_name = f"{base_dir_name}.tar.gz"
         # #BlameTelegram
         suffix_extention_length = 1 + 3 + 1 + 2
         if len(base_dir_name) > (64 - suffix_extention_length):
             compressed_file_name = base_dir_name[0:(64 - suffix_extention_length)]
-            compressed_file_name += ".rar"
+            compressed_file_name += ".tar.gz"
         # fix for https://t.me/c/1434259219/13344
         file_genertor_command = [
-            "rar",
-            "a",
-            "-v1000m",  
-            "-m0",  
+            "tar",
+            "-zcvf",
             compressed_file_name,
             f"{input_directory}"
         ]
-        LOGGER.info(file_genertor_command)
         process = await asyncio.create_subprocess_exec(
             *file_genertor_command,
             # stdout must a pipe to be accessible as process.stdout
@@ -43,7 +40,7 @@ async def create_archive(input_directory):
         )
         # Wait for the subprocess to finish
         stdout, stderr = await process.communicate()
-        e_response = stderr.decode().strip()        
+        e_response = stderr.decode().strip()
         t_response = stdout.decode().strip()
         LOGGER.info("============os.listdir()===============")
         LOGGER.info(os.listdir())
@@ -53,5 +50,4 @@ async def create_archive(input_directory):
             except:
                 pass
             return_name = compressed_file_name
-            LOGGER.info(return_name)
     return return_name

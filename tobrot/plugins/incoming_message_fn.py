@@ -88,6 +88,7 @@ async def incoming_statuz_message_f(client, message):
                 msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
             
             if prev_msg == msg:
+                await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
                 msg += "\n**Over & Out** 🔊"
                 await msg_statuz.edit(msg)
                 break;

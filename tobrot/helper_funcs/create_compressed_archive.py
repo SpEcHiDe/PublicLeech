@@ -19,16 +19,17 @@ async def create_archive(input_directory):
     return_name = None
     if os.path.exists(input_directory):
         base_dir_name = os.path.basename(input_directory)
-        compressed_file_name = f"{base_dir_name}.tar.gz"
+        compressed_file_name = f"{base_dir_name}.rar"
         # #BlameTelegram
         suffix_extention_length = 1 + 3 + 1 + 2
         if len(base_dir_name) > (64 - suffix_extention_length):
             compressed_file_name = base_dir_name[0:(64 - suffix_extention_length)]
-            compressed_file_name += ".tar.gz"
+            compressed_file_name += ".rar"
         # fix for https://t.me/c/1434259219/13344
         file_genertor_command = [
-            "tar",
-            "-zcvf",
+            "rar",
+            "a",,
+            "-m0",
             compressed_file_name,
             f"{input_directory}"
         ]

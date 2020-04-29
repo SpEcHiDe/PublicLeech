@@ -80,10 +80,10 @@ async def split_large_files(input_file):
         )
         o_d_t = o_d_t + "."
         file_genertor_command = [
-            "split",
-            "--numeric-suffixes=1",
-            "--suffix-length=5",
-            f"--bytes={MAX_TG_SPLIT_FILE_SIZE}",
+            "rar",
+            "a",
+            "-m0",
+            "-v1024m",
             input_file,
             o_d_t
         ]

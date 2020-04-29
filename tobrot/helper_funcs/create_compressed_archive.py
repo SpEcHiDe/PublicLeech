@@ -29,7 +29,7 @@ async def create_archive(input_directory):
         file_genertor_command = [
             "rar",
             "a",
-            "-v1024m",  
+            "-v1000m",  
             "-m0",  
             compressed_file_name,
             f"{input_directory}"

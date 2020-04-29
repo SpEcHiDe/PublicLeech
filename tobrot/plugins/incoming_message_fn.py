@@ -90,6 +90,7 @@ async def incoming_statuz_message_f(client, message):
             if prev_msg == msg:
                 await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
                 msg += "\n**Over & Out** 🔊"
+                LOGGER.info(msg)
                 await msg_statuz.edit(msg)
                 break;
             

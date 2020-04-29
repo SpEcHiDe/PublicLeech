@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+# (c) Shrimadhav U K / Akshay C
 
 # the logging things
 import logging
@@ -82,22 +82,16 @@ async def split_large_files(input_file):
             new_working_directory,
             os.path.basename(input_file),
         )
-        LOGGER.info("=============IN SPLIT o_d_t")
         LOGGER.info(o_d_t)
-        o_d_t = o_d_t + "."
         file_genertor_command = [
             "rar",
             "a",
-            "-v100m",
+            "-v1024m",
             "-m0",
             o_d_t,
             input_file
         ]
-        LOGGER.info("====SPLIT CMD CMD CDM=======")
         LOGGER.info(file_genertor_command)
-        LOGGER.info("====SPLIT RAR SPLIT RAR SPLIT RAR SPLIT RAR=======")
-        LOGGER.info(os.listdir())
-        LOGGER.info("====SPLIT RAR SPLIT RAR SPLIT RAR SPLIT RAR=======")
         process = await asyncio.create_subprocess_exec(
             *file_genertor_command,
             # stdout must a pipe to be accessible as process.stdout

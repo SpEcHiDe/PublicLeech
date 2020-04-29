@@ -81,7 +81,7 @@ async def upload_to_tg(
                 "\n🤖 trying to split the files 🌝🌝🌚"
             )
             LOGGER.info("=======LOCAL FILE B4 SPLIT")
-            LOGGER.info("=======local_file_name")
+            LOGGER.info(local_file_name)
             splitted_dir = await split_large_files(local_file_name)
             totlaa_sleif = os.listdir(splitted_dir)
             LOGGER.info("=======splitted_dir")

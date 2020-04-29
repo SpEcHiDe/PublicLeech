@@ -152,9 +152,10 @@ async def call_apropriate_function(
         # first check if current free space allows this
         # ref: https://github.com/out386/aria-telegram-mirror-bot/blob/master/src/download_tools/aria-tools.ts#L194
         # archive the contents
+        lg1 = "to_upload_file = "+to_upload_file
         check_if_file = await create_archive(to_upload_file)
-        LOGGER.info("check_if_file")
-        LOGGER.info(check_if_file)
+        lg1 = "check_if_file = "+check_if_file
+        LOGGER.info(lg1)
         if check_if_file is not None:
             to_upload_file = check_if_file
     #

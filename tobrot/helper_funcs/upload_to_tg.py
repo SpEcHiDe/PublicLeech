@@ -80,6 +80,11 @@ async def upload_to_tg(
             )
             splitted_dir = await split_large_files(local_file_name)
             totlaa_sleif = os.listdir(splitted_dir)
+            LOGGER.info("=======splitted_dir")
+            LOGGER.info(splitted_dir)
+            LOGGER.info("=======totlaa_sleif")
+            LOGGER.info(totlaa_sleif)
+            
             totlaa_sleif.sort()
             number_of_files = len(totlaa_sleif)
             LOGGER.info(totlaa_sleif)

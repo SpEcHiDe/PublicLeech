@@ -70,7 +70,9 @@ async def upload_to_tg(
                 dict_contatining_uploaded_files
             )
     else:
-        if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
+        #if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
+        if os.path.getsize(local_file_name) > 150000000:
+            
             LOGGER.info("TODO")
             d_f_s = humanbytes(os.path.getsize(local_file_name))
             i_m_s_g = await message.reply_text(
@@ -78,6 +80,8 @@ async def upload_to_tg(
                 f"Detected File Size: {d_f_s} 😡\n"
                 "\n🤖 trying to split the files 🌝🌝🌚"
             )
+            LOGGER.info("=======LOCAL FILE B4 SPLIT")
+            LOGGER.info("=======local_file_name")
             splitted_dir = await split_large_files(local_file_name)
             totlaa_sleif = os.listdir(splitted_dir)
             LOGGER.info("=======splitted_dir")

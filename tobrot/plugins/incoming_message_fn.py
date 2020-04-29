@@ -82,12 +82,16 @@ async def incoming_statuz_message_f(client, message):
                 msg += f"\n<code>/cancel {current_gid}</code>"
                 msg += " | "
                 msg += "\n\n"
-                if exitakc == 1:
-                    msg += "**Over & Out** 🔊"
             LOGGER.info(msg)
+            
             if msg == "":
                 msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
-                
+            
+            if prev_msg == msg:
+                msg += "\n**Over & Out** 🔊"
+                await msg_statuz.edit(msg)
+                break;
+            
             if akccounter == 1:
                 #msg_statuz2 = await msg_statuz.reply_text(msg, quote=True)
                 await msg_statuz.edit(msg)
@@ -99,19 +103,7 @@ async def incoming_statuz_message_f(client, message):
                 LOGGER.info(msg)
                 LOGGER.info("=======================")
                 await msg_statuz.edit(msg)
-                
-            if exitakc == 1:
-                break;
-            if prev_msg == msg:
-                #await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
-                #msg += "\n**Over & Out** 🔊"
-                #LOGGER.info("=======================")
-                #LOGGER.info(msg_statuz)
-                #LOGGER.info(msg)
-                #LOGGER.info("=======================")
-                #await msg_statuz.delete()
-                #await message.reply_text(msg, quote=True)
-                exitakc = 1
+            
             prev_msg = msg
             akccounter = akccounter + 1
 

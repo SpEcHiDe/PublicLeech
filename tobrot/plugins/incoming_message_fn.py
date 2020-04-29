@@ -129,6 +129,8 @@ async def incoming_message_f(client, message):
         if message.command[1] == "archive":
             is_zip = True
     # get link from the incoming message
+    LOGGER.info("is_zip===============================")
+    LOGGER.info(is_zip)
     dl_url, cf_name = extract_link(message.reply_to_message)
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)

@@ -33,6 +33,7 @@ async def create_archive(input_directory):
             compressed_file_name,
             f"{input_directory}"
         ]
+        LOGGER.info(file_genertor_command)
         process = await asyncio.create_subprocess_exec(
             *file_genertor_command,
             # stdout must a pipe to be accessible as process.stdout
@@ -49,4 +50,5 @@ async def create_archive(input_directory):
             except:
                 pass
             return_name = compressed_file_name
+            LOGGER.info(return_name)
     return return_name

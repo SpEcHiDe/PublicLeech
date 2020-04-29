@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K / Akshay C
+# (c) Akshay C / Shrimadhav U K
 
 # the logging things
 import logging

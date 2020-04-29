@@ -29,9 +29,13 @@ async def split_large_files(input_file):
         working_directory,
         str(time.time())
     )
+    LOGGER.info("=============IN SPLIT INFILE")
+    LOGGER.info(input_file)
     # create download directory, if not exist
     if not os.path.isdir(new_working_directory):
         os.makedirs(new_working_directory)
+    LOGGER.info("=============IN SPLIT new_working_directory")
+    LOGGER.info(new_working_directory)
     if input_file.upper().endswith(("MKV", "MP4", "WEBM", "MP3", "M4A", "FLAC", "WAV")):
     # if False:
         # handle video / audio files here
@@ -78,15 +82,19 @@ async def split_large_files(input_file):
             new_working_directory,
             os.path.basename(input_file),"_S"
         )
+        LOGGER.info("=============IN SPLIT o_d_t")
+        LOGGER.info(o_d_t)
         o_d_t = o_d_t + "."
         file_genertor_command = [
             "rar",
             "a",
-            "-v1024m",
+            "-v100m",
             "-m0",
             o_d_t,
             input_file
         ]
+        LOGGER.info("====SPLIT CMD CMD CDM=======")
+        LOGGER.info(file_genertor_command)
         LOGGER.info("====SPLIT RAR SPLIT RAR SPLIT RAR SPLIT RAR=======")
         LOGGER.info(os.listdir())
         LOGGER.info("====SPLIT RAR SPLIT RAR SPLIT RAR SPLIT RAR=======")

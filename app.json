@@ -66,6 +66,8 @@
     "url": "https://github.com/akshaychinnan/aria2-heroku"
   }, {
     "url": "heroku/python"
+  }, {
+    "url": "https://github.com/akshaychinnan/heroku-buildpack-rarlab"
   }],
   "formation": {
     "worker": {

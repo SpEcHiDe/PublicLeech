@@ -30,6 +30,7 @@ async def create_archive(input_directory):
             "rar",
             "a",
             "-v1024m",  
+            "-m0",  
             compressed_file_name,
             f"{input_directory}"
         ]

@@ -45,6 +45,8 @@ async def create_archive(input_directory):
         stdout, stderr = await process.communicate()
         e_response = stderr.decode().strip()        
         t_response = stdout.decode().strip()
+        LOGGER.info("============os.listdir()===============")
+        LOGGER.info(os.listdir())
         if os.path.exists(compressed_file_name):
             try:
                 shutil.rmtree(input_directory)

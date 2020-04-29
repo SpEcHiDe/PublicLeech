@@ -42,6 +42,7 @@ async def incoming_statuz_message_f(client, message):
         msg_statuz = await message.reply_text("Current Status 😎", quote=True)
         prev_msg = ""
         akccounter = 1
+        exitakc = 0
         
         aria_i_p = await aria_start()
         
@@ -81,6 +82,8 @@ async def incoming_statuz_message_f(client, message):
                 msg += f"\n<code>/cancel {current_gid}</code>"
                 msg += " | "
                 msg += "\n\n"
+                if exitakc == 1:
+                    msg += "**Over & Out** 🔊"
             LOGGER.info(msg)
             if msg == "":
                 msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
@@ -97,6 +100,8 @@ async def incoming_statuz_message_f(client, message):
                 LOGGER.info("=======================")
                 await msg_statuz.edit(msg)
                 
+            if exitakc == 1:
+                break;
             if prev_msg == msg:
                 #await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
                 #msg += "\n**Over & Out** 🔊"
@@ -106,7 +111,7 @@ async def incoming_statuz_message_f(client, message):
                 #LOGGER.info("=======================")
                 #await msg_statuz.delete()
                 #await message.reply_text(msg, quote=True)
-                break;
+                exitakc = 1
             prev_msg = msg
             akccounter = akccounter + 1
 

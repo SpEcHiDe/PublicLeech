@@ -76,17 +76,20 @@ async def split_large_files(input_file):
         # handle normal files here
         o_d_t = os.path.join(
             new_working_directory,
-            os.path.basename(input_file)
+            os.path.basename(input_file),"_S"
         )
         o_d_t = o_d_t + "."
         file_genertor_command = [
             "rar",
             "a",
-            "-m0",
             "-v1024m",
-            input_file,
-            o_d_t
+            "-m0",
+            o_d_t,
+            input_file
         ]
+        LOGGER.info("====SPLIT RAR SPLIT RAR SPLIT RAR SPLIT RAR=======")
+        LOGGER.info(os.listdir())
+        LOGGER.info("====SPLIT RAR SPLIT RAR SPLIT RAR SPLIT RAR=======")
         process = await asyncio.create_subprocess_exec(
             *file_genertor_command,
             # stdout must a pipe to be accessible as process.stdout

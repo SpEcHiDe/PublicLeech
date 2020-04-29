@@ -80,7 +80,7 @@ async def split_large_files(input_file):
         # handle normal files here
         o_d_t = os.path.join(
             new_working_directory,
-            os.path.basename(input_file),"_S"
+            os.path.basename(input_file),
         )
         LOGGER.info("=============IN SPLIT o_d_t")
         LOGGER.info(o_d_t)

@@ -23,7 +23,7 @@ from tobrot import (
     AUTH_CHANNEL,
     DOWNLOAD_LOCATION,
     EDIT_SLEEP_TIME_OUT
-    MAX_FILE_SIZE
+  #  MAX_FILE_SIZE
 )
 
 

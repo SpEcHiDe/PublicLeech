@@ -18,6 +18,7 @@ import time
 import os
 
 from tobrot import (
+    MAX_FILE_SIZE
     DOWNLOAD_LOCATION
 )
 

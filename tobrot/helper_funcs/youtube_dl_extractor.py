@@ -95,6 +95,10 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                     format_string = formats.get("format_note")
                     if format_string is None:
                         format_string = formats.get("format")
+                    # don't display formats, without audio
+                    # https://t.me/c/1434259219/269937
+                    if "DASH" in format_string.upper():
+                        continue
                     format_ext = formats.get("ext")
                     approx_file_size = ""
                     if "filesize" in formats:

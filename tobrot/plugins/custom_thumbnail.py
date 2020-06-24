@@ -1,6 +1,5 @@
 """ThumbNail utilities, © @AnyDLBot"""
 
-
 import os
 
 from tobrot import DOWNLOAD_LOCATION

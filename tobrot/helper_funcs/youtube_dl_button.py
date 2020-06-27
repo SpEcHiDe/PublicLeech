@@ -35,14 +35,7 @@ async def youtube_dl_call_back(bot, update):
     #
     current_user_id = update.message.reply_to_message.from_user.id
     current_touched_user_id = update.from_user.id
-    if current_user_id != current_touched_user_id:
-        await bot.answer_callback_query(
-            callback_query_id=update.id,
-            text="who are you? 🤪🤔🤔🤔",
-            show_alert=True,
-            cache_time=0
-        )
-        return False, None
+
     user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
     # create download directory, if not exist
     if not os.path.isdir(user_working_dir):

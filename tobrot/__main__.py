@@ -52,11 +52,11 @@ if __name__ == "__main__" :
         workers=343
     )
     #
-    incoming_message_handler = MessageHandler(
-        incoming_message_f,
-        filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(incoming_message_handler)
+    # incoming_message_handler = MessageHandler(
+    #     incoming_message_f,
+    #     filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)
+    # )
+    # app.add_handler(incoming_message_handler)
     #
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
@@ -64,11 +64,11 @@ if __name__ == "__main__" :
     )
     app.add_handler(incoming_purge_message_handler)
     #
-    incoming_youtube_dl_handler = MessageHandler(
-        incoming_youtube_dl_f,
-        filters=Filters.command(["ytdl"]) & Filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(incoming_youtube_dl_handler)
+    # incoming_youtube_dl_handler = MessageHandler(
+    #     incoming_youtube_dl_f,
+    #     filters=Filters.command(["ytdl"]) & Filters.chat(chats=AUTH_CHANNEL)
+    # )
+    # app.add_handler(incoming_youtube_dl_handler)
     #
     status_message_handler = MessageHandler(
         status_message_f,
@@ -134,5 +134,14 @@ if __name__ == "__main__" :
         filters=Filters.command(["clearthumbnail"]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
+    # 
+    incoming_message_handler = MessageHandler(
+        incoming_message_f,
+        filters=(
+            Filters.text |
+            Filters.document.file_name.upper().endswith(".TORRENT")
+        ) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(incoming_message_handler)
     #
     app.run()

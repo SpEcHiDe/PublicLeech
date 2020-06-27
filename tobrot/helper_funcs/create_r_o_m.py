@@ -23,7 +23,7 @@ def get_markup(message: Message):
     ikeyboard = []
     ikeyboard.append(InlineKeyboardButton(
         "leech 🤔🤔",
-        callback_data=("l").encode("UTF-8")
+        callback_data=("leech").encode("UTF-8")
     ))
     ikeyboard.append(InlineKeyboardButton(
         "youtube-dl",
@@ -32,7 +32,7 @@ def get_markup(message: Message):
     inline_keyboard.append(ikeyboard)
     ikeyboard = []
     ikeyboard.append(InlineKeyboardButton(
-        "A leech TAR . GZ",
+        "A leech TAR . GZ  🤔🤔",
         callback_data=("leecha").encode("UTF-8")
     ))
     ikeyboard.append(InlineKeyboardButton(

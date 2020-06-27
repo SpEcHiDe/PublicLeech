@@ -34,9 +34,8 @@ async def button(bot, update: CallbackQuery):
     await update.answer()
     LOGGER.info(update)
     cb_data = update.data
-    if "|" in cb_data:
-        await youtube_dl_call_back(bot, update)
-    elif cb_data.startswith("leech"):
+    
+    if cb_data.startswith("leech"):
         # get link from the incoming message
         dl_url, cf_name, _, _ = await extract_link(update.message.reply_to_message, "LEECH")
         LOGGER.info(dl_url)
@@ -98,7 +97,7 @@ async def button(bot, update: CallbackQuery):
                 user_working_dir
             )
             if thumb_image is not None:
-                await update.message.reply_photo(
+                await i_m_sefg.reply_to_message.reply_photo(
                     photo=thumb_image,
                     quote=True,
                     caption=text_message,
@@ -113,3 +112,5 @@ async def button(bot, update: CallbackQuery):
         else:
             await i_m_sefg.delete()
 
+    elif "|" in cb_data:
+        await youtube_dl_call_back(bot, update)

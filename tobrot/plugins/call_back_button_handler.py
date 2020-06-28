@@ -30,11 +30,6 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 async def button(bot, update: CallbackQuery):
     if update.from_user.id != update.message.reply_to_message.from_user.id:
-        await update.answer(
-            text="who are you? 🤪🤔🤔🤔",
-            show_alert=True,
-            cache_time=0
-        )
         return
 
     await update.answer()

@@ -57,6 +57,8 @@ if __name__ == "__main__" :
         workers=343
     )
     #
+    app.set_parse_mode("html")
+    #
     # incoming_message_handler = MessageHandler(
     #     incoming_message_f,
     #     filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)

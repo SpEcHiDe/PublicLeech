@@ -45,7 +45,7 @@ async def copy_via_rclone(
         "rclone",
         "copy",
         "\"" + src + "\"",
-        "\"" + remote_name + "\":" + "\"" + remote_dir + "\"",
+        "" + remote_name + ":" + "\"" + remote_dir + "\"",
         "--config=" + conf_file + ""
     ]
     LOGGER.info(command_to_exec)

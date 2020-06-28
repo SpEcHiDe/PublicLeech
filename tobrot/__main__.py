@@ -54,7 +54,8 @@ if __name__ == "__main__" :
         bot_token=TG_BOT_TOKEN,
         api_id=APP_ID,
         api_hash=API_HASH,
-        workers=343
+        workers=343,
+        workdir=DOWNLOAD_LOCATION
     )
     #
     app.set_parse_mode("html")

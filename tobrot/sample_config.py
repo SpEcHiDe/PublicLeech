@@ -33,4 +33,6 @@ class Config(object):
     UN_FINISHED_PROGRESS_STR = os.environ.get("UN_FINISHED_PROGRESS_STR", "░")
     # add offensive API
     TG_OFFENSIVE_API = os.environ.get("TG_OFFENSIVE_API", None)
+    # URL for the rclone configuration
+    R_CLONE_CONF_URI = os.environ.get("R_CLONE_CONF_URI", None)
 

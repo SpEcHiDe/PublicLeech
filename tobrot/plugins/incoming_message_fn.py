@@ -46,7 +46,7 @@ async def incoming_purge_message_f(client, message):
 async def incoming_message_f(client, message):
     """/leech command"""
     i_m_sefg = await message.reply_text("checking ", quote=True)
-    t_, rm_ = get_markup(message)
+    t_, rm_ = await get_markup(message)
     await i_m_sefg.edit_text(
         text=t_,
         reply_markup=rm_,

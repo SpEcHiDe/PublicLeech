@@ -10,15 +10,22 @@ logging.basicConfig(
 )
 LOGGER = logging.getLogger(__name__)
 
+import configparser
 
 from pyrogram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Message
 )
+from tobrot import (
+    R_CLONE_CONF_URI
+)
+from tobrot.helper_funcs.r_clone import (
+    get_r_clone_config
+)
 
 
-def get_markup(message: Message):
+async def get_markup(message: Message):
     inline_keyboard = []
     ikeyboard = []
     ikeyboard.append(InlineKeyboardButton(
@@ -41,7 +48,25 @@ def get_markup(message: Message):
     ))
     inline_keyboard.append(ikeyboard)
     ikeyboard = []
-
+    if R_CLONE_CONF_URI is not None:
+        r_clone_conf_file = await get_r_clone_config(R_CLONE_CONF_URI)
+        if r_clone_conf_file is not None:
+            config = configparser.ConfigParser()
+            config.read(r_clone_conf_file)
+            remote_names = config.sections()
+            it_r = 0
+            for remote_name in remote_names:
+                ikeyboard.append(InlineKeyboardButton(
+                    f"RClone LEECH {remote_name}",
+                    callback_data=(f"leech_rc_{it_r}").encode("UTF-8")
+                ))
+                # ikeyboard.append(InlineKeyboardButton(
+                #     f"RClone YTDL {remote_name}",
+                #     callback_data=(f"ytdl_rc_{it_r}").encode("UTF-8")
+                # ))
+                inline_keyboard.append(ikeyboard)
+                ikeyboard = []
+                it_r = it_r + 1
     reply_markup = InlineKeyboardMarkup(inline_keyboard)
     inline_keyboard = []
 

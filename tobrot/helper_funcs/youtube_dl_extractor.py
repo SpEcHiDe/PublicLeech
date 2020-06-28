@@ -53,9 +53,9 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
     # Wait for the subprocess to finish
     stdout, stderr = await process.communicate()
     e_response = stderr.decode().strip()
-    LOGGER.info(e_response)
+    # LOGGER.info(e_response)
     t_response = stdout.decode().strip()
-    LOGGER.info(t_response)
+    # LOGGER.info(t_response)
     # https://github.com/rg3/youtube-dl/issues/2630#issuecomment-38635239
     if e_response:
         # logger.warn("Status : FAIL", exc.returncode, exc.output)

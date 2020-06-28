@@ -70,6 +70,8 @@ class Config(Config):
 
 * `TG_OFFENSIVE_API`
 
+* `R_CLONE_CONF_URI`
+
 ## Available Commands
 
 * `/ytdl`: This command should be used as reply to a [supported link](https://ytdl-org.github.io/youtube-dl/supportedsites.html)

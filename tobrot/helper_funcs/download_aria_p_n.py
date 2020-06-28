@@ -13,6 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 import aria2p
 import asyncio
+import configparser
 import os
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 from tobrot.helper_funcs.create_compressed_archive import create_archive
@@ -22,7 +23,12 @@ from tobrot import (
     MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START,
     AUTH_CHANNEL,
     DOWNLOAD_LOCATION,
-    EDIT_SLEEP_TIME_OUT
+    EDIT_SLEEP_TIME_OUT,
+    R_CLONE_CONF_URI
+)
+from tobrot.helper_funcs.r_clone import (
+    get_r_clone_config,
+    copy_via_rclone
 )
 
 
@@ -121,6 +127,70 @@ def add_url(aria_instance, text_url, c_file_name):
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
     else:
         return True, "" + download.gid + ""
+
+
+async def fake_etairporpa_call(
+    aria_instance,
+    incoming_link,
+    c_file_name,
+    sent_message_to_update_tg_p,
+    r_clone_header_xedni
+):
+    # TODO: duplicate code -_-
+    if incoming_link.lower().startswith("magnet:"):
+        sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
+    elif incoming_link.lower().endswith(".torrent"):
+        sagtus, err_message = add_torrent(aria_instance, incoming_link)
+    else:
+        sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
+    if not sagtus:
+        return sagtus, err_message
+    LOGGER.info(err_message)
+    # https://stackoverflow.com/a/58213653/4723940
+    await check_progress_for_dl(
+        aria_instance,
+        err_message,
+        sent_message_to_update_tg_p,
+        None
+    )
+    if incoming_link.startswith("magnet:"):
+        #
+        err_message = await check_metadata(aria_instance, err_message)
+        #
+        await asyncio.sleep(1)
+        if err_message is not None:
+            await check_progress_for_dl(
+                aria_instance,
+                err_message,
+                sent_message_to_update_tg_p,
+                None
+            )
+        else:
+            return False, "can't get metadata \n\n#stopped"
+    await asyncio.sleep(1)
+    file = aria_instance.get_download(err_message)
+    to_upload_file = file.name
+    #
+    r_clone_conf_file = await get_r_clone_config(R_CLONE_CONF_URI)
+    if r_clone_conf_file is not None: # how? even :\
+        config = configparser.ConfigParser()
+        config.read(r_clone_conf_file)
+        remote_names = config.sections()
+        try:
+            required_remote = remote_names[r_clone_header_xedni]
+        except IndexError:
+            return False, "maybe a bug, but index seems not valid"
+        await copy_via_rclone(
+            to_upload_file,
+            required_remote,
+            "/", # assuming '/' is the default location for uploads
+            r_clone_conf_file
+        )
+        await sent_message_to_update_tg_p.reply_text(
+            "files might be uploaded in the desired remote "
+            "please check Logs for any erros"
+        )
+        return True, None
 
 
 async def call_apropriate_function(

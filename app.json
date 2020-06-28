@@ -68,6 +68,10 @@
     "TG_OFFENSIVE_API": {
       "description": "should be an URL accepting the FormParams {i}, {m}, and {t}",
       "required": false
+    },
+    "R_CLONE_CONF_URI": {
+      "description": "should be a Telegram URL",
+      "required": false
     }
   },
   "addons": [
@@ -76,6 +80,8 @@
     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
   }, {
     "url": "https://github.com/SayanthD/aria2-heroku"
+  }, {
+    "url": "https://github.com/amivin/rclone-heroku"
   }, {
     "url": "heroku/python"
   }],

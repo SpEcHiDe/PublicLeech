@@ -71,6 +71,7 @@ class Config(Config):
 * `TG_OFFENSIVE_API`
 
 * `R_CLONE_CONF_URI`
+![a help, maybe](https://telegra.ph/file/073bcbc0b69b03d75ea04.jpg)
 
 ## Available Commands
 

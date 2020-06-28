@@ -11,7 +11,10 @@ from pyrogram import (
 def message_filter_f(f, m: Message):
     return bool(
         m.text or
-        m.document.file_name.upper().endswith(".TORRENT")
+        (
+            m.document and
+            m.document.file_name.upper().endswith(".TORRENT")
+        )
     )
 
 

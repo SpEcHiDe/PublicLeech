@@ -29,11 +29,11 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 
 async def button(bot, update: CallbackQuery):
+    LOGGER.info(update)
     if update.from_user.id != update.message.reply_to_message.from_user.id:
         return
 
     await update.answer()
-    LOGGER.info(update)
     cb_data = update.data
     
     if cb_data.startswith("leech"):

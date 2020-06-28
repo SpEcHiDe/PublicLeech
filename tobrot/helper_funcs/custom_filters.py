@@ -10,8 +10,18 @@ from pyrogram import (
 
 def message_filter_f(f, m: Message):
     return bool(
-        m.text or
+        # below checks if it is a valid link
         (
+            (
+                ("http" in m.text) or
+                ("magnet:" in m.text)
+            ) and (
+                # to avoid conflicts with
+                # popular @LinkToFilesBot (s)
+                ".html" not in m.text
+            )
+        ) or (
+            # below checks the TORRENT detection part
             m.document and
             m.document.file_name.upper().endswith(".TORRENT")
         )

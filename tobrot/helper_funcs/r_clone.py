@@ -88,7 +88,12 @@ def extract_c_m_ids(message_link: str) -> (Union[str, int], int):
     chat_id, message_id = None, None
     if len(p_m_link) == 6:
         # private link
-        chat_id, message_id = int("-100" + p_m_link[4]), int(p_m_link[5])
+        if p_m_link[3] == "c":
+            # the Telegram private link
+            chat_id, message_id = int("-100" + p_m_link[4]), int(p_m_link[5])
+        elif p_m_link[3] == "PublicLeech":
+            # bleck magick
+            chat_id, message_id = int(p_m_link[4]), int(p_m_link[5])
     elif len(p_m_link) == 5:
         # public link
         chat_id, message_id = str("@" + p_m_link[3]), int(p_m_link[4])

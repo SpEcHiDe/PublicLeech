@@ -42,6 +42,7 @@ from tobrot.plugins.custom_thumbnail import (
     clear_thumb_nail
 )
 from tobrot.helper_funcs.custom_filters import message_fliter
+from tobrot.dinmamoc import Commandi
 
 
 if __name__ == "__main__" :
@@ -62,55 +63,55 @@ if __name__ == "__main__" :
     #
     # incoming_message_handler = MessageHandler(
     #     incoming_message_f,
-    #     filters=Filters.command(["leech"]) & Filters.chat(chats=AUTH_CHANNEL)
+    #     filters=Filters.command([Commandi.LEECH]) & Filters.chat(chats=AUTH_CHANNEL)
     # )
     # app.add_handler(incoming_message_handler)
     #
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
-        filters=Filters.command(["purge"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.PURGE]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_purge_message_handler)
     #
     # incoming_youtube_dl_handler = MessageHandler(
     #     incoming_youtube_dl_f,
-    #     filters=Filters.command(["ytdl"]) & Filters.chat(chats=AUTH_CHANNEL)
+    #     filters=Filters.command([Commandi.YTDL]) & Filters.chat(chats=AUTH_CHANNEL)
     # )
     # app.add_handler(incoming_youtube_dl_handler)
     #
     status_message_handler = MessageHandler(
         status_message_f,
-        filters=Filters.command(["status"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.STATUS]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(status_message_handler)
     #
     cancel_message_handler = MessageHandler(
         cancel_message_f,
-        filters=Filters.command(["cancel"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.CANCEL]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(cancel_message_handler)
     #
     exec_message_handler = MessageHandler(
         exec_message_f,
-        filters=Filters.command(["exec"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(exec_message_handler)
     #
     rename_message_handler = MessageHandler(
         rename_message_f,
-        filters=Filters.command(["rename"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.RENAME]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(rename_message_handler)
     #
     upload_document_handler = MessageHandler(
         upload_document_f,
-        filters=Filters.command(["upload"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.UPLOAD]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(upload_document_handler)
 
     help_text_handler = MessageHandler(
         help_message_f,
-        filters=Filters.command(["help"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.HELP]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(help_text_handler)
     #
@@ -133,13 +134,13 @@ if __name__ == "__main__" :
     #
     save_thumb_nail_handler = MessageHandler(
         save_thumb_nail,
-        filters=Filters.command(["savethumbnail"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.SAVETHUMBNAIL]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_thumb_nail_handler)
     #
     clear_thumb_nail_handler = MessageHandler(
         clear_thumb_nail,
-        filters=Filters.command(["clearthumbnail"]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([Commandi.CLEARTHUMBNAIL]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
     # 

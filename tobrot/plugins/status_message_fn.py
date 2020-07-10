@@ -23,6 +23,7 @@ from tobrot import (
 from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
+from tobrot.dinmamoc import Commandi
 
 
 async def status_message_f(client, message):
@@ -63,7 +64,7 @@ async def status_message_f(client, message):
             msg += " | "
             msg += f"{download_current_status}"
             msg += " | "
-            msg += f"<code>/cancel {current_gid}</code>"
+            msg += f"<code>{Commandi.CANCEL} {current_gid}</code>"
             msg += " | "
             msg += "\n\n"
         LOGGER.info(msg)

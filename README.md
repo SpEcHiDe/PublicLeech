@@ -1,8 +1,12 @@
 # ~~Telegram~~ Torrent / YouTube Leecher 🔥🤖
 
-A Telegram Torrent, youtube-dl Leecher, and rClone / Telegram Uploader!
+A Torrent, youtube-dl Leecher, and rClone / Telegram Uploader!
 
 ## installing
+
+### The Eas(iest) Way
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+###### - ~~~all that glitters is (not) gold~~~
 
 ### The Legacy Way
 Simply clone the repository and run the main file:
@@ -22,14 +26,14 @@ python3 -m tobrot
 from tobrot.sample_config import Config
 
 class Config(Config):
-  TG_BOT_TOKEN = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
-  # These example values won't work. You must get your own app_id and
-  # api_hash from https://my.telegram.org, under API Development.
-  APP_ID = 6
-  API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-  # please read https://t.me/c/1279877202/74
-  # if you have not read the above README
-  AUTH_CHANNEL = [-1001234567890]
+    TG_BOT_TOKEN = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+    # These example values won't work. You must get your own app_id and
+    # api_hash from https://my.telegram.org, under API Development.
+    APP_ID = 6
+    API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
+    # please read https://t.me/c/1279877202/74
+    # if you have not read the above README
+    AUTH_CHANNEL = [-1001234567890]
 ```
 
 ### Variable Explanations
@@ -48,35 +52,35 @@ You can add multiple IDs seperated by space.
 
 ##### Optional Configuration Variables
 
-* `DOWNLOAD_LOCATION`
+* `DOWNLOAD_LOCATION`: optional download directory, where the temporary downloads should ideally reside.
 
-* `MAX_FILE_SIZE`
+* `MAX_FILE_SIZE`: The maximum file_size allowed by Telegram [BOT API](https://core.telegram.org/bots/api), kept for [legacy purposes](https://t.me/c/1235155926/33801).
 
-* `TG_MAX_FILE_SIZE`
+* `TG_MAX_FILE_SIZE`: The maximum file_size, allowed by Telegram [API](https://core.telegram.org/api).
 
-* `FREE_USER_MAX_FILE_SIZE`
+* `FREE_USER_MAX_FILE_SIZE`: The file_size that was [supposed to be allowed](https://t.me/c/1331081386/147445) by the bot.
 
-* `MAX_TG_SPLIT_FILE_SIZE`
+* `MAX_TG_SPLIT_FILE_SIZE`: The file_size at which it should be splitted if the file_size is greater than  `TG_MAX_FILE_SIZE`.
 
-* `CHUNK_SIZE`
+* `CHUNK_SIZE`: ~~not used~~, kept for [legacy purposes](https://t.me/c/1235155926/33801).
 
-* `MAX_MESSAGE_LENGTH`
+* `MAX_MESSAGE_LENGTH`: The maximum message length, allowed by [Telegram](https://t.me/c/1097142020/1224).
 
-* `PROCESS_MAX_TIMEOUT`
+* `PROCESS_MAX_TIMEOUT`: ~~not used~~, kept for [legacy purposes](https://t.me/c/1235155926/33801).
 
-* `ARIA_TWO_STARTED_PORT`
+* `ARIA_TWO_STARTED_PORT`: The port on which aria2c daemon must START.
 
-* `EDIT_SLEEP_TIME_OUT`
+* `EDIT_SLEEP_TIME_OUT`: The number of seconds to sleep after editing a Telegram message.
 
-* `MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START`
+* `MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START`: The number of seconds to wait before auto-cancelling a dead link.
 
-* `FINISHED_PROGRESS_STR`
+* `FINISHED_PROGRESS_STR`: any character(s) that might be displayed in the progress string.
 
-* `UN_FINISHED_PROGRESS_STR`
+* `UN_FINISHED_PROGRESS_STR`: any character(s) that might be displayed in the progress string.
 
-* `TG_OFFENSIVE_API`
+* `TG_OFFENSIVE_API`: ~~DO NOT USE THIS~~.
 
-* `R_CLONE_CONF_URI`
+* `R_CLONE_CONF_URI`:
 ![a help, maybe](https://telegra.ph/file/073bcbc0b69b03d75ea04.jpg)
 
 ## Available Commands
@@ -86,8 +90,9 @@ You can add multiple IDs seperated by space.
 ## How to Use?
 
 * send any link, and click on the available buttons.
+  - due to ~~Telegram~~ limitations, the buttons will only work, if the bot was created by you, or you are in the same region as the Telegram bot creator.
 
-* if file is larger than 1500MB, [read this](https://t.me/c/1434259219/113).
+* if file is larger than `TG_MAX_FILE_SIZE`, [read this](https://t.me/c/1434259219/113).
 
 * if file is a TAR archive, [read this](https://t.me/c/1434259219/104) to know how to uncompress.
 

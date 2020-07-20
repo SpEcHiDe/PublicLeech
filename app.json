@@ -75,18 +75,9 @@
       "required": false
     }
   },
-  "addons": [
-  ],
-  "stack": "heroku-18",
-  "buildpacks": [{
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-  }, {
-    "url": "https://github.com/SayanthD/aria2-heroku"
-  }, {
-    "url": "https://github.com/amivin/rclone-heroku"
-  }, {
-    "url": "heroku/python"
-  }],
+  "addons": [],
+  "stack": "container",
+  "buildpacks": [],
   "formation": {
     "worker": {
       "quantity": 1,

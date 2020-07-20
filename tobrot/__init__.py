@@ -5,10 +5,15 @@
 import os
 
 # the secret configuration specific things
-if bool(os.environ.get("ENV", False)):
-    from tobrot.sample_config import Config
-else:
+if os.path.exists(
+    os.path.join(
+        __name__,
+        "config.py"
+    )
+):
     from tobrot.config import Config
+else:
+    from tobrot.sample_config import Config
 
 
 # TODO: is there a better way?

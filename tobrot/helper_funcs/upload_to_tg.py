@@ -40,14 +40,16 @@ async def upload_to_tg(
     local_file_name,
     from_user,
     dict_contatining_uploaded_files,
-    edit_media=False
+    edit_media=False,
+    custom_caption=None
 ):
     LOGGER.info(local_file_name)
     base_file_name = os.path.basename(local_file_name)
-    caption_str = ""
-    caption_str += "<code>"
-    caption_str += base_file_name
-    caption_str += "</code>"
+    caption_str = custom_caption
+    if not caption_str:
+        caption_str = "<code>"
+        caption_str += base_file_name
+        caption_str += "</code>"
     # caption_str += "\n\n"
     # caption_str += "<a href='tg://user?id="
     # caption_str += str(from_user)

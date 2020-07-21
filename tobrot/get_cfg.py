@@ -24,4 +24,5 @@ def get_config(name: str, d_v=None):
             val = input(f"enter {name}'s value: ")
         except EOFError:
             val = d_v
+        print("\n")
     return val

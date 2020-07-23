@@ -47,6 +47,7 @@ async def upload_to_tg(
     base_file_name = os.path.basename(local_file_name)
     caption_str = custom_caption
     if not caption_str:
+        LOGGER.info("fall-back to default file_name")
         caption_str = "<code>"
         caption_str += base_file_name
         caption_str += "</code>"
@@ -75,7 +76,8 @@ async def upload_to_tg(
                 os.path.join(local_file_name, single_file),
                 from_user,
                 dict_contatining_uploaded_files,
-                edit_media
+                edit_media,
+                caption_str
             )
     else:
         if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:

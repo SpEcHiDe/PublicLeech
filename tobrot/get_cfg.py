@@ -18,7 +18,7 @@ import os
 
 
 def get_config(name: str, d_v=None):
-    val = os.environ.get(name)
+    val = os.environ.get(name, d_v)
     if not val:
         try:
             val = input(f"enter {name}'s value: ")

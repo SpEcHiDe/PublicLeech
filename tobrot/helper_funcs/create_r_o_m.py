@@ -48,7 +48,7 @@ async def get_markup(message: Message):
     ))
     inline_keyboard.append(ikeyboard)
     ikeyboard = []
-    if R_CLONE_CONF_URI is not None:
+    if R_CLONE_CONF_URI:
         r_clone_conf_file = await get_r_clone_config(
             R_CLONE_CONF_URI,
             message._client

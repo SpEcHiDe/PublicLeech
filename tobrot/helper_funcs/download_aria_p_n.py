@@ -329,15 +329,15 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
     except Exception as e:
         LOGGER.info(str(e))
         if " not found" in str(e) or "'file'" in str(e):
-            await event.edit("Download Canceled :\n`{}`".format(file.name))
+            await event.edit("Download Canceled :\n<code>{}</code>".format(file.name))
             return False
         elif " depth exceeded" in str(e):
             file.remove(force=True)
-            await event.edit("Download Auto Canceled :\n`{}`\nYour Torrent/Link is Dead.".format(file.name))
+            await event.edit("Download Auto Canceled :\n<code>{}</code>\nYour Torrent/Link is Dead.".format(file.name))
             return False
         else:
             LOGGER.info(str(e))
-            await event.edit("<u>error</u> :\n`{}` \n\n#error".format(str(e)))
+            await event.edit("<u>error</u> :\n<code>{}</code> \n\n#error".format(str(e)))
             return
 # https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
 

@@ -15,7 +15,6 @@
     "leecher"
   ],
   "repository": "https://github.com/SpEcHiDe/PublicLeech",
-  "success_url": "https://telegram.dog/ThankTelegram",
   "website": "https://github.com/SpEcHiDe/PublicLeech",
   "logo": "https://telegra.ph/file/8b973b270f4f380a427b1.png",
   "env": {

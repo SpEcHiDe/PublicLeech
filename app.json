@@ -74,9 +74,7 @@
       "required": false
     }
   },
-  "addons": [],
   "stack": "container",
-  "buildpacks": [],
   "formation": {
     "worker": {
       "quantity": 1,

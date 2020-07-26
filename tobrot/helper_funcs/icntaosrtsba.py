@@ -19,11 +19,14 @@
 import os
 import time
 
+from pyrogram import (
+    Message
+)
+
 from tobrot import (
     LOGGER,
     DOWNLOAD_LOCATION
 )
-
 from tobrot.helper_funcs.download_aria_p_n import (
     call_apropriate_function,
     aria_start,
@@ -33,21 +36,20 @@ from tobrot.helper_funcs.extract_link_from_message import extract_link
 from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 
-async def leech_btn_k(update):
-    cb_data = update.data
+async def leech_btn_k(message: Message, cb_data: str):
     # get link from the incoming message
     dl_url, cf_name, _, _ = await extract_link(
-        update.message.reply_to_message, "LEECH"
+        message.reply_to_message, "LEECH"
     )
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
-        await update.message.edit_text("extracting links")
+        await message.edit_text("extracting links")
         # start the aria2c daemon
         aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
         if "_" in cb_data:
-            current_user_id = update.from_user.id
+            current_user_id = message.reply_to_message.from_user.id
             # create an unique directory
             new_download_location = os.path.join(
                 DOWNLOAD_LOCATION,
@@ -57,25 +59,25 @@ async def leech_btn_k(update):
             # create download directory, if not exist
             if not os.path.isdir(new_download_location):
                 os.makedirs(new_download_location)
-            await update.message.edit_text("trying to download")
+            await message.edit_text("trying to download")
             # try to download the "link"
             sagtus, err_message = await fake_etairporpa_call(
                 aria_i_p,
                 dl_url,
                 new_download_location,
-                update.message,
+                message,
                 int(cb_data.split("_")[2])
                 # maybe IndexError / ValueError might occur,
                 # we don't know, yet!!
             )
             if not sagtus:
                 # if FAILED, display the error message
-                await update.message.edit_text(err_message)
+                await message.edit_text(err_message)
         else:
             is_zip = False
             if "a" in cb_data:
                 is_zip = True
-            current_user_id = update.from_user.id
+            current_user_id = message.reply_to_message.from_user.id
             # create an unique directory
             new_download_location = os.path.join(
                 DOWNLOAD_LOCATION,
@@ -85,32 +87,32 @@ async def leech_btn_k(update):
             # create download directory, if not exist
             if not os.path.isdir(new_download_location):
                 os.makedirs(new_download_location)
-            await update.message.edit_text("trying to download")
+            await message.edit_text("trying to download")
             # try to download the "link"
             sagtus, err_message = await call_apropriate_function(
                 aria_i_p,
                 dl_url,
                 new_download_location,
-                update.message,
+                message,
                 is_zip
             )
             if not sagtus:
                 # if FAILED, display the error message
-                await update.message.edit_text(err_message)
+                await message.edit_text(err_message)
 
 
-async def ytdl_btn_k(update):
-    i_m_sefg = await update.message.edit_text("processing")
+async def ytdl_btn_k(message: Message):
+    i_m_sefg = await message.edit_text("processing")
     # LOGGER.info(message)
     # extract link from message
     dl_url, cf_name, yt_dl_user_name, yt_dl_pass_word = await extract_link(
-        update.message.reply_to_message, "YTDL"
+        message.reply_to_message, "YTDL"
     )
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
-        current_user_id = update.from_user.id
+        current_user_id = message.reply_to_message.from_user.id
         # create an unique directory
         user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
         # create download directory, if not exist

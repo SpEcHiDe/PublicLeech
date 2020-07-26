@@ -29,10 +29,10 @@ async def button(bot, update: CallbackQuery):
     cb_data = update.data
     
     if cb_data.startswith("leech"):
-        await leech_btn_k(update)
+        await leech_btn_k(update.message, cb_data)
 
     elif cb_data.startswith("ytdl"):
-        await ytdl_btn_k(update)
+        await ytdl_btn_k(update.message)
 
     elif "|" in cb_data:
         await youtube_dl_call_back(bot, update)

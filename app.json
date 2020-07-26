@@ -72,6 +72,10 @@
     "R_CLONE_CONF_URI": {
       "description": "should be a Telegram URL",
       "required": false
+    },
+    "SHOULD_USE_BUTTONS": {
+      "description": "because, https://t.me/c/1494623325/5603",
+      "required": false
     }
   },
   "stack": "container",

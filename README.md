@@ -86,6 +86,8 @@ You can add multiple IDs seperated by space.
 * `R_CLONE_CONF_URI`:
 ![a help, maybe](https://telegra.ph/file/073bcbc0b69b03d75ea04.jpg)
 
+* `SHOULD_USE_BUTTONS`: because, [BlameTelegram](https://t.me/c/1494623325/5603)
+
 ## Available Commands
 
 * No Commands. 👉 BUTTONS better 👈

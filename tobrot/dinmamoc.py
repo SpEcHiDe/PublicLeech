@@ -46,3 +46,7 @@ class Commandi:
         "COMMANDI_CLEARTHUMBNAIL",
         "clearthumbnail"
     )
+    GET_RCLONE_CONF_URI = os.environ.get(
+        "COMMANDI_GET_RCLONE_CONF_URI",
+        "getrcloneconfuri"
+    )

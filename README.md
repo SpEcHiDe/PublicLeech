@@ -125,6 +125,7 @@ You can add multiple IDs seperated by space.
 
 * add issues / feature requests, [here](https://github.com/SpEcHiDe/PublicLeech/issues/new).
 
+* the GitHub Issue Tracker is only for Issue / Feature Requests. For any support, please use the Telegram Group.
 
 ## Credits, and Thanks to
 

@@ -35,7 +35,7 @@ async def split_large_files(input_file):
     # if input_file.upper().endswith(("MKV", "MP4", "WEBM", "MP3", "M4A", "FLAC", "WAV")):
     """The below logic is DERPed, so removing temporarily
     """
-    if False:
+    if input_file.upper().endswith(("MKV", "MP4", "WEBM")):
         # handle video / audio files here
         metadata = extractMetadata(createParser(input_file))
         total_duration = 0
@@ -46,6 +46,10 @@ async def split_large_files(input_file):
         total_file_size = os.path.getsize(input_file)
         LOGGER.info(total_file_size)
         minimum_duration = (total_duration / total_file_size) * (MAX_TG_SPLIT_FILE_SIZE)
+        
+        #casting to int cuz float Time Stamp can cause errors
+        minimum_duration = int(minimum_duration)
+        
         LOGGER.info(minimum_duration)
         # END: proprietary
         start_time = 0
@@ -53,16 +57,15 @@ async def split_large_files(input_file):
         base_name = os.path.basename(input_file)
         input_extension = base_name.split(".")[-1]
         LOGGER.info(input_extension)
+        
         i = 0
+        flag = False
         while end_time < total_duration:
             LOGGER.info(i)
-            parted_file_name = ""
-            parted_file_name += str(i).zfill(5)
-            parted_file_name += str(base_name)
-            parted_file_name += "_PART_"
-            parted_file_name += str(start_time)
-            parted_file_name += "."
-            parted_file_name += str(input_extension)
+            
+            #file name generate
+            parted_file_name = "{}_PART_{}.{}".format(str(base_name),str(i).zfill(5),str(input_extension))
+
             output_file = os.path.join(new_working_directory, parted_file_name)
             LOGGER.info(output_file)
             LOGGER.info(await cult_small_video(
@@ -71,9 +74,18 @@ async def split_large_files(input_file):
                 str(start_time),
                 str(end_time)
             ))
-            start_time = end_time
+            LOGGER.info(f"Start time {start_time}, End time {end_time}, Itr {i}")
+
+            #adding offset of 3 seconds to ensure smooth playback 
+            start_time = end_time-3
             end_time = end_time + minimum_duration
             i = i + 1
+            
+            if (end_time > total_duration) and not flag:
+                 end_time = total_duration
+                 flag = True
+            elif flag:
+                break
     else:
         # handle normal files here
         o_d_t = os.path.join(

@@ -19,8 +19,7 @@ from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
 
 from tobrot.plugins.new_join_fn import (
     new_join_f,
-    help_message_f,
-    rename_message_f
+    help_message_f
 )
 from tobrot.plugins.incoming_message_fn import (
     incoming_message_f,
@@ -121,12 +120,6 @@ if __name__ == "__main__" :
         filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(exec_message_handler)
-
-    rename_message_handler = MessageHandler(
-        rename_message_f,
-        filters=Filters.command([Commandi.RENAME]) & Filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(rename_message_handler)
 
     upload_document_handler = MessageHandler(
         upload_document_f,

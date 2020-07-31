@@ -17,9 +17,9 @@
 import os
 
 
-def get_config(name: str, d_v=None):
+def get_config(name: str, d_v=None, should_prompt=False):
     val = os.environ.get(name, d_v)
-    if not val:
+    if not val and should_prompt:
         try:
             val = input(f"enter {name}'s value: ")
         except EOFError:

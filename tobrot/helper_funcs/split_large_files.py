@@ -60,7 +60,7 @@ async def split_large_files(input_file):
         
         i = 0
         flag = False
-        while end_time < total_duration:
+        while end_time <= total_duration:
             LOGGER.info(i)
             
             #file name generate
@@ -80,7 +80,7 @@ async def split_large_files(input_file):
             start_time = end_time-3
             end_time = end_time + minimum_duration
             i = i + 1
-            
+
             if (end_time > total_duration) and not flag:
                  end_time = total_duration
                  flag = True

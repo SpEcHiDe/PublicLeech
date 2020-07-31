@@ -2,4 +2,5 @@ venv
 config.py
 __pycache__
 *.session
-test*.py
+test*.*
+splfil/

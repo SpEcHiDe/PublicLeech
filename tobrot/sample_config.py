@@ -55,7 +55,7 @@ class Config(object):
     ))
     MAX_TG_SPLIT_FILE_SIZE = int(get_config(
         "MAX_TG_SPLIT_FILE_SIZE",
-        1072864000
+        1900000000
     ))
     # add config vars for the display progress
     FINISHED_PROGRESS_STR = get_config("FINISHED_PROGRESS_STR", "█")

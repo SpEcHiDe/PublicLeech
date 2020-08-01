@@ -67,12 +67,14 @@ async def upload_to_tg(
         new_m_esg = message
         if not message.photo:
             new_m_esg = await message.reply_text(
-                "Found {} files".format(len(directory_contents)),
+                "Found {} files\nReply /cancel to cancel the upload".format(len(directory_contents)),
                 quote=True
                 # reply_to_message_id=message.message_id
             )
         dbh.registerUpload(new_m_esg.chat.id,new_m_esg.message_id)
         for single_file in directory_contents:
+            if dbh.isBlocked(new_m_esg.chat.id,new_m_esg.message_id):
+                break
             # recursion: will this FAIL somewhere?
             await upload_to_tg(
                 new_m_esg,
@@ -104,17 +106,28 @@ async def upload_to_tg(
                 f"<code>{ba_se_file_name}</code> splitted into {number_of_files} files.\n"
                 "trying to upload to Telegram, now ..."
             )
+
+            if not from_inside:
+                dbh.registerUpload(message.chat.id,message.message_id)
+
             for le_file in totlaa_sleif:
-                # recursion: will this FAIL somewhere?
+                # recursion: will this FAIL somewhere? - NO ;)
+                if dbh.isBlocked(message.chat.id,message.message_id):
+                    break
                 await upload_to_tg(
                     message,
                     os.path.join(splitted_dir, le_file),
                     from_user,
-                    dict_contatining_uploaded_files
+                    dict_contatining_uploaded_files,
+                    True
                 )
+                
+            if not from_inside:
+                dbh.deregisterUpload(message.chat.id,message.message_id)
         else:
             if not from_inside:
                 dbh.registerUpload(message.chat.id,message.message_id)
+
             sent_message = await upload_single_file(
                 message,
                 local_file_name,
@@ -122,6 +135,7 @@ async def upload_to_tg(
                 from_user,
                 edit_media
             )
+
             if not from_inside:
                 dbh.deregisterUpload(message.chat.id,message.message_id)
             if sent_message is not None:

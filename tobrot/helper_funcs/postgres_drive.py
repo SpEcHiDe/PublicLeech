@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
 # Contributed by YashDK 
 
 # the logging things
@@ -19,6 +18,11 @@ import psycopg2,traceback
 class DataBaseHandle:
     def __init__(self,dburl=None):
         self._dburl = DB_HOST_URL if dburl == None else dburl
+        if isinstance(self._dburl,bool):
+            self._block = True
+        else:
+            self._block = False
+        
         self._conn = psycopg2.connect(self._dburl)
         
         download_table = """
@@ -40,6 +44,9 @@ class DataBaseHandle:
 
 
     def registerUpload(self,chat_id :int, msg_id :int):
+        if self._block:
+            return
+
         sql = "INSERT INTO active_downs(chat_id,msg_id,status) VALUES(%s,%s,%s)"
         try:
             LOGGER.info("Registing the upload {} {}".format(chat_id,msg_id))
@@ -53,6 +60,8 @@ class DataBaseHandle:
             LOGGER.error("Error occured while registering a Upload\n{}".format(traceback.format_exc()))
 
     def deregisterUpload(self,chat_id :int, msg_id :int):
+        if self._block:
+            return
         sql = "DELETE FROM active_downs WHERE chat_id=%s AND msg_id=%s"
         try:
             LOGGER.info("Deregisting the upload {} {}".format(chat_id,msg_id))
@@ -66,6 +75,9 @@ class DataBaseHandle:
             LOGGER.error("Error occured while deregistering a Upload\n{}".format(traceback.format_exc()))
 
     def isBlocked(self,chat_id :int, msg_id :int):
+        if self._block:
+            return False
+        
         sql = "SELECT * FROM active_downs WHERE chat_id=%s AND msg_id=%s AND status='can'"
         try:
             cur = self._conn.cursor()
@@ -83,6 +95,9 @@ class DataBaseHandle:
         return False
 
     def markCancel(self,chat_id :int, msg_id :int):
+        if self._block:
+            return False
+            
         sql = "SELECT * FROM active_downs WHERE chat_id=%s AND msg_id=%s"
         try:
             cur = self._conn.cursor()
@@ -106,3 +121,6 @@ class DataBaseHandle:
             LOGGER.error("Error occured while deregistering a Upload\n{}".format(traceback.format_exc()))
             return False
         return False
+    
+    def __del__(self):
+        self._conn.close()

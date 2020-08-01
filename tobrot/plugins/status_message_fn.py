@@ -8,7 +8,8 @@ import time
 
 from tobrot import (
     LOGGER,
-    MAX_MESSAGE_LENGTH
+    MAX_MESSAGE_LENGTH,
+    DB_HOST_URL
 )
 
 
@@ -85,12 +86,15 @@ async def cancel_message_f(client, message):
                 "<i>FAILED</i>\n\n" + str(e) + "\n#error"
             )
     elif message.reply_to_message != None:
-        res = dbh.markCancel(message.reply_to_message.chat.id,message.reply_to_message.message_id)
-        LOGGER.info("Canceling the upload {}\n{}".format(message.reply_to_message.chat.id,message.reply_to_message.message_id))
-        if res:
-            await message.reply_text("Cancel received the download will be canceled")
+        if not isinstance(DB_HOST_URL,bool):
+            res = dbh.markCancel(message.reply_to_message.chat.id,message.reply_to_message.message_id)
+            LOGGER.info("Canceling the upload {}\n{}".format(message.reply_to_message.chat.id,message.reply_to_message.message_id))
+            if res:
+                await message.reply_to_message.edit_text(text="{} - cancellation requested.".format(message.reply_to_message.text))
+            else:
+                await message.reply_text("Cancel received no download to cancel")
         else:
-            await message.reply_text("Cancel received no download to cancel")
+            await message.reply_text("Please create a database for Heroku or specify DB_HOST_URL if legacy hosted.")
     else:
         await message.delete()
 

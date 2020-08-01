@@ -79,7 +79,7 @@
     },
     "LANG": {
       "description": "Setting the encoding to UTF-8 Dont touch this",
-      "value": "1"
+      "value": "C.UTF-8"
     }
   },
   "stack": "container",

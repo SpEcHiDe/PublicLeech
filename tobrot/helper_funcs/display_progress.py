@@ -27,7 +27,8 @@ async def progress_for_pyrogram(
     message,
     start
 ):
-    if dbh.isBlocked(message.chat.id,message.message_id):
+    logger.info("Checking is block for {} {}".format(message.reply_to_message.chat.id,message.reply_to_message.message_id))
+    if dbh.isBlocked(message.reply_to_message.chat.id,message.reply_to_message.message_id):
         await message.edit_text(text="Canceled By User.")
         await message._client.stop_transmission()
         return

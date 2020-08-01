@@ -5,3 +5,4 @@ Pillow
 git+git://github.com/pyrogram/pyrogram@asyncio-dev#pyrogram
 tgcrypto
 git+git://github.com/sudoshell/youtube-dl@73400cc#youtube_dl
+psycopg2-binary

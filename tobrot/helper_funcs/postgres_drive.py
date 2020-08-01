@@ -22,14 +22,18 @@ class DataBaseHandle:
         self._conn = psycopg2.connect(self._dburl)
         
         download_table = """
-            CREATE TABLE IF NOT EXISTS active_downs(
+            CREATE TABLE active_downs(
                 id SERIAL PRIMARY KEY NOT NULL,
-                chat_id INT NOT NULL,
-                msg_id INT NOT NULL,
+                chat_id BIGINT NOT NULL,
+                msg_id BIGINT NOT NULL,
                 status VARCHAR(10) DEFAULT '' NOT NULL
             )
         """
         cur = self._conn.cursor()
+        try:
+            cur.execute("DROP TABLE active_downs")
+        except:
+            pass
         cur.execute(download_table)
         cur.close()
         self._conn.commit()
@@ -38,7 +42,7 @@ class DataBaseHandle:
     def registerUpload(self,chat_id :int, msg_id :int):
         sql = "INSERT INTO active_downs(chat_id,msg_id,status) VALUES(%s,%s,%s)"
         try:
-            LOGGER.info("Deregisting the upload {} {}".format(chat_id,msg_id))
+            LOGGER.info("Registing the upload {} {}".format(chat_id,msg_id))
             cur = self._conn.cursor()
 
             cur.execute(sql,(chat_id,msg_id,'a'))
@@ -73,6 +77,31 @@ class DataBaseHandle:
 
             cur.close()
             self._conn.commit()
+        except Exception as e:
+            LOGGER.error("Error occured while deregistering a Upload\n{}".format(traceback.format_exc()))
+            return False
+        return False
+
+    def markCancel(self,chat_id :int, msg_id :int):
+        sql = "SELECT * FROM active_downs WHERE chat_id=%s AND msg_id=%s"
+        try:
+            cur = self._conn.cursor()
+
+            cur.execute(sql,(chat_id,msg_id))
+            data = cur.fetchall()
+            
+            if len(data) > 0:
+                sql = "UPDATE active_downs SET status=%s WHERE chat_id=%s AND msg_id=%s"
+                cur.execute(sql,("can",chat_id,msg_id))
+                cur.close()
+                self._conn.commit()
+                return True
+            else:
+                cur.close()
+                self._conn.commit()
+                return False
+
+            
         except Exception as e:
             LOGGER.error("Error occured while deregistering a Upload\n{}".format(traceback.format_exc()))
             return False

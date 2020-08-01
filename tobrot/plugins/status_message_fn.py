@@ -16,7 +16,8 @@ from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 from tobrot.dinmamoc import Commandi
-
+from tobrot.helper_funcs.postgres_drive import DataBaseHandle
+dbh = DataBaseHandle()
 
 async def status_message_f(client, message):
     if await AdminCheck(client, message.chat.id, message.from_user.id):
@@ -83,6 +84,13 @@ async def cancel_message_f(client, message):
             await i_m_s_e_g.edit_text(
                 "<i>FAILED</i>\n\n" + str(e) + "\n#error"
             )
+    elif message.reply_to_message != None:
+        res = dbh.markCancel(message.reply_to_message.chat.id,message.reply_to_message.message_id)
+        LOGGER.info("Canceling the upload {}\n{}".format(message.reply_to_message.chat.id,message.reply_to_message.message_id))
+        if res:
+            await message.reply_text("Cancel received the download will be canceled")
+        else:
+            await message.reply_text("Cancel received no download to cancel")
     else:
         await message.delete()
 

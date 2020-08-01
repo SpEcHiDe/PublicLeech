@@ -18,4 +18,31 @@ import os
 
 
 class Loilacaztion:
-    pass
+    PROCESSING = os.environ.get(
+        "STRINGS_PROCESSING",
+        "processing ..."
+    )
+    CLEARED_THUMBNAIL = os.environ.get(
+        "STRINGS_CLEARED_THUMBNAIL",
+        "✅ Custom thumbnail cleared succesfully."
+    )
+    HELP_SAVE_THUMBNAIL = os.environ.get(
+        "STRINGS_HELP_SAVE_THUMBNAIL",
+        "Reply to a photo to save custom thumbnail"
+    )
+    SAVED_THUMBNAIL = os.environ.get(
+        "STRINGS_SAVED_THUMBNAIL",
+        (
+            "Custom video / file thumbnail saved. "
+            "This image will be used in the upload, till /clearthumbnail."
+        )
+    )
+
+    HELP_MESSAGE = os.environ.get(
+        "STRINGS_HELP_MESSAGE",
+        "please read the <a href='https://t.me/c/1434259219/99'>Pinned Message</a>"
+    )
+    WRONG_MESSAGE = os.environ.get(
+        "STRINGS_WRONG_MESSAGE",
+        "current CHAT ID: <code>{CHAT_ID}</code>"
+    )

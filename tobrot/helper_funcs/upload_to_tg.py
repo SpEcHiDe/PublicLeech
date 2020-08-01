@@ -87,6 +87,7 @@ async def upload_to_tg(
             )
         dbh.deregisterUpload(new_m_esg.chat.id,new_m_esg.message_id)
     else:
+        
         if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
             LOGGER.info("TODO")
             d_f_s = humanbytes(os.path.getsize(local_file_name))
@@ -109,6 +110,7 @@ async def upload_to_tg(
 
             if not from_inside:
                 dbh.registerUpload(message.chat.id,message.message_id)
+                await message.edit_text("{} - Reply /cancel to cancel the upload".format(message.text))
 
             for le_file in totlaa_sleif:
                 # recursion: will this FAIL somewhere? - NO ;)
@@ -121,12 +123,13 @@ async def upload_to_tg(
                     dict_contatining_uploaded_files,
                     True
                 )
-                
+
             if not from_inside:
                 dbh.deregisterUpload(message.chat.id,message.message_id)
         else:
             if not from_inside:
                 dbh.registerUpload(message.chat.id,message.message_id)
+                await message.edit_text("{} - Reply /cancel to cancel the upload".format(message.text))
 
             sent_message = await upload_single_file(
                 message,

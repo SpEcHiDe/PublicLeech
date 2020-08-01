@@ -60,6 +60,7 @@ async def split_large_files(input_file):
         
         i = 0
         flag = False
+        
         while end_time <= total_duration:
             LOGGER.info(i)
             
@@ -77,7 +78,7 @@ async def split_large_files(input_file):
             LOGGER.info(f"Start time {start_time}, End time {end_time}, Itr {i}")
 
             #adding offset of 3 seconds to ensure smooth playback 
-            start_time = end_time-3
+            start_time = end_time - 3
             end_time = end_time + minimum_duration
             i = i + 1
 

@@ -21,6 +21,7 @@ from tobrot.helper_funcs.display_progress import progress_for_pyrogram, humanbyt
 from tobrot.helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 from tobrot.helper_funcs.split_large_files import split_large_files
 from tobrot.helper_funcs.copy_similar_file import copy_file
+from tobrot.helper_funcs.postgres_drive import DataBaseHandle
 
 from tobrot import (
     TG_MAX_FILE_SIZE,
@@ -33,7 +34,7 @@ from pyrogram import (
     InputMediaVideo,
     InputMediaAudio
 )
-
+dbh = DataBaseHandle()
 
 async def upload_to_tg(
     message,
@@ -41,7 +42,8 @@ async def upload_to_tg(
     from_user,
     dict_contatining_uploaded_files,
     edit_media=False,
-    custom_caption=None
+    custom_caption=None,
+    from_inside=False
 ):
     LOGGER.info(local_file_name)
     base_file_name = os.path.basename(local_file_name)
@@ -69,6 +71,7 @@ async def upload_to_tg(
                 quote=True
                 # reply_to_message_id=message.message_id
             )
+        dbh.registerUpload(new_m_esg.chat.id,new_m_esg.message_id)
         for single_file in directory_contents:
             # recursion: will this FAIL somewhere?
             await upload_to_tg(
@@ -77,8 +80,10 @@ async def upload_to_tg(
                 from_user,
                 dict_contatining_uploaded_files,
                 edit_media,
-                caption_str
+                caption_str,
+                True
             )
+        dbh.deregisterUpload(new_m_esg.chat.id,new_m_esg.message_id)
     else:
         if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
             LOGGER.info("TODO")
@@ -108,6 +113,8 @@ async def upload_to_tg(
                     dict_contatining_uploaded_files
                 )
         else:
+            if not from_inside:
+                dbh.registerUpload(message.chat.id,message.message_id)
             sent_message = await upload_single_file(
                 message,
                 local_file_name,
@@ -115,6 +122,8 @@ async def upload_to_tg(
                 from_user,
                 edit_media
             )
+            if not from_inside:
+                dbh.deregisterUpload(message.chat.id,message.message_id)
             if sent_message is not None:
                 dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
     # await message.delete()
@@ -122,6 +131,7 @@ async def upload_to_tg(
 
 
 async def upload_single_file(message, local_file_name, caption_str, from_user, edit_media):
+
     await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
     sent_message = None
     start_time = time.time()

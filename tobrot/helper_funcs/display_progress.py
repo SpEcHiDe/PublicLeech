@@ -13,12 +13,12 @@ logger = logging.getLogger(__name__)
 import math
 import os
 import time
-
+from tobrot.helper_funcs.postgres_drive import DataBaseHandle
 from tobrot import (
     FINISHED_PROGRESS_STR,
     UN_FINISHED_PROGRESS_STR
 )
-
+dbh = DataBaseHandle()
 
 async def progress_for_pyrogram(
     current,
@@ -27,6 +27,11 @@ async def progress_for_pyrogram(
     message,
     start
 ):
+    if dbh.isBlocked(message.chat.id,message.message_id):
+        await message.edit_text(text="Canceled By User.")
+        await message._client.stop_transmission()
+        return
+
     now = time.time()
     diff = now - start
     if round(diff % 10.00) == 0 or current == total:

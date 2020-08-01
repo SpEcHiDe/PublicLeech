@@ -66,3 +66,5 @@ class Config(object):
     R_CLONE_CONF_URI = get_config("R_CLONE_CONF_URI", None)
     # because, https://t.me/c/1494623325/5603
     SHOULD_USE_BUTTONS = get_config("SHOULD_USE_BUTTONS", False)
+    #DB URL
+    DB_HOST_URL = get_config("DATABASE_URL",False)

@@ -76,6 +76,10 @@
     "SHOULD_USE_BUTTONS": {
       "description": "because, https://t.me/c/1494623325/5603",
       "required": false
+    },
+    "LANG": {
+      "description": "Setting the encoding to UTF-8 Dont touch this",
+      "value": "1"
     }
   },
   "stack": "container",

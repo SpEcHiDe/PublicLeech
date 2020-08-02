@@ -74,7 +74,8 @@ async def upload_to_tg(
         dbh.registerUpload(new_m_esg.chat.id,new_m_esg.message_id)
         for single_file in directory_contents:
             if dbh.isBlocked(new_m_esg.chat.id,new_m_esg.message_id):
-                break
+                os.remove(os.path.join(local_file_name, single_file))
+                continue
             # recursion: will this FAIL somewhere?
             await upload_to_tg(
                 new_m_esg,
@@ -83,7 +84,7 @@ async def upload_to_tg(
                 dict_contatining_uploaded_files,
                 edit_media,
                 caption_str,
-                True
+                from_inside=True
             )
         dbh.deregisterUpload(new_m_esg.chat.id,new_m_esg.message_id)
     else:
@@ -115,13 +116,14 @@ async def upload_to_tg(
             for le_file in totlaa_sleif:
                 # recursion: will this FAIL somewhere? - NO ;)
                 if dbh.isBlocked(message.chat.id,message.message_id):
-                    break
+                    os.remove(os.path.join(splitted_dir, le_file))
+                    continue
                 await upload_to_tg(
                     message,
                     os.path.join(splitted_dir, le_file),
                     from_user,
                     dict_contatining_uploaded_files,
-                    True
+                    from_inside=True
                 )
 
             if not from_inside:

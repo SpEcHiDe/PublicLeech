@@ -62,21 +62,21 @@ if __name__ == "__main__" :
     # PURGE command
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
-        filters=Filters.command([Commandi.PURGE]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([PURGE@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_purge_message_handler)
 
     # STATUS command
     status_message_handler = MessageHandler(
         status_message_f,
-        filters=Filters.command([Commandi.STATUS]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([STATUS@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(status_message_handler)
 
     # CANCEL command
     cancel_message_handler = MessageHandler(
         cancel_message_f,
-        filters=Filters.command([Commandi.CANCEL]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([CANCEL@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(cancel_message_handler)
 
@@ -85,14 +85,14 @@ if __name__ == "__main__" :
         # LEECH command
         incoming_message_handler = MessageHandler(
             leech_commandi_f,
-            filters=Filters.command([Commandi.LEECH]) & Filters.chat(chats=AUTH_CHANNEL)
+            filters=Filters.command([LEECH@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_message_handler)
     
         # YTDL command
         incoming_youtube_dl_handler = MessageHandler(
             incoming_youtube_dl_f,
-            filters=Filters.command([Commandi.YTDL]) & Filters.chat(chats=AUTH_CHANNEL)
+            filters=Filters.command([YTDL@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_youtube_dl_handler)
     else:
@@ -117,20 +117,20 @@ if __name__ == "__main__" :
     # MEMEs COMMANDs
     exec_message_handler = MessageHandler(
         exec_message_f,
-        filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([EXEC@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(exec_message_handler)
 
     upload_document_handler = MessageHandler(
         upload_document_f,
-        filters=Filters.command([Commandi.UPLOAD]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([UPLOAD@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(upload_document_handler)
 
     # HELP command
     help_text_handler = MessageHandler(
         help_message_f,
-        filters=Filters.command([Commandi.HELP]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([HELP@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(help_text_handler)
 
@@ -151,21 +151,21 @@ if __name__ == "__main__" :
     # savethumbnail COMMAND
     save_thumb_nail_handler = MessageHandler(
         save_thumb_nail,
-        filters=Filters.command([Commandi.SAVETHUMBNAIL]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([SAVETHUMBNAIL@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_thumb_nail_handler)
 
     # clearthumbnail COMMAND
     clear_thumb_nail_handler = MessageHandler(
         clear_thumb_nail,
-        filters=Filters.command([Commandi.CLEARTHUMBNAIL]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([CLEARTHUMBNAIL@Publicleechrobot]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
 
     # an probably easy way to get RClone CONF URI
     save_rclone_conf_handler = MessageHandler(
         save_rclone_conf_f,
-        filters=Filters.command([Commandi.GET_RCLONE_CONF_URI]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=Filters.command([@Publicleechrobot.GET_RCLONE_CONF_URI]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_rclone_conf_handler)
 

@@ -1,56 +1,72 @@
-import os
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# (c) PublicLeech Author(s)
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from tobrot.get_cfg import get_config
 
 
 class Commandi:
-    LEECH = os.environ.get(
+    LEECH = get_config(
         "COMMANDI_LEECH",
         "leech"
     )
-    PURGE = os.environ.get(
+    PURGE = get_config(
         "COMMANDI_PURGE",
         "purge"
     )
-    YTDL = os.environ.get(
+    YTDL = get_config(
         "COMMANDI_YTDL",
         "ytdl"
     )
-    STATUS = os.environ.get(
+    STATUS = get_config(
         "COMMANDI_STATUS",
         "status"
     )
-    CANCEL = os.environ.get(
+    CANCEL = get_config(
         "COMMANDI_CANCEL",
         "cancel"
     )
-    EXEC = os.environ.get(
+    EXEC = get_config(
         "COMMANDI_EXEC",
         "exec"
     )
-    RENAME = os.environ.get(
+    RENAME = get_config(
         "COMMANDI_RENAME",
         "rename"
     )
-    UPLOAD = os.environ.get(
+    UPLOAD = get_config(
         "COMMANDI_UPLOAD",
         "upload"
     )
-    HELP = os.environ.get(
+    HELP = get_config(
         "COMMANDI_HELP",
         "help"
     )
-    SAVETHUMBNAIL = os.environ.get(
+    SAVETHUMBNAIL = get_config(
         "COMMANDI_SAVETHUMBNAIL",
         "savethumbnail"
     )
-    CLEARTHUMBNAIL = os.environ.get(
+    CLEARTHUMBNAIL = get_config(
         "COMMANDI_CLEARTHUMBNAIL",
         "clearthumbnail"
     )
-    GET_RCLONE_CONF_URI = os.environ.get(
+    GET_RCLONE_CONF_URI = get_config(
         "COMMANDI_GET_RCLONE_CONF_URI",
         "getrcloneconfuri"
     )
-    UPLOAD_LOG_FILE = os.environ.get(
+    UPLOAD_LOG_FILE = get_config(
         "COMMANDI_UPLOAD_LOG_FILE",
         "log"
     )

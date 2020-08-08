@@ -50,3 +50,7 @@ class Commandi:
         "COMMANDI_GET_RCLONE_CONF_URI",
         "getrcloneconfuri"
     )
+    UPLOAD_LOG_FILE = os.environ.get(
+        "COMMANDI_UPLOAD_LOG_FILE",
+        "log"
+    )

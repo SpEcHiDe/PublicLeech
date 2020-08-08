@@ -10,6 +10,7 @@ import time
 from tobrot import (
     BOT_START_TIME,
     LOGGER,
+    LOG_FILE_ZZGEVC,
     MAX_MESSAGE_LENGTH
 )
 
@@ -190,4 +191,10 @@ async def save_rclone_conf_f(client, message):
         "<code>"
         f"{r_clone_conf_uri}"
         "</code>"
+    )
+
+
+async def upload_log_file(client, message):
+    await message.reply_document(
+        LOG_FILE_ZZGEVC
     )

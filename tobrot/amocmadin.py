@@ -14,24 +14,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import os
+from tobrot.get_cfg import get_config
 
 
 class Loilacaztion:
-    PROCESSING = os.environ.get(
+    PROCESSING = get_config(
         "STRINGS_PROCESSING",
         "processing ..."
     )
 
-    CLEARED_THUMBNAIL = os.environ.get(
+    CLEARED_THUMBNAIL = get_config(
         "STRINGS_CLEARED_THUMBNAIL",
         "✅ Custom thumbnail cleared succesfully."
     )
-    HELP_SAVE_THUMBNAIL = os.environ.get(
+    HELP_SAVE_THUMBNAIL = get_config(
         "STRINGS_HELP_SAVE_THUMBNAIL",
         "Reply to a photo to save custom thumbnail"
     )
-    SAVED_THUMBNAIL = os.environ.get(
+    SAVED_THUMBNAIL = get_config(
         "STRINGS_SAVED_THUMBNAIL",
         (
             "Custom video / file thumbnail saved. "
@@ -39,24 +39,24 @@ class Loilacaztion:
         )
     )
 
-    HELP_MESSAGE = os.environ.get(
+    HELP_MESSAGE = get_config(
         "STRINGS_HELP_MESSAGE",
         "please read the <a href='https://t.me/c/1434259219/99'>Pinned Message</a>"
     )
-    WRONG_MESSAGE = os.environ.get(
+    WRONG_MESSAGE = get_config(
         "STRINGS_WRONG_MESSAGE",
         "current CHAT ID: <code>{CHAT_ID}</code>"
     )
 
-    NO_TOR_STATUS = os.environ.get(
+    NO_TOR_STATUS = get_config(
         "STRINGS_NO_TOR_STATUS",
         "🤷‍♂️ No Active, Queued or Paused TORRENTs"
     )
-    TOR_CANCELLED = os.environ.get(
+    TOR_CANCELLED = get_config(
         "STRINGS_TOR_CANCELLED",
         "Leech Cancelled"
     )
-    TOR_CANCEL_FAILED = os.environ.get(
+    TOR_CANCEL_FAILED = get_config(
         "STRINGS_TOR_CANCEL_FAILED",
         "<i>FAILED</i>\n\n#error"
     )

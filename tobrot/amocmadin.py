@@ -22,6 +22,7 @@ class Loilacaztion:
         "STRINGS_PROCESSING",
         "processing ..."
     )
+
     CLEARED_THUMBNAIL = os.environ.get(
         "STRINGS_CLEARED_THUMBNAIL",
         "✅ Custom thumbnail cleared succesfully."
@@ -45,4 +46,17 @@ class Loilacaztion:
     WRONG_MESSAGE = os.environ.get(
         "STRINGS_WRONG_MESSAGE",
         "current CHAT ID: <code>{CHAT_ID}</code>"
+    )
+
+    NO_TOR_STATUS = os.environ.get(
+        "STRINGS_NO_TOR_STATUS",
+        "🤷‍♂️ No Active, Queued or Paused TORRENTs"
+    )
+    TOR_CANCELLED = os.environ.get(
+        "STRINGS_TOR_CANCELLED",
+        "Leech Cancelled"
+    )
+    TOR_CANCEL_FAILED = os.environ.get(
+        "STRINGS_TOR_CANCEL_FAILED",
+        "<i>FAILED</i>\n\n#error"
     )

@@ -16,6 +16,7 @@ from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 from tobrot.dinmamoc import Commandi
+from tobrot.amocmadin import Loilacaztion
 
 
 async def status_message_f(client, message):
@@ -61,14 +62,17 @@ async def status_message_f(client, message):
             msg += "\n\n"
         LOGGER.info(msg)
         if msg == "":
-            msg = "🤷‍♂️ No Active, Queued or Paused TORRENTs"
+            msg = Loilacaztion.NO_TOR_STATUS
         await message.reply_text(msg, quote=True)
 
 
 async def cancel_message_f(client, message):
     if len(message.command) > 1:
         # /cancel command
-        i_m_s_e_g = await message.reply_text("checking..?", quote=True)
+        i_m_s_e_g = await message.reply_text(
+            Loilacaztion.PROCESSING,
+            quote=True
+        )
         aria_i_p = await aria_start()
         g_id = message.command[1].strip()
         LOGGER.info(g_id)
@@ -77,11 +81,12 @@ async def cancel_message_f(client, message):
             LOGGER.info(downloads)
             LOGGER.info(downloads.remove(force=True))
             await i_m_s_e_g.edit_text(
-                "Leech Cancelled"
+                Loilacaztion.TOR_CANCELLED
             )
         except Exception as e:
+            LOGGER.warn(str(e))
             await i_m_s_e_g.edit_text(
-                "<i>FAILED</i>\n\n" + str(e) + "\n#error"
+                Loilacaztion.TOR_CANCEL_FAILED
             )
     else:
         await message.delete()
@@ -133,7 +138,7 @@ async def exec_message_f(client, message):
 
 async def upload_document_f(client, message):
     imsegd = await message.reply_text(
-        "processing ..."
+        Loilacaztion.PROCESSING
     )
     if await AdminCheck(client, message.chat.id, message.from_user.id):
         if " " in message.text:

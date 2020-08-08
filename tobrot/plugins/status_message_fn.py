@@ -4,66 +4,87 @@
 
 import asyncio
 import os
+import shutil
 import time
 
 from tobrot import (
+    BOT_START_TIME,
     LOGGER,
     MAX_MESSAGE_LENGTH
 )
 
 
 from tobrot.helper_funcs.admin_check import AdminCheck
-from tobrot.helper_funcs.download_aria_p_n import call_apropriate_function, aria_start
+from tobrot.helper_funcs.download_aria_p_n import (
+    call_apropriate_function, aria_start
+)
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 from tobrot.dinmamoc import Commandi
 from tobrot.amocmadin import Loilacaztion
+from tobrot.helper_funcs.display_progress import (
+    TimeFormatter,
+    humanbytes
+)
 
 
 async def status_message_f(client, message):
-    if await AdminCheck(client, message.chat.id, message.from_user.id):
-        aria_i_p = await aria_start()
-        # Show All Downloads
-        downloads = aria_i_p.get_downloads()
+    aria_i_p = await aria_start()
+    # Show All Downloads
+    downloads = aria_i_p.get_downloads()
+    #
+    DOWNLOAD_ICON = "📥"
+    UPLOAD_ICON = "📤"
+    #
+    msg = ""
+    for download in downloads:
+        downloading_dir_name = "NA"
+        try:
+            downloading_dir_name = str(download.name)
+        except:
+            pass
+        total_length_size = str(download.total_length_string())
+        progress_percent_string = str(download.progress_string())
+        down_speed_string = str(download.download_speed_string())
+        up_speed_string = str(download.upload_speed_string())
+        download_current_status = str(download.status)
+        e_t_a = str(download.eta_string())
+        current_gid = str(download.gid)
         #
-        DOWNLOAD_ICON = "📥"
-        UPLOAD_ICON = "📤"
-        #
-        msg = ""
-        for download in downloads:
-            downloading_dir_name = "NA"
-            try:
-                downloading_dir_name = str(download.name)
-            except:
-                pass
-            total_length_size = str(download.total_length_string())
-            progress_percent_string = str(download.progress_string())
-            down_speed_string = str(download.download_speed_string())
-            up_speed_string = str(download.upload_speed_string())
-            download_current_status = str(download.status)
-            e_t_a = str(download.eta_string())
-            current_gid = str(download.gid)
-            #
-            msg += f"<u>{downloading_dir_name}</u>"
-            msg += " | "
-            msg += f"{total_length_size}"
-            msg += " | "
-            msg += f"{progress_percent_string}"
-            msg += " | "
-            msg += f"{DOWNLOAD_ICON} {down_speed_string}"
-            msg += " | "
-            msg += f"{UPLOAD_ICON} {up_speed_string}"
-            msg += " | "
-            msg += f"{e_t_a}"
-            msg += " | "
-            msg += f"{download_current_status}"
-            msg += " | "
-            msg += f"<code>{Commandi.CANCEL} {current_gid}</code>"
-            msg += " | "
-            msg += "\n\n"
-        LOGGER.info(msg)
-        if msg == "":
-            msg = Loilacaztion.NO_TOR_STATUS
-        await message.reply_text(msg, quote=True)
+        msg += f"<u>{downloading_dir_name}</u>"
+        msg += " | "
+        msg += f"{total_length_size}"
+        msg += " | "
+        msg += f"{progress_percent_string}"
+        msg += " | "
+        msg += f"{DOWNLOAD_ICON} {down_speed_string}"
+        msg += " | "
+        msg += f"{UPLOAD_ICON} {up_speed_string}"
+        msg += " | "
+        msg += f"{e_t_a}"
+        msg += " | "
+        msg += f"{download_current_status}"
+        msg += " | "
+        msg += f"<code>{Commandi.CANCEL} {current_gid}</code>"
+        msg += " | "
+        msg += "\n\n"
+    LOGGER.info(msg)
+
+    if msg == "":
+        msg = Loilacaztion.NO_TOR_STATUS
+
+    currentTime = TimeFormatter((time.time() - BOT_START_TIME))
+    total, used, free = shutil.disk_usage(".")
+    total = humanbytes(total)
+    used = humanbytes(used)
+    free = humanbytes(free)
+
+    ms_g = f"<b>Bot Uptime</b>: <code>{currentTime}</code>\n" \
+        f"<b>Total disk space</b>: <code>{total}</code>\n" \
+        f"<b>Used</b>: <code>{used}</code>\n" \
+        f"<b>Free</b>: <code>{free}</code>\n"
+
+    msg = ms_g + "\n" + msg
+    await message.reply_text(msg, quote=True)
 
 
 async def cancel_message_f(client, message):

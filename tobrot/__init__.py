@@ -5,6 +5,7 @@
 # the logging things
 import logging
 import os
+import time
 
 # the secret configuration specific things
 if os.path.exists(
@@ -50,3 +51,4 @@ UN_FINISHED_PROGRESS_STR = Config.UN_FINISHED_PROGRESS_STR
 TG_OFFENSIVE_API = Config.TG_OFFENSIVE_API
 R_CLONE_CONF_URI = Config.R_CLONE_CONF_URI
 SHOULD_USE_BUTTONS = Config.SHOULD_USE_BUTTONS
+BOT_START_TIME = time.time()

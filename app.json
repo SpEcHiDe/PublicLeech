@@ -73,6 +73,11 @@
       "description": "should be a Telegram URL",
       "required": false
     },
+    "R_CLONE_DEST": {
+      "description": "destination path for rclone, must start with '/'",
+      "value": "/PublicLeech",
+      "required": false
+    },
     "SHOULD_USE_BUTTONS": {
       "description": "because, https://t.me/c/1494623325/5603",
       "required": false

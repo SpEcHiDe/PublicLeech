@@ -15,7 +15,12 @@ from tobrot import (
     TG_BOT_TOKEN
 )
 
-from pyrogram import Client, Filters, MessageHandler, CallbackQueryHandler
+from pyrogram import (
+    Client,
+    Filters,
+    MessageHandler,
+    CallbackQueryHandler
+)
 
 from tobrot.plugins.new_join_fn import (
     new_join_f,

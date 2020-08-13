@@ -76,6 +76,8 @@ You can add multiple IDs seperated by space.
 * `R_CLONE_CONF_URI`:
 ![a help, maybe](https://telegra.ph/file/073bcbc0b69b03d75ea04.jpg)
 
+* `R_CLONE_DEST`: Destination folder for rclone copying. Set your path starting with '/'. Or just leave '/' to set root folder
+
 * `DOWNLOAD_LOCATION`: optional download directory, where the temporary downloads should ideally reside.
 
 * `MAX_FILE_SIZE`: The maximum file_size allowed by Telegram [BOT API](https://core.telegram.org/bots/api), kept for [legacy purposes](https://t.me/c/1235155926/33801).

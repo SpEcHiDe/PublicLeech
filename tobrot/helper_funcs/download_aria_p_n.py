@@ -24,7 +24,8 @@ from tobrot import (
     AUTH_CHANNEL,
     DOWNLOAD_LOCATION,
     EDIT_SLEEP_TIME_OUT,
-    R_CLONE_CONF_URI
+    R_CLONE_CONF_URI,
+    R_CLONE_DEST
 )
 from tobrot.helper_funcs.r_clone import (
     get_r_clone_config,
@@ -186,7 +187,7 @@ async def fake_etairporpa_call(
         await copy_via_rclone(
             to_upload_file,
             required_remote,
-            "/", # assuming '/' is the default location for uploads
+            R_CLONE_DEST,  # rclone destination folder
             r_clone_conf_file
         )
         await sent_message_to_update_tg_p.reply_text(

@@ -237,6 +237,12 @@ async def call_apropriate_function(
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
     to_upload_file = file.name
+    if not file.is_complete:
+        return False, (
+            "unable to download, "
+            "upload #stopped "
+            "\n\nmanually clear storage (/ upload 🤦‍♂️) using GNU/Linux commands"
+        )
     #
     if is_zip:
         # first check if current free space allows this
@@ -323,7 +329,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 await event.edit(f"`{msg}`")
                 return False
             await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
-            await check_progress_for_dl(aria2, gid, event, previous_message)
+            return await check_progress_for_dl(aria2, gid, event, previous_message)
         else:
             await event.edit(f"File Downloaded Successfully: <code>{file.name}</code>")
             return True
@@ -339,7 +345,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         else:
             LOGGER.info(str(e))
             await event.edit("<u>error</u> :\n<code>{}</code> \n\n#error".format(str(e)))
-            return
+            return False
 # https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
 
 

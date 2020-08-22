@@ -97,6 +97,8 @@ You can add multiple IDs seperated by space.
 * `SP_LIT_ALGO_RITH_M`: allowed values can be `hjs` or `rar`.
   - VIDEO files are not affected based on this value.
 
+* `DIS_ABLE_ST_GFC_COMMAND_I`: setting this to ANYTHING will enable `/exec` and `/eval` commands.
+
 
 ## Available Commands
 

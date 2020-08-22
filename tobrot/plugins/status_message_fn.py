@@ -9,16 +9,12 @@ import shutil
 import sys
 import time
 import traceback
-
 from tobrot import (
     BOT_START_TIME,
     LOGGER,
     LOG_FILE_ZZGEVC,
     MAX_MESSAGE_LENGTH
 )
-
-
-from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.download_aria_p_n import (
     call_apropriate_function, aria_start
 )
@@ -171,16 +167,15 @@ async def upload_document_f(client, message):
     imsegd = await message.reply_text(
         Loilacaztion.PROCESSING
     )
-    if await AdminCheck(client, message.chat.id, message.from_user.id):
-        if " " in message.text:
-            recvd_command, local_file_name = message.text.split(" ", 1)
-            recvd_response = await upload_to_tg(
-                imsegd,
-                local_file_name,
-                message.from_user.id,
-                {}
-            )
-            LOGGER.info(recvd_response)
+    if " " in message.text:
+        recvd_command, local_file_name = message.text.split(" ", 1)
+        recvd_response = await upload_to_tg(
+            imsegd,
+            local_file_name,
+            message.from_user.id,
+            {}
+        )
+        LOGGER.info(recvd_response)
     await imsegd.delete()
 
 

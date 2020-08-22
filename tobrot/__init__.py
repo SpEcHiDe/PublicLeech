@@ -71,3 +71,4 @@ logging.getLogger("urllib3").setLevel(logging.WARNING)
 LOGGER = logging.getLogger(__name__)
 
 SP_LIT_ALGO_RITH_M = Config.SP_LIT_ALGO_RITH_M
+DIS_ABLE_ST_GFC_COMMAND_I = Config.DIS_ABLE_ST_GFC_COMMAND_I

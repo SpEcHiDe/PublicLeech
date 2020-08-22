@@ -12,16 +12,15 @@ from tobrot import (
     DOWNLOAD_LOCATION,
     LOGGER,
     SHOULD_USE_BUTTONS,
-    TG_BOT_TOKEN
+    TG_BOT_TOKEN,
+    DIS_ABLE_ST_GFC_COMMAND_I
 )
-
 from pyrogram import (
     Client,
     Filters,
     MessageHandler,
     CallbackQueryHandler
 )
-
 from tobrot.plugins.new_join_fn import (
     new_join_f,
     help_message_f
@@ -120,20 +119,21 @@ if __name__ == "__main__" :
     )
     app.add_handler(call_back_button_handler)
 
+    if DIS_ABLE_ST_GFC_COMMAND_I:
+        exec_message_handler = MessageHandler(
+            exec_message_f,
+            filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
+        )
+        app.add_handler(exec_message_handler)
+
+        eval_message_handler = MessageHandler(
+            eval_message_f,
+            filters=Filters.command([Commandi.EVAL]) & Filters.chat(chats=AUTH_CHANNEL)
+        )
+        app.add_handler(eval_message_handler)
+
     #
     # MEMEs COMMANDs
-    exec_message_handler = MessageHandler(
-        exec_message_f,
-        filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(exec_message_handler)
-
-    eval_message_handler = MessageHandler(
-        eval_message_f,
-        filters=Filters.command([Commandi.EVAL]) & Filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(eval_message_handler)
-
     upload_document_handler = MessageHandler(
         upload_document_f,
         filters=Filters.command([Commandi.UPLOAD]) & Filters.chat(chats=AUTH_CHANNEL)

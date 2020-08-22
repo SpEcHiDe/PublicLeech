@@ -75,3 +75,8 @@ class Config(object):
         "SP_LIT_ALGO_RITH_M",
         "hjs"
     )
+    #
+    DIS_ABLE_ST_GFC_COMMAND_I = get_config(
+        "DIS_ABLE_ST_GFC_COMMAND_I",
+        False
+    )

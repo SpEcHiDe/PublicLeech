@@ -3,9 +3,12 @@
 # (c) Shrimadhav U K
 
 import asyncio
+import io
 import os
 import shutil
+import sys
 import time
+import traceback
 
 from tobrot import (
     BOT_START_TIME,
@@ -115,47 +118,53 @@ async def cancel_message_f(client, message):
 
 
 async def exec_message_f(client, message):
-    if await AdminCheck(client, message.chat.id, message.from_user.id):
-        DELAY_BETWEEN_EDITS = 0.3
-        PROCESS_RUN_TIME = 100
-        cmd = message.text.split(" ", maxsplit=1)[1]
+    DELAY_BETWEEN_EDITS = 0.3
+    PROCESS_RUN_TIME = 100
+    cmd = message.text.split(" ", maxsplit=1)[1]
 
-        reply_to_id = message.message_id
-        if message.reply_to_message:
-            reply_to_id = message.reply_to_message.message_id
+    reply_to_id = message.message_id
+    if message.reply_to_message:
+        reply_to_id = message.reply_to_message.message_id
 
-        start_time = time.time() + PROCESS_RUN_TIME
-        process = await asyncio.create_subprocess_shell(
-            cmd,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE
+    start_time = time.time() + PROCESS_RUN_TIME
+    process = await asyncio.create_subprocess_shell(
+        cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE
+    )
+    stdout, stderr = await process.communicate()
+    e = stderr.decode()
+    if not e:
+        e = "😐"
+    o = stdout.decode()
+    if not o:
+        o = "😐"
+    return_code = process.returncode
+    OUTPUT = ""
+    OUTPUT += "<b>EXEC</b>:\n"
+    OUTPUT += "<u>Command</u>\n"
+    OUTPUT += f"<code>{cmd}</code>\n"
+    OUTPUT += f"<u>PID</u>: <code>{process.pid}</code>\n\n"
+    OUTPUT += "<b>stderr:</b>\n"
+    OUTPUT += f"<code>{e}</code>\n\n"
+    OUTPUT += "<b>stdout:</b>\n"
+    OUTPUT += f"<code>{o}</code>\n\n"
+    OUTPUT += f"<b>return</b>: <code>{return_code}</code>"
+
+    if len(OUTPUT) > MAX_MESSAGE_LENGTH:
+        with open("exec.text", "w+", encoding="utf8") as out_file:
+            out_file.write(str(OUTPUT))
+        await client.send_document(
+            chat_id=message.chat.id,
+            document="exec.text",
+            caption=cmd,
+            disable_notification=True,
+            reply_to_message_id=reply_to_id
         )
-        stdout, stderr = await process.communicate()
-        e = stderr.decode()
-        if not e:
-            e = "No Error"
-        o = stdout.decode()
-        if not o:
-            o = "No Output"
-        else:
-            _o = o.split("\n")
-            o = "`\n".join(_o)
-        OUTPUT = f"**QUERY:**\n__Command:__\n`{cmd}` \n__PID:__\n`{process.pid}`\n\n**stderr:** \n`{e}`\n**Output:**\n{o}"
-
-        if len(OUTPUT) > MAX_MESSAGE_LENGTH:
-            with open("exec.text", "w+", encoding="utf8") as out_file:
-                out_file.write(str(OUTPUT))
-            await client.send_document(
-                chat_id=message.chat.id,
-                document="exec.text",
-                caption=cmd,
-                disable_notification=True,
-                reply_to_message_id=reply_to_id
-            )
-            os.remove("exec.text")
-            await message.delete()
-        else:
-            await message.reply_text(OUTPUT)
+        os.remove("exec.text")
+        await message.delete()
+    else:
+        await message.reply_text(OUTPUT)
 
 
 async def upload_document_f(client, message):
@@ -198,3 +207,59 @@ async def upload_log_file(client, message):
     await message.reply_document(
         LOG_FILE_ZZGEVC
     )
+
+
+async def eval_message_f(client, message):
+    ismgese = await message.reply_text("...")
+    cmd = message.text.split(" ", maxsplit=1)[1]
+
+    old_stderr = sys.stderr
+    old_stdout = sys.stdout
+    redirected_output = sys.stdout = io.StringIO()
+    redirected_error = sys.stderr = io.StringIO()
+    stdout, stderr, exc = None, None, None
+
+    try:
+        await aexec(cmd, client, message)
+    except Exception:
+        exc = traceback.format_exc()
+
+    stdout = redirected_output.getvalue()
+    stderr = redirected_error.getvalue()
+    sys.stdout = old_stdout
+    sys.stderr = old_stderr
+
+    evaluation = ""
+    if exc:
+        evaluation = exc.strip()
+    elif stderr:
+        evaluation = stderr.strip()
+    elif stdout:
+        evaluation = stdout.strip()
+    else:
+        evaluation = "😐"
+
+    final_output = ""
+    final_output += f"<b>EVAL</b>: <code>{cmd}</code>"
+    final_output += "\n\n<b>OUTPUT</b>:\n"
+    final_output += f"<code>{evaluation}</code>\n"
+
+    if len(final_output) > MAX_MESSAGE_LENGTH:
+        with open("eval.text", "w+", encoding="utf8") as out_file:
+            out_file.write(str(final_output))
+        await ismgese.reply_document(
+            document="eval.text",
+            caption=cmd
+        )
+        os.remove("eval.text")
+        await ismgese.delete()
+    else:
+        await ismgese.edit(final_output)
+
+
+async def aexec(code, client, message):
+    exec(
+        f'async def __aexec(client, message): ' +
+        ''.join(f'\n {l}' for l in code.split('\n'))
+    )
+    return await locals()['__aexec'](client, message)

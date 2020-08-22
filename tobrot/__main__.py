@@ -36,6 +36,7 @@ from tobrot.plugins.status_message_fn import (
     status_message_f,
     cancel_message_f,
     exec_message_f,
+    eval_message_f,
     upload_document_f,
     save_rclone_conf_f,
     upload_log_file
@@ -126,6 +127,12 @@ if __name__ == "__main__" :
         filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(exec_message_handler)
+
+    eval_message_handler = MessageHandler(
+        eval_message_f,
+        filters=Filters.command([Commandi.EVAL]) & Filters.chat(chats=AUTH_CHANNEL)
+    )
+    app.add_handler(eval_message_handler)
 
     upload_document_handler = MessageHandler(
         upload_document_f,

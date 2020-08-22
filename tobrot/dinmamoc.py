@@ -43,7 +43,7 @@ class Commandi:
         "exec"
     )
     EVAL = get_config(
-        "COMMANDI_EXEC",
+        "COMMANDI_EVAL",
         "eval"
     )
     RENAME = get_config(

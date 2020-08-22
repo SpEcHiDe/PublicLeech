@@ -94,6 +94,9 @@ You can add multiple IDs seperated by space.
 
 * `PROCESS_MAX_TIMEOUT`: ~~not used~~, kept for [legacy purposes](https://t.me/c/1235155926/33801).
 
+* `SP_LIT_ALGO_RITH_M`: allowed values can be `hjs` or `rar`.
+  - VIDEO files are not affected based on this value.
+
 
 ## Available Commands
 

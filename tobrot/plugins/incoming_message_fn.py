@@ -156,7 +156,7 @@ async def incoming_youtube_dl_f(client, message):
             user_working_dir
         )
         req = requests.get(f"{thumb_image}")
-        thu_b = f"{current_user_id}.jpg"
+        thum_b = f"{current_user_id}.jpg"
         open(thum_b, 'wb').write(req.content)
         if thumb_image is not None:
             await message.reply_photo(

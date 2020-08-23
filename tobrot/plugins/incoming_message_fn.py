@@ -22,6 +22,7 @@ from tobrot import (
 import time
 import aria2p
 import asyncio
+import requests
 from tobrot.helper_funcs.extract_link_from_message import extract_link
 from tobrot.helper_funcs.download_aria_p_n import (
     call_apropriate_function, aria_start,
@@ -154,9 +155,12 @@ async def incoming_youtube_dl_f(client, message):
             yt_dl_pass_word,
             user_working_dir
         )
+        req = requests.get(f"{thumb_image}")
+        thu_b = f"{current_user_id}.jpg"
+        open(thum_b, 'wb').write(req.content)
         if thumb_image is not None:
             await message.reply_photo(
-                photo=thumb_image,
+                photo=thum_b,
                 quote=True,
                 caption=text_message,
                 reply_markup=reply_markup

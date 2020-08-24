@@ -83,10 +83,12 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
         thumb_image = DEF_THUMB_NAIL_VID_S
         #
         for current_r_json in response_json:
+            LOGGER.info(current_r_json)
             #
             thumb_image = current_r_json.get("thumbnail", None)
             if thumb_image is None:
                 thumb_image = current_r_json.get("thumbnails", None)
+                LOGGER.info(thumb_image)
                 if thumb_image is not None:
                     thumb_image = thumb_image[0]["url"]
             if thumb_image is None:
@@ -165,6 +167,7 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                         callback_data=(cb_string_video).encode("UTF-8")
                     )
                 ])
+            # TODO: :\
             break
         reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
         # LOGGER.info(reply_markup)

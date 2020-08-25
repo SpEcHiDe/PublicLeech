@@ -13,7 +13,7 @@ LOGGER = logging.getLogger(__name__)
 
 import aiohttp
 
-from pyrogram import MessageEntity
+from pyrogram.types import MessageEntity
 
 from tobrot import (
     TG_OFFENSIVE_API

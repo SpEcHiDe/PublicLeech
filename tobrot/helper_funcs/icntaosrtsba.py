@@ -18,11 +18,9 @@
 
 import os
 import time
-
-from pyrogram import (
+from pyrogram.types import (
     Message
 )
-
 from tobrot import (
     LOGGER,
     DOWNLOAD_LOCATION

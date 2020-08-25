@@ -3,12 +3,15 @@
 
 
 from pyrogram import (
-    Filters,
+    Client,
+    filters
+)
+from pyrogram.types import (
     Message
 )
 
 
-def message_filter_f(f, m: Message):
+def message_filter_f(flt, c: Client, m: Message):
     return bool(
             (
                 # below checks the TORRENT detection part
@@ -29,7 +32,7 @@ def message_filter_f(f, m: Message):
         )
 
 
-message_fliter = Filters.create(
+message_fliter = filters.create(
     func=message_filter_f,
     name="TstMesgFilter"
 )

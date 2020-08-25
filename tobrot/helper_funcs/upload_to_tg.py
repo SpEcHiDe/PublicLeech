@@ -17,23 +17,23 @@ import time
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from PIL import Image
-from tobrot.helper_funcs.display_progress import progress_for_pyrogram, humanbytes
+from pyrogram.types import (
+    InputMediaDocument,
+    InputMediaVideo,
+    InputMediaAudio
+)
+from tobrot.helper_funcs.display_progress import (
+    progress_for_pyrogram,
+    humanbytes
+)
 from tobrot.helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
 from tobrot.helper_funcs.split_large_files import split_large_files
 from tobrot.helper_funcs.copy_similar_file import copy_file
-
 from tobrot import (
     TG_MAX_FILE_SIZE,
     EDIT_SLEEP_TIME_OUT,
     DOWNLOAD_LOCATION
 )
-
-from pyrogram import (
-    InputMediaDocument,
-    InputMediaVideo,
-    InputMediaAudio
-)
-
 
 async def upload_to_tg(
     message,

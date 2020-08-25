@@ -12,7 +12,7 @@ LOGGER = logging.getLogger(__name__)
 
 import configparser
 
-from pyrogram import (
+from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Message

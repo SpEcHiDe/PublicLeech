@@ -10,10 +10,8 @@ logging.basicConfig(
 )
 LOGGER = logging.getLogger(__name__)
 
-from pyrogram import CallbackQuery
-
+from pyrogram.types import CallbackQuery
 from tobrot.helper_funcs.youtube_dl_button import youtube_dl_call_back
-
 from tobrot.helper_funcs.icntaosrtsba import (
     leech_btn_k,
     ytdl_btn_k

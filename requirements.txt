@@ -2,6 +2,6 @@ aiohttp
 aria2p
 hachoir
 Pillow
-git+git://github.com/pyrogram/pyrogram@asyncio-dev#pyrogram
+pyrogram
 tgcrypto
-git+git://github.com/sudoshell/youtube-dl@73400cc#youtube_dl
+git+git://github.com/sudoshell/youtube-dl@master#youtube_dl

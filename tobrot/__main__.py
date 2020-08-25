@@ -17,7 +17,9 @@ from tobrot import (
 )
 from pyrogram import (
     Client,
-    Filters,
+    filters
+)
+from pyrogram.handlers import (
     MessageHandler,
     CallbackQueryHandler
 )
@@ -55,7 +57,7 @@ if __name__ == "__main__" :
         os.makedirs(DOWNLOAD_LOCATION)
     #
     app = Client(
-        "LeechBot",
+        ":memory:",
         bot_token=TG_BOT_TOKEN,
         api_id=APP_ID,
         api_hash=API_HASH,
@@ -68,21 +70,21 @@ if __name__ == "__main__" :
     # PURGE command
     incoming_purge_message_handler = MessageHandler(
         incoming_purge_message_f,
-        filters=Filters.command([Commandi.PURGE]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.PURGE]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(incoming_purge_message_handler)
 
     # STATUS command
     status_message_handler = MessageHandler(
         status_message_f,
-        filters=Filters.command([Commandi.STATUS]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.STATUS]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(status_message_handler)
 
     # CANCEL command
     cancel_message_handler = MessageHandler(
         cancel_message_f,
-        filters=Filters.command([Commandi.CANCEL]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.CANCEL]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(cancel_message_handler)
 
@@ -91,14 +93,14 @@ if __name__ == "__main__" :
         # LEECH command
         incoming_message_handler = MessageHandler(
             leech_commandi_f,
-            filters=Filters.command([Commandi.LEECH]) & Filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.LEECH]) & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_message_handler)
     
         # YTDL command
         incoming_youtube_dl_handler = MessageHandler(
             incoming_youtube_dl_f,
-            filters=Filters.command([Commandi.YTDL]) & Filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.YTDL]) & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_youtube_dl_handler)
     else:
@@ -107,7 +109,7 @@ if __name__ == "__main__" :
         # in the AUTH_CHANNELs
         incoming_message_handler = MessageHandler(
             incoming_message_f,
-            filters=message_fliter & Filters.chat(chats=AUTH_CHANNEL)
+            filters=message_fliter & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_message_handler)
 
@@ -122,13 +124,13 @@ if __name__ == "__main__" :
     if DIS_ABLE_ST_GFC_COMMAND_I:
         exec_message_handler = MessageHandler(
             exec_message_f,
-            filters=Filters.command([Commandi.EXEC]) & Filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.EXEC]) & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(exec_message_handler)
 
         eval_message_handler = MessageHandler(
             eval_message_f,
-            filters=Filters.command([Commandi.EVAL]) & Filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.EVAL]) & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(eval_message_handler)
 
@@ -136,56 +138,56 @@ if __name__ == "__main__" :
     # MEMEs COMMANDs
     upload_document_handler = MessageHandler(
         upload_document_f,
-        filters=Filters.command([Commandi.UPLOAD]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.UPLOAD]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(upload_document_handler)
 
     # HELP command
     help_text_handler = MessageHandler(
         help_message_f,
-        filters=Filters.command([Commandi.HELP]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.HELP]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(help_text_handler)
 
     # not AUTH CHANNEL users
     new_join_handler = MessageHandler(
         new_join_f,
-        filters=~Filters.chat(chats=AUTH_CHANNEL)
+        filters=~filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(new_join_handler)
 
     # welcome MESSAGE
     group_new_join_handler = MessageHandler(
         help_message_f,
-        filters=Filters.chat(chats=AUTH_CHANNEL) & Filters.new_chat_members
+        filters=filters.chat(chats=AUTH_CHANNEL) & filters.new_chat_members
     )
     app.add_handler(group_new_join_handler)
 
     # savethumbnail COMMAND
     save_thumb_nail_handler = MessageHandler(
         save_thumb_nail,
-        filters=Filters.command([Commandi.SAVETHUMBNAIL]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.SAVETHUMBNAIL]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_thumb_nail_handler)
 
     # clearthumbnail COMMAND
     clear_thumb_nail_handler = MessageHandler(
         clear_thumb_nail,
-        filters=Filters.command([Commandi.CLEARTHUMBNAIL]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.CLEARTHUMBNAIL]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
 
     # an probably easy way to get RClone CONF URI
     save_rclone_conf_handler = MessageHandler(
         save_rclone_conf_f,
-        filters=Filters.command([Commandi.GET_RCLONE_CONF_URI]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.GET_RCLONE_CONF_URI]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_rclone_conf_handler)
 
     # Telegram command to upload LOG files
     upload_log_f_handler = MessageHandler(
         upload_log_file,
-        filters=Filters.command([Commandi.UPLOAD_LOG_FILE]) & Filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.UPLOAD_LOG_FILE]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(upload_log_f_handler)
 

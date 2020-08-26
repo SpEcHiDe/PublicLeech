@@ -118,7 +118,7 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                     if "drive.google.com" in url:
                         if format_id == "source":
                             ikeyboard = [
-                                pyrogram.InlineKeyboardButton(
+                                pyrogram.types.InlineKeyboardButton(
                                     dipslay_str_uon,
                                     callback_data=(cb_string_video).encode("UTF-8")
                                 )
@@ -126,7 +126,7 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                     else:
                         if format_string is not None and not "audio only" in format_string:
                             ikeyboard = [
-                                pyrogram.InlineKeyboardButton(
+                                pyrogram.types.InlineKeyboardButton(
                                     dipslay_str_uon,
                                     callback_data=(cb_string_video).encode("UTF-8")
                                 )
@@ -134,7 +134,7 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                         else:
                             # special weird case :\
                             ikeyboard = [
-                                pyrogram.InlineKeyboardButton(
+                                pyrogram.types.InlineKeyboardButton(
                                     "SVideo [" +
                                     "] ( " +
                                     approx_file_size + " )",
@@ -147,13 +147,13 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                     cb_string_128 = "{}|{}|{}".format("audio", "128k", "mp3")
                     cb_string = "{}|{}|{}".format("audio", "320k", "mp3")
                     inline_keyboard.append([
-                        pyrogram.InlineKeyboardButton(
+                        pyrogram.types.InlineKeyboardButton(
                             "MP3 " + "(" + "64 kbps" + ")", callback_data=cb_string_64.encode("UTF-8")),
-                        pyrogram.InlineKeyboardButton(
+                        pyrogram.types.InlineKeyboardButton(
                             "MP3 " + "(" + "128 kbps" + ")", callback_data=cb_string_128.encode("UTF-8"))
                     ])
                     inline_keyboard.append([
-                        pyrogram.InlineKeyboardButton(
+                        pyrogram.types.InlineKeyboardButton(
                             "MP3 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
                     ])
             else:
@@ -162,14 +162,14 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                 cb_string_video = "{}|{}|{}".format(
                     "video", format_id, format_ext)
                 inline_keyboard.append([
-                    pyrogram.InlineKeyboardButton(
+                    pyrogram.types.InlineKeyboardButton(
                         "SVideo",
                         callback_data=(cb_string_video).encode("UTF-8")
                     )
                 ])
             # TODO: :\
             break
-        reply_markup = pyrogram.InlineKeyboardMarkup(inline_keyboard)
+        reply_markup = pyrogram.types.InlineKeyboardMarkup(inline_keyboard)
         # LOGGER.info(reply_markup)
         succss_mesg = """Select the desired format: 👇
 <u>mentioned</u> <i>file size might be approximate</i>"""

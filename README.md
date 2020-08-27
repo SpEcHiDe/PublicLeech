@@ -110,7 +110,6 @@ You can add multiple IDs seperated by space.
 ## How to Use?
 
 * send any link, and click on the available buttons.
-  - due to ~~Telegram~~ limitations, the buttons will only work, if the bot was created by you, or you are in the same region as the Telegram bot creator.
 
 * if you have disabled `SHOULD_USE_BUTTONS`, you can read the [Commandi](./tobrot/dinmamoc.py) file, to know about the commands.
   - [COMMANDI_LEECH](./tobrot/dinmamoc.py#L23) can take multiple arguments

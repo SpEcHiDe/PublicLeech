@@ -312,7 +312,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 msg += f"\nProgress: {file.progress_string()}"
                 msg += f"\nTotal Size: {file.total_length_string()}"
                 msg += f"\n<b>Info:</b>| P: {file.connections} |"
-                if file.seeder is False:
+                if file.seeder:
                     msg += f"| S: {file.num_seeders} |"
                 # msg += f"\nStatus: {file.status}"
                 msg += f"\nETA: {file.eta_string()}"
@@ -330,14 +330,21 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         else:
             await event.edit(f"File Downloaded Successfully: <code>{file.name}</code>")
             return True
+    except aria2p.client.ClientException:
+        pass
+    except RecursionError:
+        file.remove(force=True)
+        await event.edit(
+            "Download Auto Canceled :\n\n"
+            "Your Torrent/Link is Dead.".format(
+                file.name
+            )
+        )
+        return False
     except Exception as e:
         LOGGER.info(str(e))
         if " not found" in str(e) or "'file'" in str(e):
             await event.edit("Download Canceled :\n<code>{}</code>".format(file.name))
-            return False
-        elif " depth exceeded" in str(e):
-            file.remove(force=True)
-            await event.edit("Download Auto Canceled :\n<code>{}</code>\nYour Torrent/Link is Dead.".format(file.name))
             return False
         else:
             LOGGER.info(str(e))

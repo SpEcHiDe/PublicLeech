@@ -42,6 +42,7 @@ async def aria_start():
     # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
     # TODO: this does not work, need to investigate this.
     # but for now, https://t.me/TrollVoiceBot?start=858
+    # maybe, :\ but https://t.me/c/1374712761/1142
     aria2_daemon_start_cmd.append("--enable-rpc")
     aria2_daemon_start_cmd.append("--follow-torrent=mem")
     aria2_daemon_start_cmd.append("--max-connection-per-server=10")
@@ -76,14 +77,14 @@ async def aria_start():
 
 def add_magnet(aria_instance, magnetic_link, c_file_name):
     options = None
-    # if c_file_name is not None:
-    #     options = {
-    #         "dir": c_file_name
-    #     }
+    if c_file_name is not None:
+        options = {
+            "dir": c_file_name
+        }
     try:
         download = aria_instance.add_magnet(
             magnetic_link,
-            options=options
+            options
         )
     except Exception as e:
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
@@ -113,16 +114,16 @@ def add_torrent(aria_instance, torrent_file_path):
 
 def add_url(aria_instance, text_url, c_file_name):
     options = None
-    # if c_file_name is not None:
-    #     options = {
-    #         "dir": c_file_name
-    #     }
+    if c_file_name is not None:
+        options = {
+            "dir": c_file_name
+        }
     uris = [text_url]
     # Add URL Into Queue
     try:
         download = aria_instance.add_uris(
             uris,
-            options=options
+            options
         )
     except Exception as e:
         return False, "**FAILED** \n" + str(e) + " \nPlease do not send SLOW links. Read /help"
@@ -312,7 +313,8 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 msg += f"\nProgress: {file.progress_string()}"
                 msg += f"\nTotal Size: {file.total_length_string()}"
                 msg += f"\n<b>Info:</b>| P: {file.connections} |"
-                if file.seeder:
+                if file.seeder is False:
+                    """https://t.me/c/1220993104/670177"""
                     msg += f"| S: {file.num_seeders} |"
                 # msg += f"\nStatus: {file.status}"
                 msg += f"\nETA: {file.eta_string()}"

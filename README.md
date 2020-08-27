@@ -2,14 +2,35 @@
 
 A Torrent, youtube-dl Leecher, and Uploader!
 
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [COPYING](./COPYING) for more details.
+
 ## installing
 
 ### The Eas(iest) Way
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
+- Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-###### - ~~~all that glitters is (not) gold~~~
+- Start docker daemon [skip if already running]:
+```sh
+dockerd
+```
+- Build Docker image:
+```sh
+docker build . -t uniborg
+```
+- Run the image:
+```sh
+docker run uniborg
+```
+
+It is not recommended to use "sudo", while using Docker.
+GNU/Linux Permissions are highly customisable, and it is generally not required to have "ROOT" permission, ~~unless you know what you are doing~~.
+You can still install all the dependencies in your system [with ROOT permissions],
+but please be aware of the potential issues when doing so. The installed packages
+may conflict with the system package manager's installed packages, which can
+cause trouble down the road and errors when upgrading conflicting packages.
+**You have been warned.**
+
 
 ### The Legacy Way
 Simply clone the repository and run the main file:

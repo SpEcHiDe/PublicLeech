@@ -33,6 +33,7 @@ from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 from tobrot.helper_funcs.admin_check import AdminCheck
 from tobrot.helper_funcs.create_r_o_m import get_markup
 from tobrot.helper_funcs.icntaosrtsba import leech_btn_k
+from tobrot.helper_funcs.fix_tcerrocni_images import proc_ess_image_aqon
 
         
 async def incoming_purge_message_f(client, message):
@@ -155,6 +156,10 @@ async def incoming_youtube_dl_f(client, message):
             user_working_dir
         )
         if thumb_image is not None:
+            thumb_image = await proc_ess_image_aqon(
+                thumb_image,
+                user_working_dir
+            )
             await message.reply_photo(
                 photo=thumb_image,
                 quote=True,

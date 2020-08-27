@@ -100,7 +100,7 @@ async def cancel_message_f(client, message):
         try:
             downloads = aria_i_p.get_download(g_id)
             LOGGER.info(downloads)
-            LOGGER.info(downloads.remove(force=True))
+            LOGGER.info(downloads.remove(force=True, files=True))
             await i_m_s_e_g.edit_text(
                 Loilacaztion.TOR_CANCELLED
             )

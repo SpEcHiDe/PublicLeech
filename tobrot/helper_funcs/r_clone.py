@@ -16,7 +16,8 @@
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import asyncio
+import os
+import re
 from typing import Union
 
 # the logging things
@@ -33,6 +34,7 @@ from pyrogram import (
 from pyrogram.errors import (
     ChannelInvalid
 )
+from tobrot.helper_funcs.run_shell_command import run_command
 
 
 async def copy_via_rclone(
@@ -49,20 +51,19 @@ async def copy_via_rclone(
         "--config=" + conf_file + ""
     ]
     LOGGER.info(command_to_exec)
-    process = await asyncio.create_subprocess_exec(
-        *command_to_exec,
-        # stdout must a pipe to be accessible as process.stdout
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
+    t_response, e_response = await run_command(command_to_exec)
     # Wait for the subprocess to finish
-    stdout, stderr = await process.communicate()
-    e_response = stderr.decode().strip()
     LOGGER.info(e_response)
-    t_response = stdout.decode().strip()
     LOGGER.info(t_response)
     # https://github.com/rg3/youtube-dl/issues/2630#issuecomment-38635239
-    return None
+    remote_file_id = await r_clone_extract_link_s(
+        re.escape(src),
+        remote_name,
+        remote_dir,
+        conf_file
+    )
+    LOGGER.info(remote_file_id)
+    return remote_file_id
 
 
 async def get_r_clone_config(message_link: str, py_client: Client) -> str:
@@ -98,3 +99,31 @@ def extract_c_m_ids(message_link: str) -> (Union[str, int], int):
         # public link
         chat_id, message_id = str("@" + p_m_link[3]), int(p_m_link[4])
     return chat_id, message_id
+
+
+async r_clone_extract_link_s(
+    src_file_name: str,
+    remote_name: str,
+    remote_dir: str,
+    conf_file: str
+):
+    tmp_file_name = "lsf_filter.txt"
+    with open(tmp_file_name, "w+", encoding="utf-8") as f_d:
+        f_d.write(f"+ {src_file_name}\n- *")
+    command_to_exec = [
+        "rclone",
+        "lsf",
+        "-F",
+        "-i",
+        f"--filter-from={tmp_file_name}",
+        "--files-only",
+        "" + remote_name + ":" + remote_dir + "",
+        "--config=" + conf_file + ""
+    ]
+    LOGGER.info(command_to_exec)
+    t_response, e_response = await run_command(command_to_exec)
+    # Wait for the subprocess to finish
+    LOGGER.info(e_response)
+    LOGGER.info(t_response)
+    os.remove(tmp_file_name)
+    return t_response

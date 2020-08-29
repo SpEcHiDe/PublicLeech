@@ -101,7 +101,7 @@ def extract_c_m_ids(message_link: str) -> (Union[str, int], int):
     return chat_id, message_id
 
 
-async r_clone_extract_link_s(
+async def r_clone_extract_link_s(
     src_file_name: str,
     remote_name: str,
     remote_dir: str,

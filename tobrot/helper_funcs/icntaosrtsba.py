@@ -104,7 +104,7 @@ async def ytdl_btn_k(message: Message):
         user_working_dir = os.path.join(
             DOWNLOAD_LOCATION,
             str(current_user_id),
-            str(message.reply_to_message.message_id)
+            str(message.message_id)
         )
         # create download directory, if not exist
         if not os.path.isdir(user_working_dir):

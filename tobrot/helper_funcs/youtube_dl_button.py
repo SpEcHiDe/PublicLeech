@@ -34,8 +34,6 @@ async def youtube_dl_call_back(bot, update):
     #
     current_user_id = update.message.reply_to_message.from_user.id
     current_message_id = update.message.reply_to_message
-    if not SHOULD_USE_BUTTONS:
-        current_message_id = current_message_id.reply_to_message
     current_message_id = current_message_id.message_id
     current_touched_user_id = update.from_user.id
 
@@ -94,14 +92,7 @@ async def youtube_dl_call_back(bot, update):
         description = response_json["description"][0:1021]
     LOGGER.info(description)
     #
-    tmp_directory_for_each_user = os.path.join(
-        DOWNLOAD_LOCATION,
-        str(update.from_user.id),
-        # https://t.me/c/1235155926/33801
-        str(update.message.message_id)
-    )
-    if not os.path.isdir(tmp_directory_for_each_user):
-        os.makedirs(tmp_directory_for_each_user)
+    tmp_directory_for_each_user = user_working_dir
     download_directory = tmp_directory_for_each_user
     download_directory = os.path.join(
         tmp_directory_for_each_user,

@@ -16,7 +16,7 @@ from tobrot import (
     MAX_MESSAGE_LENGTH
 )
 from tobrot.helper_funcs.download_aria_p_n import (
-    call_apropriate_function, aria_start
+    aria_start
 )
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 from tobrot.dinmamoc import Commandi

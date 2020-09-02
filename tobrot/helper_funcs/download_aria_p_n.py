@@ -235,7 +235,10 @@ async def call_apropriate_function(
             return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
-    to_upload_file = file.name
+    to_upload_file = os.path.join(
+        c_file_name,
+        file.name
+    )
     if not file.is_complete:
         return False, (
             "unable to download, "
@@ -326,7 +329,9 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 await event.edit(f"`{msg}`")
                 return False
             await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
-            return await check_progress_for_dl(aria2, gid, event, previous_message)
+            return await check_progress_for_dl(
+                aria2, gid, event, previous_message
+            )
         else:
             await event.edit(f"File Downloaded Successfully: <code>{file.name}</code>")
             return True
@@ -346,7 +351,9 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
     except Exception as e:
         LOGGER.info(str(e))
         if " not found" in str(e) or "'file'" in str(e):
-            await event.edit("Download Canceled :\n<code>{}</code>".format(file.name))
+            await event.edit(
+                "Download Canceled :\n<code>{}</code>".format(file.name)
+            )
             return False
         else:
             LOGGER.info(str(e))

@@ -41,22 +41,22 @@ async def leech_btn_k(message: Message, cb_data: str):
     )
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
+    current_user_id = message.reply_to_message.from_user.id
+    # create an unique directory
+    new_download_location = os.path.join(
+        DOWNLOAD_LOCATION,
+        str(current_user_id),
+        str(message.reply_to_message.message_id)
+    )
+    # create download directory, if not exist
+    if not os.path.isdir(new_download_location):
+        os.makedirs(new_download_location)
     if dl_url is not None:
         await message.edit_text("extracting links")
         # start the aria2c daemon
         aria_i_p = await aria_start()
         LOGGER.info(aria_i_p)
         if "_" in cb_data:
-            current_user_id = message.reply_to_message.from_user.id
-            # create an unique directory
-            new_download_location = os.path.join(
-                DOWNLOAD_LOCATION,
-                str(current_user_id),
-                str(time.time())
-            )
-            # create download directory, if not exist
-            if not os.path.isdir(new_download_location):
-                os.makedirs(new_download_location)
             await message.edit_text("trying to download")
             # try to download the "link"
             sagtus, err_message = await fake_etairporpa_call(
@@ -75,16 +75,6 @@ async def leech_btn_k(message: Message, cb_data: str):
             is_zip = False
             if "a" in cb_data:
                 is_zip = True
-            current_user_id = message.reply_to_message.from_user.id
-            # create an unique directory
-            new_download_location = os.path.join(
-                DOWNLOAD_LOCATION,
-                str(current_user_id),
-                str(time.time())
-            )
-            # create download directory, if not exist
-            if not os.path.isdir(new_download_location):
-                os.makedirs(new_download_location)
             await message.edit_text("trying to download")
             # try to download the "link"
             sagtus, err_message = await call_apropriate_function(
@@ -108,14 +98,17 @@ async def ytdl_btn_k(message: Message):
     )
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
+    current_user_id = message.reply_to_message.from_user.id
+    # create an unique directory
+    user_working_dir = os.path.join(
+        DOWNLOAD_LOCATION,
+        str(current_user_id)
+    )
+    # create download directory, if not exist
+    if not os.path.isdir(user_working_dir):
+        os.makedirs(user_working_dir)
     if dl_url is not None:
         await i_m_sefg.edit_text("extracting links")
-        current_user_id = message.reply_to_message.from_user.id
-        # create an unique directory
-        user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
-        # create download directory, if not exist
-        if not os.path.isdir(user_working_dir):
-            os.makedirs(user_working_dir)
         # list the formats, and display in button markup formats
         thumb_image, text_message, reply_markup = await extract_youtube_dl_formats(
             dl_url,

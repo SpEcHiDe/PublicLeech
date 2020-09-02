@@ -38,27 +38,7 @@ cd PublicLeech
 python3 -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
-# <Create config.py appropriately>
 python3 -m tobrot
-```
-
-### an example config.py 👇
-```py
-from tobrot.sample_config import Config
-
-class Config(Config):
-    TG_BOT_TOKEN = "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
-    # These example values won't work. You must get your own app_id and
-    # api_hash from https://my.telegram.org, under API Development.
-    APP_ID = 6
-    API_HASH = "eb06d4abfb49dc3eeb1aeb98ae0f581e"
-    # please read https://t.me/c/1279877202/74
-    # if you have not read the above README
-    AUTH_CHANNEL = [
-        -1001234567890,
-        7351948,
-        -456790
-    ]
 ```
 
 ### Variable Explanations

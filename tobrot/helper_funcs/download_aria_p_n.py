@@ -72,10 +72,10 @@ async def aria_start():
 
 def add_magnet(aria_instance, magnetic_link, c_file_name):
     options = None
-    if c_file_name is not None:
-        options = {
-            "dir": c_file_name
-        }
+    # if c_file_name is not None:
+    #     options = {
+    #         "dir": c_file_name
+    #     }
     try:
         download = aria_instance.add_magnet(
             magnetic_link,
@@ -109,10 +109,10 @@ def add_torrent(aria_instance, torrent_file_path):
 
 def add_url(aria_instance, text_url, c_file_name):
     options = None
-    if c_file_name is not None:
-        options = {
-            "dir": c_file_name
-        }
+    # if c_file_name is not None:
+    #     options = {
+    #         "dir": c_file_name
+    #     }
     uris = [text_url]
     # Add URL Into Queue
     try:
@@ -167,7 +167,7 @@ async def fake_etairporpa_call(
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
     to_upload_file = file.name
-    #
+    # -_-
     r_clone_conf_file = await get_r_clone_config(
         R_CLONE_CONF_URI,
         sent_message_to_update_tg_p._client
@@ -235,10 +235,10 @@ async def call_apropriate_function(
             return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
-    to_upload_file = os.path.join(
+    to_upload_file = file.name """os.path.join(
         c_file_name,
         file.name
-    )
+    )"""
     if not file.is_complete:
         return False, (
             "unable to download, "

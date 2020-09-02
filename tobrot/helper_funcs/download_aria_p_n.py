@@ -235,7 +235,8 @@ async def call_apropriate_function(
             return False, "can't get metadata \n\n#stopped"
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
-    to_upload_file = file.name """os.path.join(
+    to_upload_file = file.name 
+    """os.path.join(
         c_file_name,
         file.name
     )"""
@@ -343,7 +344,7 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
         file.remove(force=True)
         await event.edit(
             "Download Auto Canceled :\n\n"
-            "Your Torrent/Link is Dead.".format(
+            "Your Torrent/Link {} is Dead.".format(
                 file.name
             )
         )

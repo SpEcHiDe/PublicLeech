@@ -20,12 +20,9 @@ from datetime import datetime
 
 from tobrot import (
     DOWNLOAD_LOCATION,
-    AUTH_CHANNEL
+    AUTH_CHANNEL,
+    SHOULD_USE_BUTTONS
 )
-
-import pyrogram
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
 from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 
 
@@ -36,9 +33,17 @@ async def youtube_dl_call_back(bot, update):
     tg_send_type, youtube_dl_format, youtube_dl_ext = cb_data.split("|")
     #
     current_user_id = update.message.reply_to_message.from_user.id
+    current_message_id = update.message.reply_to_message
+    if not SHOULD_USE_BUTTONS:
+        current_message_id = current_message_id.reply_to_message
+    current_message_id = current_message_id.message_id
     current_touched_user_id = update.from_user.id
 
-    user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
+    user_working_dir = os.path.join(
+        DOWNLOAD_LOCATION,
+        str(current_user_id),
+        str(current_message_id)
+    )
     # create download directory, if not exist
     if not os.path.isdir(user_working_dir):
         await bot.delete_messages(

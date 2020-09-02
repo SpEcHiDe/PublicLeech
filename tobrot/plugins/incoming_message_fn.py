@@ -133,7 +133,11 @@ async def incoming_youtube_dl_f(client, message):
         await i_m_sefg.edit_text("extracting links")
         current_user_id = message.from_user.id
         # create an unique directory
-        user_working_dir = os.path.join(DOWNLOAD_LOCATION, str(current_user_id))
+        user_working_dir = os.path.join(
+            DOWNLOAD_LOCATION,
+            str(current_user_id),
+            str(message.reply_to_message.message_id)
+        )
         # create download directory, if not exist
         if not os.path.isdir(user_working_dir):
             os.makedirs(user_working_dir)

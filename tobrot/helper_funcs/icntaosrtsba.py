@@ -98,16 +98,17 @@ async def ytdl_btn_k(message: Message):
     )
     LOGGER.info(dl_url)
     LOGGER.info(cf_name)
-    current_user_id = message.reply_to_message.from_user.id
-    # create an unique directory
-    user_working_dir = os.path.join(
-        DOWNLOAD_LOCATION,
-        str(current_user_id)
-    )
-    # create download directory, if not exist
-    if not os.path.isdir(user_working_dir):
-        os.makedirs(user_working_dir)
     if dl_url is not None:
+        current_user_id = message.reply_to_message.from_user.id
+        # create an unique directory
+        user_working_dir = os.path.join(
+            DOWNLOAD_LOCATION,
+            str(current_user_id),
+            str(message.reply_to_message.message_id)
+        )
+        # create download directory, if not exist
+        if not os.path.isdir(user_working_dir):
+            os.makedirs(user_working_dir)
         await i_m_sefg.edit_text("extracting links")
         # list the formats, and display in button markup formats
         thumb_image, text_message, reply_markup = await extract_youtube_dl_formats(

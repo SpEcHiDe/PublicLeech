@@ -160,6 +160,7 @@ async def incoming_youtube_dl_f(client, message):
                 caption=text_message,
                 reply_markup=reply_markup
             )
+            os.remove(thumb_image)
             await i_m_sefg.delete()
         else:
             await i_m_sefg.edit_text(

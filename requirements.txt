@@ -4,4 +4,4 @@ hachoir
 Pillow
 pyrogram
 tgcrypto
-git+git://github.com/sudoshell/youtube-dl@master#youtube_dl
+youtube-dlc

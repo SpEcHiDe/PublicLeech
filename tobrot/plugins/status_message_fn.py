@@ -22,7 +22,7 @@ from tobrot.helper_funcs.upload_to_tg import upload_to_tg
 from tobrot.dinmamoc import Commandi
 from tobrot.amocmadin import Loilacaztion
 from tobrot.helper_funcs.display_progress import (
-    TimeFormatter,
+    time_formatter,
     humanbytes
 )
 
@@ -72,7 +72,7 @@ async def status_message_f(client, message):
     if msg == "":
         msg = Loilacaztion.NO_TOR_STATUS
 
-    currentTime = TimeFormatter((time.time() - BOT_START_TIME))
+    currentTime = time_formatter((time.time() - BOT_START_TIME))
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
     used = humanbytes(used)

@@ -93,14 +93,14 @@ if __name__ == "__main__" :
         # LEECH command
         incoming_message_handler = MessageHandler(
             leech_commandi_f,
-            filters=filters.command([Commandi.LEECH]) & filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.leech@torlecbot]) & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_message_handler)
     
         # YTDL command
         incoming_youtube_dl_handler = MessageHandler(
             incoming_youtube_dl_f,
-            filters=filters.command([Commandi.YTDL]) & filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.ytdl@torlecbot]) & filters.chat(chats=AUTH_CHANNEL)
         )
         app.add_handler(incoming_youtube_dl_handler)
     else:
@@ -138,7 +138,7 @@ if __name__ == "__main__" :
     # MEMEs COMMANDs
     upload_document_handler = MessageHandler(
         upload_document_f,
-        filters=filters.command([Commandi.UPLOAD]) & filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.upload@torlecbot]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(upload_document_handler)
 
@@ -166,14 +166,14 @@ if __name__ == "__main__" :
     # savethumbnail COMMAND
     save_thumb_nail_handler = MessageHandler(
         save_thumb_nail,
-        filters=filters.command([Commandi.SAVETHUMBNAIL]) & filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.savethumb@torlecbot]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(save_thumb_nail_handler)
 
     # clearthumbnail COMMAND
     clear_thumb_nail_handler = MessageHandler(
         clear_thumb_nail,
-        filters=filters.command([Commandi.CLEARTHUMBNAIL]) & filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.clearthumb@torlecbot]) & filters.chat(chats=AUTH_CHANNEL)
     )
     app.add_handler(clear_thumb_nail_handler)
 

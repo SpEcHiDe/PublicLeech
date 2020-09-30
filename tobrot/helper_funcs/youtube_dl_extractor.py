@@ -105,9 +105,12 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                     approx_file_size = ""
                     if "filesize" in formats:
                         approx_file_size = humanbytes(formats["filesize"])
+                    n_ue_sc = bool("video only" in format_string)
+                    scneu = "DL" if not n_ue_sc else "XM"
                     dipslay_str_uon = " " + format_string + " (" + format_ext.upper() + ") " + approx_file_size + " "
-                    cb_string_video = "{}|{}|{}".format(
-                        "video", format_id, format_ext)
+                    cb_string_video = "{}|{}|{}|{}".format(
+                        "video", format_id, format_ext, scneu
+                    )
                     ikeyboard = []
                     if "drive.google.com" in url:
                         if format_id == "source":
@@ -153,8 +156,9 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
             else:
                 format_id = current_r_json["format_id"]
                 format_ext = current_r_json["ext"]
-                cb_string_video = "{}|{}|{}".format(
-                    "video", format_id, format_ext)
+                cb_string_video = "{}|{}|{}|{}".format(
+                    "video", format_id, format_ext, "DL"
+                )
                 inline_keyboard.append([
                     InlineKeyboardButton(
                         "SVideo",

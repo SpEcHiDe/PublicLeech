@@ -30,7 +30,7 @@ async def youtube_dl_call_back(bot, update):
     LOGGER.info(update)
     cb_data = update.data
     # youtube_dl extractors
-    tg_send_type, youtube_dl_format, youtube_dl_ext = cb_data.split("|")
+    tg_send_type, youtube_dl_format, youtube_dl_ext, so_type = cb_data.split("|")
     #
     current_user_id = update.message.reply_to_message.from_user.id
     current_message_id = update.message.reply_to_message
@@ -112,8 +112,8 @@ async def youtube_dl_call_back(bot, update):
             # "--external-downloader", "aria2c"
         ]
     else:
-        # command_to_exec = ["youtube-dl", "-f", youtube_dl_format, "--hls-prefer-ffmpeg", "--recode-video", "mp4", "-k", youtube_dl_url, "-o", download_directory]
         minus_f_format = youtube_dl_format
+
         if "youtu" in youtube_dl_url:
             for for_mat in response_json["formats"]:
                 format_id = for_mat.get("format_id")
@@ -123,6 +123,9 @@ async def youtube_dl_call_back(bot, update):
                     if acodec == "none" or vcodec == "none":
                         minus_f_format = youtube_dl_format + "+bestaudio"
                     break
+        elif so_type:
+            minus_f_format = youtube_dl_format + "+bestaudio"
+
         command_to_exec = [
             "youtube-dl",
             "-c",

@@ -35,8 +35,6 @@ async def youtube_dl_call_back(bot, update):
     current_user_id = update.message.reply_to_message.from_user.id
     current_message_id = update.message.reply_to_message
     current_message_id = current_message_id.message_id
-    current_touched_user_id = update.from_user.id
-
     user_working_dir = os.path.join(
         DOWNLOAD_LOCATION,
         str(current_user_id),
@@ -169,6 +167,8 @@ async def youtube_dl_call_back(bot, update):
         await update.message.edit_caption(
             caption=f"found {dir_contents} files"
         )
+        current_touched_user_id = update.from_user.id
+
         user_id = update.from_user.id
         #
         final_response = await upload_to_tg(

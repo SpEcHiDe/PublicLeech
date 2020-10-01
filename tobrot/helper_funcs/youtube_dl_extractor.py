@@ -153,7 +153,7 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                 format_id = current_r_json["format_id"]
                 format_ext = current_r_json["ext"]
                 cb_string_video = "{}|{}|{}|{}|{}".format(
-                    "video", format_id, format_ext, "noaudio", "hasvideo"
+                    "video", format_id, format_ext, "hasaudio", "hasvideo"
                 )
                 inline_keyboard.append([
                     InlineKeyboardButton(

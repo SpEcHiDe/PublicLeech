@@ -134,13 +134,12 @@ if __name__ == "__main__" :
         )
         app.add_handler(eval_message_handler)
 
-    #
-    # MEMEs COMMANDs
-    upload_document_handler = MessageHandler(
-        upload_document_f,
-        filters=filters.command([Commandi.UPLOAD]) & filters.chat(chats=AUTH_CHANNEL)
-    )
-    app.add_handler(upload_document_handler)
+        # MEMEs COMMANDs
+        upload_document_handler = MessageHandler(
+            upload_document_f,
+            filters=filters.command([Commandi.UPLOAD]) & filters.chat(chats=AUTH_CHANNEL)
+        )
+        app.add_handler(upload_document_handler)
 
     # HELP command
     help_text_handler = MessageHandler(

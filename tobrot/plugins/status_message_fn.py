@@ -11,6 +11,7 @@ import time
 import traceback
 from tobrot import (
     BOT_START_TIME,
+    DOWNLOAD_LOCATION,
     LOGGER,
     LOG_FILE_ZZGEVC,
     MAX_MESSAGE_LENGTH
@@ -169,6 +170,16 @@ async def upload_document_f(client, message):
     )
     if " " in message.text:
         recvd_command, local_file_name = message.text.split(" ", 1)
+        local_file_name = os.path.realpath(os.path.join(
+            DOWNLOAD_LOCATION,
+            local_file_name
+        ))
+        real_download_location = os.path.realpath(DOWNLOAD_LOCATION)
+        LOGGER.info(os.path.realpath(local_file_name))
+        if os.path.commonprefix((local_file_name, 
+                                 real_download_location)) != real_download_location:
+            imsegd = await message.reply_text("U wot m8?")
+            return
         recvd_response = await upload_to_tg(
             imsegd,
             local_file_name,

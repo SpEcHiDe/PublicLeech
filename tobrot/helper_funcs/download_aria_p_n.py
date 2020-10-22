@@ -104,7 +104,7 @@ def add_torrent(aria_instance, torrent_file_path):
         else:
             return True, "" + download.gid + ""
     else:
-        return False, "**FAILED** \n" + str(e) + " \nPlease try other sources to get workable link"
+        return False, "**FAILED** \n\nPlease try other sources to get workable link"
 
 
 def add_url(aria_instance, text_url, c_file_name):

@@ -40,7 +40,7 @@ async def youtube_dl_call_back(bot, update):
     user_working_dir = os.path.join(
         DOWNLOAD_LOCATION,
         str(current_user_id),
-        str(current_message_id)
+        str(update.message.message_id)
     )
     # create download directory, if not exist
     if not os.path.isdir(user_working_dir):

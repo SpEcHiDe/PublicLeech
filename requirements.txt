@@ -1,8 +1,13 @@
-aiohttp
-aria2p
-hachoir
-Pillow
-pyrogram
-tgcrypto
-youtube-dl
+# GET / POST network requests
+asyncio==3.4.3
+aiohttp==3.6.2
 
+aria2p==0.9.1
+
+hachoir==3.1.1
+Pillow==7.2.0
+
+Pyrogram==1.0.7
+TgCrypto==1.2.1
+
+youtube-dl

@@ -13,7 +13,8 @@ from tobrot import (
     LOGGER,
     SHOULD_USE_BUTTONS,
     TG_BOT_TOKEN,
-    DIS_ABLE_ST_GFC_COMMAND_I
+    DIS_ABLE_ST_GFC_COMMAND_I,
+    SUDO_USERS
 )
 from pyrogram import (
     Client,
@@ -124,20 +125,20 @@ if __name__ == "__main__" :
     if DIS_ABLE_ST_GFC_COMMAND_I:
         exec_message_handler = MessageHandler(
             exec_message_f,
-            filters=filters.command([Commandi.EXEC]) & filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.EXEC]) & filters.user(users=SUDO_USERS)
         )
         app.add_handler(exec_message_handler)
 
         eval_message_handler = MessageHandler(
             eval_message_f,
-            filters=filters.command([Commandi.EVAL]) & filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.EVAL]) & filters.user(users=SUDO_USERS)
         )
         app.add_handler(eval_message_handler)
 
         # MEMEs COMMANDs
         upload_document_handler = MessageHandler(
             upload_document_f,
-            filters=filters.command([Commandi.UPLOAD]) & filters.chat(chats=AUTH_CHANNEL)
+            filters=filters.command([Commandi.UPLOAD]) & filters.user(users=SUDO_USERS)
         )
         app.add_handler(upload_document_handler)
 
@@ -179,14 +180,14 @@ if __name__ == "__main__" :
     # an probably easy way to get RClone CONF URI
     save_rclone_conf_handler = MessageHandler(
         save_rclone_conf_f,
-        filters=filters.command([Commandi.GET_RCLONE_CONF_URI]) & filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.GET_RCLONE_CONF_URI]) & filters.user(users=SUDO_USERS)
     )
     app.add_handler(save_rclone_conf_handler)
 
     # Telegram command to upload LOG files
     upload_log_f_handler = MessageHandler(
         upload_log_file,
-        filters=filters.command([Commandi.UPLOAD_LOG_FILE]) & filters.chat(chats=AUTH_CHANNEL)
+        filters=filters.command([Commandi.UPLOAD_LOG_FILE]) & filters.user(users=SUDO_USERS)
     )
     app.add_handler(upload_log_f_handler)
 

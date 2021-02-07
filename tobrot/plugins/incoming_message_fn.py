@@ -136,7 +136,7 @@ async def incoming_youtube_dl_f(client, message):
         user_working_dir = os.path.join(
             DOWNLOAD_LOCATION,
             str(current_user_id),
-            str(message.message_id)
+            str(message.reply_to_message.message_id)
         )
         # create download directory, if not exist
         if not os.path.isdir(user_working_dir):
@@ -158,6 +158,7 @@ async def incoming_youtube_dl_f(client, message):
                 photo=thumb_image,
                 quote=True,
                 caption=text_message,
+                reply_to_message_id=message.reply_to_message.message_id,
                 reply_markup=reply_markup
             )
             os.remove(thumb_image)

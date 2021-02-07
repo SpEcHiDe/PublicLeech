@@ -140,18 +140,15 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
                             ]
                     inline_keyboard.append(ikeyboard)
                 if duration is not None:
-                    cb_string_64 = "{}|{}|{}".format("audio", "64k", "mp3")
-                    cb_string_128 = "{}|{}|{}".format("audio", "128k", "mp3")
-                    cb_string = "{}|{}|{}".format("audio", "320k", "mp3")
                     inline_keyboard.append([
                         InlineKeyboardButton(
-                            "MP3 " + "(" + "64 kbps" + ")", callback_data=cb_string_64.encode("UTF-8")),
+                            "MP3 (64 kbps)", callback_data="audio|64k|mp3|_"),
                         InlineKeyboardButton(
-                            "MP3 " + "(" + "128 kbps" + ")", callback_data=cb_string_128.encode("UTF-8"))
+                            "MP3 (128 kbps)", callback_data="audio|128k|mp3|_")
                     ])
                     inline_keyboard.append([
                         InlineKeyboardButton(
-                            "MP3 " + "(" + "320 kbps" + ")", callback_data=cb_string.encode("UTF-8"))
+                            "MP3 (320 kbps)", callback_data="audio|320k|mp3|_")
                     ])
             else:
                 format_id = current_r_json["format_id"]

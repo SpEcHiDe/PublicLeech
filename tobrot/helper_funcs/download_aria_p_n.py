@@ -139,7 +139,7 @@ async def fake_etairporpa_call(
     # TODO: duplicate code -_-
     if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
-    elif incoming_link.lower().endswith(".torrent"):
+    elif os.path.isfile(incoming_link) and incoming_link.lower().endswith(".torrent"):
         sagtus, err_message = add_torrent(aria_instance, incoming_link)
     else:
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
@@ -153,20 +153,15 @@ async def fake_etairporpa_call(
         sent_message_to_update_tg_p,
         None
     )
-    if incoming_link.startswith("magnet:"):
-        #
-        err_message = await check_metadata(aria_instance, err_message)
-        #
-        await asyncio.sleep(1)
-        if err_message is not None:
-            await check_progress_for_dl(
-                aria_instance,
-                err_message,
-                sent_message_to_update_tg_p,
-                None
-            )
-        else:
-            return False, "can't get metadata \n\n#stopped"
+    has_metadata = aria_instance.client.tell_status(err_message, ["followedBy"])
+    if has_metadata:
+        err_message = has_metadata["followedBy"][0]
+        await check_progress_for_dl(
+            aria_instance,
+            err_message,
+            sent_message_to_update_tg_p,
+            None
+        )
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
     to_upload_file = file.name
@@ -208,7 +203,7 @@ async def call_apropriate_function(
 ):
     if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
-    elif incoming_link.lower().endswith(".torrent"):
+    elif os.path.isfile(incoming_link) and incoming_link.lower().endswith(".torrent"):
         sagtus, err_message = add_torrent(aria_instance, incoming_link)
     else:
         sagtus, err_message = add_url(aria_instance, incoming_link, c_file_name)
@@ -222,20 +217,15 @@ async def call_apropriate_function(
         sent_message_to_update_tg_p,
         None
     )
-    if incoming_link.startswith("magnet:"):
-        #
-        err_message = await check_metadata(aria_instance, err_message)
-        #
-        await asyncio.sleep(1)
-        if err_message is not None:
-            await check_progress_for_dl(
-                aria_instance,
-                err_message,
-                sent_message_to_update_tg_p,
-                None
-            )
-        else:
-            return False, "can't get metadata \n\n#stopped"
+    has_metadata = aria_instance.client.tell_status(err_message, ["followedBy"])
+    if has_metadata:
+        err_message = has_metadata["followedBy"][0]
+        await check_progress_for_dl(
+            aria_instance,
+            err_message,
+            sent_message_to_update_tg_p,
+            None
+        )
     await asyncio.sleep(1)
     file = aria_instance.get_download(err_message)
     to_upload_file = file.name 
@@ -366,14 +356,3 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
             await event.edit("<u>error</u> :\n<code>{}</code> \n\n#error".format(str(e)))
             return False
 # https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
-
-
-async def check_metadata(aria2, gid):
-    file = aria2.get_download(gid)
-    LOGGER.info(file)
-    if not file.followed_by_ids:
-        # https://t.me/c/1213160642/496
-        return None
-    new_gid = file.followed_by_ids[0]
-    LOGGER.info("Changing GID " + gid + " to " + new_gid)
-    return new_gid

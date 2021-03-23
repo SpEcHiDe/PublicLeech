@@ -33,7 +33,7 @@ async def save_thumb_nail(_, message):
         # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
         await ismgs.edit(Loilacaztion.SAVED_THUMBNAIL)
     else:
-        await message.edit(Loilacaztion.HELP_SAVE_THUMBNAIL)
+        await ismgs.edit(Loilacaztion.HELP_SAVE_THUMBNAIL)
 
 
 async def clear_thumb_nail(_, message):

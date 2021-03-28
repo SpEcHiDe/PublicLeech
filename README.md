@@ -4,6 +4,13 @@ A Torrent, youtube-dl Leecher, and Uploader!
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [COPYING](./COPYING) for more details.
 
+
+## Deploy Heroku Botton
+
+<a href="https://heroku.com/deploy?template=https://github.com/yesraaj11/Torrent-Leecher-Bot-1">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
 ## installing
 
 ### The Eas(iest) Way

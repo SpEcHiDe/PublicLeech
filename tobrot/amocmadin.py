@@ -25,7 +25,7 @@ class Loilacaztion:
 
     CLEARED_THUMBNAIL = get_config(
         "STRINGS_CLEARED_THUMBNAIL",
-        "✅ Custom thumbnail cleared succesfully."
+        "✅ Custom thumbnail cleared successfully."
     )
     HELP_SAVE_THUMBNAIL = get_config(
         "STRINGS_HELP_SAVE_THUMBNAIL",

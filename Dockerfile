@@ -1,5 +1,5 @@
 #  creates a layer from the base Docker image.
-FROM python:3.8.5-slim-buster
+FROM python:3.9.2-slim-buster
 
 WORKDIR /app
 
@@ -19,6 +19,8 @@ RUN apt -qq install -y --no-install-recommends \
     gnupg2 \
     unzip \
     wget \
+    # install gcc [ PEP 517 ]
+    build-essential gcc \
     software-properties-common && \
     rm -rf /var/lib/apt/lists/* && \
     apt-add-repository non-free
@@ -41,9 +43,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # sets the TimeZone, to be used inside the container
 ENV TZ Asia/Kolkata
-
-# we don't have an interactive xTerm
-ENV DEBIAN_FRONTEND noninteractive
 
 # install required packages
 RUN apt -qq install -y --no-install-recommends \

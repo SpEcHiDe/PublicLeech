@@ -233,12 +233,6 @@ async def call_apropriate_function(
         c_file_name,
         file.name
     )"""
-    if not file.is_complete:
-        return False, (
-            "unable to download, "
-            "upload #stopped "
-            "\n\nmanually clear storage (/ upload 🤦‍♂️) using GNU/Linux commands"
-        )
     #
     if is_zip:
         # first check if current free space allows this

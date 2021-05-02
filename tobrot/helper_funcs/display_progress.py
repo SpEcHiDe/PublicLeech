@@ -37,10 +37,10 @@ async def progress_for_pyrogram(
             return
         speed = current / elapsed_time
         time_to_completion = round((total - current) / speed)
-        estimated_total_time = elapsed_time + time_to_completion
+        # estimated_total_time = elapsed_time + time_to_completion
 
-        elapsed_time = time_formatter(elapsed_time)
-        estimated_total_time = time_formatter(estimated_total_time)
+        # elapsed_time = time_formatter(elapsed_time)
+        estimated_total_time = time_formatter(time_to_completion)
 
         progress = "[{0}{1}] \nP: {2}%\n".format(
             ''.join([FINISHED_PROGRESS_STR for _ in range(math.floor(percentage / 5))]),

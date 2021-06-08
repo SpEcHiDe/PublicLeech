@@ -5,7 +5,7 @@ aiohttp==3.7.4
 aria2p==0.9.1
 
 hachoir==3.1.1
-Pillow==8.1.1
+Pillow==8.2.0
 
 Pyrogram==1.2.9
 TgCrypto==1.2.2

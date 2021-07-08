@@ -8,7 +8,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 ### The Eas(iest) Way
 
-- Install Docker by following the [official docker docs](https://docs.docker.com/engine/install/debian/)
+- Install Docker by following th#### Deploy on Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)</br>
+
+ [official docker docs](https://docs.docker.com/engine/install/debian/)
 
 - Start docker daemon [skip if already running]:
 ```sh

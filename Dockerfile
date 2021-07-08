@@ -1,10 +1,37 @@
+#!/usr/bin/env python3
+#  -*- coding: utf-8 -*-
+#  Copyright (C) 2020 PublicLeech Authors
+
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
+
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 #  creates a layer from the base Docker image.
-FROM python:3.9.2-slim-buster
+FROM python:3.9.5-slim-buster
 
 WORKDIR /app
 
 # https://shouldiblamecaching.com/
 ENV PIP_NO_CACHE_DIR 1
+
+# http://bugs.python.org/issue19846
+# https://github.com/SpEcHiDe/PublicLeech/pull/97
+ENV LANG C.UTF-8
+
+# we don't have an interactive xTerm
+ENV DEBIAN_FRONTEND noninteractive
+
+# sets the TimeZone, to be used inside the container
+ENV TZ Asia/Kolkata
 
 # fix "ephimeral" / "AWS" file-systems
 RUN sed -i.bak 's/us-west-2\.ec2\.//' /etc/apt/sources.list
@@ -34,16 +61,6 @@ RUN sh -c 'echo "deb https://mkvtoolnix.download/debian/ buster main" >> /etc/ap
 # to resynchronize the package index files from their sources.
 RUN apt -qq update
 
-# http://bugs.python.org/issue19846
-# https://github.com/SpEcHiDe/PublicLeech/pull/97
-ENV LANG C.UTF-8
-
-# we don't have an interactive xTerm
-ENV DEBIAN_FRONTEND noninteractive
-
-# sets the TimeZone, to be used inside the container
-ENV TZ Asia/Kolkata
-
 # install required packages
 RUN apt -qq install -y --no-install-recommends \
     # this package is required to fetch "contents" via "TLS"
@@ -71,7 +88,8 @@ RUN apt -qq install -y --no-install-recommends \
 COPY . .
 
 # install requirements, inside the container
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
 
 # specifies what command to run within the container.
 CMD ["python3", "-m", "tobrot"]

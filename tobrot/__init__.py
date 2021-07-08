@@ -1,6 +1,19 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# (c) Shrimadhav U K
+#  -*- coding: utf-8 -*-
+#  Copyright (C) 2020 PublicLeech Authors
+
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
+
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # the logging things
 import logging
@@ -8,16 +21,7 @@ from logging.handlers import RotatingFileHandler
 import os
 import time
 
-# the secret configuration specific things
-if os.path.exists(
-    os.path.join(
-        __name__,
-        "config.py"
-    )
-):
-    from tobrot.config import Config
-else:
-    from tobrot.sample_config import Config
+from tobrot.sample_config import Config
 
 
 # TODO: is there a better way?
@@ -61,7 +65,7 @@ logging.basicConfig(
         RotatingFileHandler(
             LOG_FILE_ZZGEVC,
             maxBytes=FREE_USER_MAX_FILE_SIZE,
-            backupCount=10
+            backupCount=1
         ),
         logging.StreamHandler()
     ]

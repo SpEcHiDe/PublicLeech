@@ -2,12 +2,21 @@
 asyncio==3.4.3
 aiohttp==3.7.4
 
+# achG2zZTxbA 12
 aria2p==0.9.1
 
+# get metadata from files
 hachoir==3.1.1
+
+# process(, and resize) images
 Pillow==8.1.1
 
+# required to communicate with Telegram API
 Pyrogram==1.2.9
 TgCrypto==1.2.2
 
+# required to abup
 youtube-dl
+
+# for reading .env files
+python-dotenv>=0.10

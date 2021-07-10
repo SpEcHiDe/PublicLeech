@@ -26,6 +26,7 @@ from publicleechgroup import (
     SHOULD_USE_BUTTONS,
     TG_BOT_TOKEN,
     DIS_ABLE_ST_GFC_COMMAND_I,
+    SLEEP_THRES_HOLD,
     SUDO_USERS
 )
 from pyrogram import (
@@ -77,7 +78,7 @@ class Bot(Client):
             workers=343,
             workdir=DOWNLOAD_LOCATION,
             parse_mode="html",
-            sleep_threshold=1800,
+            sleep_threshold=SLEEP_THRES_HOLD,
             # TODO: utilize PSP
             # plugins={
             #     "root": "bot/plugins"

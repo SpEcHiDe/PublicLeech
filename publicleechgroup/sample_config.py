@@ -100,6 +100,11 @@ class Config:
         "DIS_ABLE_ST_GFC_COMMAND_I",
         False
     )
+    #
+    SLEEP_THRES_HOLD = get_config(
+        "SLEEP_THRES_HOLD",
+        98712
+    )
     # array to store the users who will have control (permissions)
     # in the bot
     SUDO_USERS = set(

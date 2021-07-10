@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from tobrot.get_cfg import get_config
+from .get_cfg import get_config
 
 
 class Loilacaztion:

@@ -16,11 +16,11 @@ dockerd
 ```
 - Build Docker image:
 ```sh
-docker build . -t public-leech
+docker build . -t publicleech
 ```
 - Run the image:
 ```sh
-docker run public-leech
+docker run publicleech
 ```
 
 It is not recommended to use "sudo", un-necessarily, in a GNU/Linux system.
@@ -38,7 +38,7 @@ cd PublicLeech
 python3 -m venv venv
 . ./venv/bin/activate
 pip install -r requirements.txt
-python3 -m tobrot
+python3 -m publicleechgroup
 ```
 
 ### Variable Explanations
@@ -101,16 +101,16 @@ You can add multiple IDs seperated by space.
 ## Available Commands
 
 * The available commands depends on the ENVironment / CONfig variables that is set by you.
-* You can read the [Commandi](./tobrot/dinmamoc.py) file, to know about the ENVironment variables to use.
-* You can read the [Loilacaztion](./tobrot/amocmadin.py) file, to know about the ENVironment variables to use.
+* You can read the [Commandi](./publicleechgroup/dinmamoc.py) file, to know about the ENVironment variables to use.
+* You can read the [Loilacaztion](./publicleechgroup/amocmadin.py) file, to know about the ENVironment variables to use.
 
 
 ## How to Use?
 
 * send any link, and click on the available buttons.
 
-* if you have disabled `SHOULD_USE_BUTTONS`, you can read the [Commandi](./tobrot/dinmamoc.py) file, to know about the commands.
-  - [COMMANDI_LEECH](./tobrot/dinmamoc.py#L23) can take multiple arguments
+* if you have disabled `SHOULD_USE_BUTTONS`, you can read the [Commandi](./publicleechgroup/dinmamoc.py) file, to know about the commands.
+  - [COMMANDI_LEECH](./publicleechgroup/dinmamoc.py#L23) can take multiple arguments
     * `archive`: if you want a `.tar.gz` file, in your Telegram Chat.
     * `leech_rc_0`: if you want to mirror to an rClone supported host, `0` is an example, and should be replaced with the index of your required host, in your uploaded `rclone.conf` file.
 

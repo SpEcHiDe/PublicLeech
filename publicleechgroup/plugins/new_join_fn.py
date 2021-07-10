@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from tobrot.amocmadin import Loilacaztion
+from publicleechgroup.amocmadin import Loilacaztion
 
 
 async def new_join_f(client, message):

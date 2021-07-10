@@ -16,16 +16,14 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import asyncio
-from tobrot.helper_funcs.display_progress import humanbytes
+from publicleechgroup.helper_funcs.display_progress import humanbytes
 import json
 import os
 from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup
 )
-
-
-from tobrot import (
+from publicleechgroup import (
     LOGGER,
     DEF_THUMB_NAIL_VID_S
 )
@@ -179,6 +177,8 @@ async def extract_youtube_dl_formats(url, yt_dl_user_name, yt_dl_pass_word, user
             break
         reply_markup = InlineKeyboardMarkup(inline_keyboard)
         # LOGGER.info(reply_markup)
-        succss_mesg = """Select the desired format: 👇
-<u>mentioned</u> <i>file size might be approximate</i>"""
+        succss_mesg = (
+            "Select the desired format: 👇\n"
+            "<u>mentioned</u> <i>file size might be approximate</i>"
+        )
         return thumb_image, succss_mesg, reply_markup

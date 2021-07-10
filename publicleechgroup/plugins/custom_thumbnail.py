@@ -17,8 +17,8 @@
 
 import os
 from PIL import Image
-from tobrot import DOWNLOAD_LOCATION
-from tobrot.amocmadin import Loilacaztion
+from publicleechgroup import DOWNLOAD_LOCATION
+from publicleechgroup.amocmadin import Loilacaztion
 
 
 async def save_thumb_nail(_, message):

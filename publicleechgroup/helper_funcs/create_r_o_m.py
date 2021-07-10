@@ -30,10 +30,10 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     Message
 )
-from tobrot import (
+from publicleechgroup import (
     R_CLONE_CONF_URI
 )
-from tobrot.helper_funcs.r_clone import (
+from publicleechgroup.helper_funcs.r_clone import (
     get_r_clone_config
 )
 

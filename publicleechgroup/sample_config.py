@@ -14,7 +14,7 @@ if not __name__.endswith("sample_config"):
     quit(1)
 
 from dotenv import load_dotenv
-from tobrot.get_cfg import get_config
+from .get_cfg import get_config
 
 
 # apparently, no error appears even if the path does not exists

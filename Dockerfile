@@ -92,4 +92,4 @@ RUN pip3 install --upgrade pip && \
     pip3 install --no-cache-dir -r requirements.txt
 
 # specifies what command to run within the container.
-CMD ["python3", "-m", "tobrot"]
+CMD ["python3", "-m", "publicleechgroup"]

@@ -22,19 +22,19 @@ import shutil
 import sys
 import time
 import traceback
-from tobrot import (
+from publicleechgroup import (
     BOT_START_TIME,
     LOGGER,
     LOG_FILE_ZZGEVC,
     MAX_MESSAGE_LENGTH
 )
-from tobrot.helper_funcs.download_aria_p_n import (
+from publicleechgroup.helper_funcs.download_aria_p_n import (
     aria_start
 )
-from tobrot.helper_funcs.upload_to_tg import upload_to_tg
-from tobrot.dinmamoc import Commandi
-from tobrot.amocmadin import Loilacaztion
-from tobrot.helper_funcs.display_progress import (
+from publicleechgroup.helper_funcs.upload_to_tg import upload_to_tg
+from publicleechgroup.dinmamoc import Commandi
+from publicleechgroup.amocmadin import Loilacaztion
+from publicleechgroup.helper_funcs.display_progress import (
     time_formatter,
     humanbytes
 )

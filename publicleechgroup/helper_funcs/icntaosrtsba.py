@@ -21,17 +21,18 @@ import time
 from pyrogram.types import (
     Message
 )
-from tobrot import (
+from publicleechgroup import (
     LOGGER,
     DOWNLOAD_LOCATION
 )
-from tobrot.helper_funcs.download_aria_p_n import (
+LOGGER = LOGGER(__name__)
+from publicleechgroup.helper_funcs.download_aria_p_n import (
     call_apropriate_function,
     aria_start,
     fake_etairporpa_call
 )
-from tobrot.helper_funcs.extract_link_from_message import extract_link
-from tobrot.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
+from publicleechgroup.helper_funcs.extract_link_from_message import extract_link
+from publicleechgroup.helper_funcs.youtube_dl_extractor import extract_youtube_dl_formats
 
 
 async def leech_btn_k(message: Message, cb_data: str):

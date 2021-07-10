@@ -31,12 +31,12 @@ import shutil
 import time
 from datetime import datetime
 
-from tobrot import (
+from publicleechgroup import (
     DOWNLOAD_LOCATION,
     AUTH_CHANNEL,
     SHOULD_USE_BUTTONS
 )
-from tobrot.helper_funcs.upload_to_tg import upload_to_tg
+from publicleechgroup.helper_funcs.upload_to_tg import upload_to_tg
 
 
 async def youtube_dl_call_back(bot, update):

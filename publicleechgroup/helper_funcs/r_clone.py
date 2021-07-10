@@ -34,7 +34,7 @@ from pyrogram import (
 from pyrogram.errors import (
     ChannelInvalid
 )
-from tobrot.helper_funcs.run_shell_command import run_command
+from publicleechgroup.helper_funcs.run_shell_command import run_command
 
 
 async def copy_via_rclone(

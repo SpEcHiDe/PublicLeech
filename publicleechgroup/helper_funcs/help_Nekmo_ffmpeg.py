@@ -28,7 +28,7 @@ LOGGER = logging.getLogger(__name__)
 import asyncio
 import os
 import time
-from tobrot.helper_funcs.copy_similar_file import copy_file
+from publicleechgroup.helper_funcs.copy_similar_file import copy_file
 
 
 async def take_screen_shot(video_file, output_directory, ttl):

@@ -28,7 +28,7 @@ import aiohttp
 
 from pyrogram.types import MessageEntity
 
-from tobrot import (
+from publicleechgroup import (
     TG_OFFENSIVE_API
 )
 

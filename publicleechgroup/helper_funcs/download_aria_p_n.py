@@ -23,13 +23,14 @@ from pyrogram.errors import (
     MessageNotModified,
     FloodWait
 )
-from tobrot import (
+from publicleechgroup import (
     LOGGER
 )
-from tobrot.helper_funcs.upload_to_tg import upload_to_tg
-from tobrot.helper_funcs.create_compressed_archive import create_archive
+LOGGER = LOGGER(__name__)
+from publicleechgroup.helper_funcs.upload_to_tg import upload_to_tg
+from publicleechgroup.helper_funcs.create_compressed_archive import create_archive
 
-from tobrot import (
+from publicleechgroup import (
     ARIA_TWO_STARTED_PORT,
     MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START,
     AUTH_CHANNEL,
@@ -38,7 +39,7 @@ from tobrot import (
     R_CLONE_CONF_URI,
     R_CLONE_DEST
 )
-from tobrot.helper_funcs.r_clone import (
+from publicleechgroup.helper_funcs.r_clone import (
     get_r_clone_config,
     copy_via_rclone
 )

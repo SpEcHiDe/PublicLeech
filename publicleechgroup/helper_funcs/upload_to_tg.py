@@ -59,7 +59,7 @@ async def upload_to_tg(
     LOGGER.info(local_file_name)
     base_file_name = os.path.basename(local_file_name)
     caption_str = custom_caption
-    if not (caption_str and edit_media):
+    if not (caption_str or edit_media):
         LOGGER.info("fall-back to default file_name")
         caption_str = "<code>"
         caption_str += base_file_name

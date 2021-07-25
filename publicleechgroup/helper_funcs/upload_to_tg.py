@@ -54,7 +54,9 @@ async def upload_to_tg(
     from_user,
     dict_contatining_uploaded_files,
     edit_media=False,
-    custom_caption=None
+    custom_caption=None,
+    force_doc=False,
+    cfn=None
 ):
     LOGGER.info(local_file_name)
     base_file_name = os.path.basename(local_file_name)
@@ -90,7 +92,9 @@ async def upload_to_tg(
                 from_user,
                 dict_contatining_uploaded_files,
                 edit_media,
-                caption_str
+                caption_str,
+                force_doc=force_doc,
+                cfn=cfn
             )
     else:
         if os.path.getsize(local_file_name) > TG_MAX_FILE_SIZE:
@@ -118,7 +122,9 @@ async def upload_to_tg(
                     message,
                     os.path.join(splitted_dir, le_file),
                     from_user,
-                    dict_contatining_uploaded_files
+                    dict_contatining_uploaded_files,
+                    force_doc=force_doc,
+                    cfn=cfn
                 )
         else:
             sent_message = await upload_single_file(
@@ -126,7 +132,9 @@ async def upload_to_tg(
                 local_file_name,
                 caption_str,
                 from_user,
-                edit_media
+                edit_media,
+                force_doc,
+                cfn
             )
             if sent_message is not None:
                 dict_contatining_uploaded_files[os.path.basename(local_file_name)] = sent_message.message_id
@@ -134,9 +142,20 @@ async def upload_to_tg(
     return dict_contatining_uploaded_files
 
 
-async def upload_single_file(message, local_file_name, caption_str, from_user, edit_media):
+async def upload_single_file(
+    message,
+    local_file_name,
+    caption_str,
+    from_user,
+    edit_media,
+    force_doc=False,
+    cfn=None
+):
     await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
     sent_message = None
+    if cfn:
+        os.rename(local_file_name, cfn)
+        local_file_name = cfn
     start_time = time.time()
     #
     thumbnail_location = os.path.join(
@@ -151,7 +170,10 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
         message_for_progress_display = await message.reply_text(
             "starting upload of {}".format(os.path.basename(local_file_name))
         )
-    if local_file_name.upper().endswith(("MKV", "MP4", "WEBM")):
+
+    if local_file_name.upper().endswith((
+        "M4V", "MP4", "MOV", "FLV", "WMV", "3GP", "MPEG", "WEBM", "MKV"
+    )) and not force_doc:
         metadata = extractMetadata(createParser(local_file_name))
         duration = 0
         if metadata.has("duration"):
@@ -230,7 +252,10 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
             )
         if thumb is not None:
             os.remove(thumb)
-    elif local_file_name.upper().endswith(("MP3", "M4A", "M4B", "FLAC", "WAV")):
+
+    elif local_file_name.upper().endswith((
+        "MP3", "M4A", "M4B", "FLAC", "WAV", "AIF", "OGG", "AAC", "DTS"
+    )) and not force_doc:
         metadata = extractMetadata(createParser(local_file_name))
         duration = 0
         title = ""
@@ -285,6 +310,7 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
             )
         if thumb is not None:
             os.remove(thumb)
+
     else:
         thumb_image_path = None
         if os.path.isfile(thumbnail_location):
@@ -330,5 +356,6 @@ async def upload_single_file(message, local_file_name, caption_str, from_user, e
 
     if message.message_id != message_for_progress_display.message_id:
         await message_for_progress_display.delete()
+
     os.remove(local_file_name)
     return sent_message

@@ -77,7 +77,10 @@ async def leech_commandi_f(client, message):
         "checking",
         quote=True
     )
+    force_doc = False
     m_sgra = " ".join(message.command[1:])
+    if "file" in m_sgra.lower():
+        force_doc = True
     # get link from the incoming message
     dl_url, cf_name, _, _ = await extract_link(
         message.reply_to_message, "LEECH"
@@ -125,7 +128,9 @@ async def leech_commandi_f(client, message):
                 dl_url,
                 new_download_location,
                 m_,
-                is_zip
+                is_zip,
+                force_doc=force_doc,
+                cfn=cf_name
             )
             if not sagtus:
                 # if FAILED, display the error message

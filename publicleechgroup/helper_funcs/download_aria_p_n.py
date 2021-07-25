@@ -213,7 +213,9 @@ async def call_apropriate_function(
     incoming_link,
     c_file_name,
     sent_message_to_update_tg_p,
-    is_zip
+    is_zip,
+    force_doc=False,
+    cfn=None
 ):
     if incoming_link.lower().startswith("magnet:"):
         sagtus, err_message = add_magnet(aria_instance, incoming_link, c_file_name)
@@ -263,7 +265,9 @@ async def call_apropriate_function(
         sent_message_to_update_tg_p,
         to_upload_file,
         user_id,
-        response
+        response,
+        force_doc=force_doc,
+        cfn=cfn
     )
     LOGGER.info(final_response)
     message_to_send = ""

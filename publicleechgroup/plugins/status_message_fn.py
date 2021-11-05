@@ -97,7 +97,12 @@ async def status_message_f(client, message):
         f"<b>Free</b>: <code>{free}</code>\n"
 
     msg = ms_g + "\n" + msg
-    await message.reply_text(msg, quote=True)
+    while len(msg) > 4095:
+        await message.reply_text(msg[:4095], quote=True)
+        msg = msg[:4095]
+        await asyncio.sleep(1)
+    if len(msg) > 0:
+        await message.reply_text(msg, quote=True)
 
 
 async def cancel_message_f(client, message):

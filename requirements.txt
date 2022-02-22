@@ -9,13 +9,12 @@ aria2p==0.9.1
 hachoir==3.1.1
 
 # process(, and resize) images
-Pillow==8.3.2
+Pillow==9.0.0
 
 # required to communicate with Telegram API
-Pyrogram==1.2.9
-TgCrypto==1.2.2
+Pyrogram==1.4.7
+TgCrypto==1.2.3
 
-# required to abup
 youtube-dl
 
 # for reading .env files

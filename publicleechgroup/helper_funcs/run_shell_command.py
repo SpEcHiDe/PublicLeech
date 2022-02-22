@@ -30,6 +30,12 @@ async def run_command(shell_command: List) -> (str, str):
     )
     # Wait for the subprocess to finish
     stdout, stderr = await process.communicate()
-    e_response = stderr.decode().strip()
-    t_response = stdout.decode().strip()
+    try:
+        e_response = stderr.decode().strip()
+    except:
+        e_response = None
+    try:
+        t_response = stdout.decode().strip()
+    except:
+        t_response = None
     return t_response, e_response

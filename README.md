@@ -57,7 +57,7 @@ python3 -m publicleechgroup
 
 * `SHOULD_USE_BUTTONS`: Because, [BlameTelegram](https://t.me/c/1494623325/5603)
 
-* `ARIA_TWO_STARTED_PORT`: The port which aria2c daemon must START in. This should be an integer, between 1001 and 65535.
+* `ARIA_TWO_STARTED_PORT`: The port aria2c daemon must START with. This should be an integer between 1001 and 65535.
 
 * `EDIT_SLEEP_TIME_OUT`: The number of seconds to sleep after editing a Telegram message.
 

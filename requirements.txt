@@ -9,7 +9,7 @@ aria2p==0.9.1
 hachoir==3.1.1
 
 # process(, and resize) images
-Pillow==9.0.0
+Pillow==9.3.0
 
 # required to communicate with Telegram API
 Pyrogram==1.4.7

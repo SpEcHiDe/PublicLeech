@@ -1,6 +1,6 @@
 # GET / POST network requests
 asyncio==3.4.3
-aiohttp==3.7.4
+aiohttp==3.8.5
 
 # achG2zZTxbA 12
 aria2p==0.9.1
